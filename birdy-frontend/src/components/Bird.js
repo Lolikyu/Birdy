@@ -1,25 +1,12 @@
 import '../styles/Bird.css';
 import {useState} from 'react';
 import PostBird from './PostBird';
+import { Link } from 'react-router-dom';
 
-function Bird({updatePage, isConnected, userInfos, reloadListeBird, setReloadListeBird, idBird, pseudo, avatar, content, date, heure, isPrivate, commentaires, updateIdBirdCourant, updateListeIdCommentairesCourant}) {
-    const [afficheCommentaire, updateAfficheCommentaire] = useState(-1);
-
-    function setAfficheCommentaire(){
-        if (afficheCommentaire === 0){
-            updateAfficheCommentaire(-1);
-        }
-        else {
-            if (afficheCommentaire === -1){
-                updateAfficheCommentaire(0);
-            }
-        }
-    }
-
+function Bird({idBird, pseudo, avatar, content, date, heure, isPrivate, commentaires, updateIdBirdCourant, updateListeIdCommentairesCourant}) {
     function AfficheDetails(){
         updateIdBirdCourant(idBird);
         updateListeIdCommentairesCourant(commentaires);
-        updatePage('Bird');
     }
 
     return (
@@ -31,7 +18,7 @@ function Bird({updatePage, isConnected, userInfos, reloadListeBird, setReloadLis
                         <div>{pseudo}</div>
                     </div>
                 </div>
-                <div onClick={AfficheDetails}>
+                <div>
                     {content}
                 </div>
                 <div>
@@ -40,26 +27,11 @@ function Bird({updatePage, isConnected, userInfos, reloadListeBird, setReloadLis
                     </div>
                     <div>
                         isPrivate : {isPrivate.toString()}
-                        {
-                            (isConnected) ?
-                            <button onClick={setAfficheCommentaire}>Commenter</button>
-                            :
-                            null
-                        }
-                        {
-                        (afficheCommentaire === 0)?
-                        <PostBird
-                            userInfos= {userInfos}
-                            reloadListeBird= {reloadListeBird}
-                            setReloadListeBird= {setReloadListeBird}
-                            isCommentaire= {true}
-                            idBirdCible= {idBird}
-                        />
-                        :
-                        null
-                        }
                         <i></i>
                         <i></i>
+                        <nav onClick={AfficheDetails}>
+                            <Link to='/bird'>Détails</Link>
+                        </nav>
                     </div>
                 </div>
             </div>

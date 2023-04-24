@@ -3,7 +3,7 @@ import axios from 'axios'
 import {useState,useEffect} from 'react'
 import Bird from './Bird'
 
-function TimeLine({updatePage, userInfos, isConnected, updateUserInfos, birds, page, setBirds, reloadListeBird, setReloadListeBird, condition, dateRecherche, setdateRecherche, updateIdBirdCourant, updateListeIdCommentairesCourant}){
+function TimeLine({updatePage, userInfos, isConnected, updateUserInfos, birds, setBirds, reloadListeBird, setReloadListeBird, condition, dateRecherche, setdateRecherche, updateIdBirdCourant, updateListeIdCommentairesCourant}){
 
     useEffect(() => {
         axios.post("http://localhost:8000/api/bird/getBirdsFiltre", 
