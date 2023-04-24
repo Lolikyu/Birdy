@@ -24,13 +24,13 @@ function BirdDetail({updatePage, isConnected, idBirdCourant, updateIdBirdCourant
         }
         )
         setBirds(retour.data.sort((a, b)=>(a.dateDepuis70 > b.dateDepuis70 ? -1 : 1))); //pour récupérer les posts du plus récent ou plus ancien
-        setReloadListeBird(true);
+        setReloadListeBird(reloadListeBird +1);
     }
 
     useEffect(() => {
         getBird();
         getBirdCommentaires();
-    }, [reloadListeBird, dateRecherche, idBirdCourant, listeIdCommentairesCourant, isConnected, birds]
+    }, [idBirdCourant, listeIdCommentairesCourant]
     );
 
     if (!mainBird) return null;
@@ -40,14 +40,10 @@ function BirdDetail({updatePage, isConnected, idBirdCourant, updateIdBirdCourant
             <ul>
                 <Bird
                     updatePage= {updatePage}
-                    userInfos= {userInfos}
                     isConnected= {isConnected}
-                    updateUserInfos= {updateUserInfos}
-                    updateIdBirdCourant= {updateIdBirdCourant}
-                    updateListeIdCommentairesCourant= {updateListeIdCommentairesCourant}
+                    userInfos= {userInfos}
                     reloadListeBird= {reloadListeBird}
                     setReloadListeBird= {setReloadListeBird}
-                    page= {page}
                     idBird= {mainBird._id}
                     pseudo= {mainBird.pseudo}
                     avatar= {mainBird.avatar}
@@ -55,24 +51,21 @@ function BirdDetail({updatePage, isConnected, idBirdCourant, updateIdBirdCourant
                     date= {mainBird.date}
                     heure= {mainBird.heure}
                     isPrivate= {mainBird.isPrivate}
-                    dateDepuis70= {mainBird.dateDepuis70}
                     commentaires= {mainBird.commentaires}
-                    birds= {birds}
+                    updateIdBirdCourant= {updateIdBirdCourant}
+                    updateListeIdCommentairesCourant= {updateListeIdCommentairesCourant}
                 />
+
                 {
                     birds.filter(() => true)
                     .map((b)=>
                         <li key={b._id}>
                             <Bird
                                 updatePage= {updatePage}
-                                userInfos= {userInfos}
                                 isConnected= {isConnected}
-                                updateUserInfos= {updateUserInfos}
-                                updateIdBirdCourant= {updateIdBirdCourant}
-                                updateListeIdCommentairesCourant= {updateListeIdCommentairesCourant}
+                                userInfos= {userInfos}
                                 reloadListeBird= {reloadListeBird}
                                 setReloadListeBird= {setReloadListeBird}
-                                page= {page}
                                 idBird= {b._id}
                                 pseudo= {b.pseudo}
                                 avatar= {b.avatar}
@@ -80,9 +73,9 @@ function BirdDetail({updatePage, isConnected, idBirdCourant, updateIdBirdCourant
                                 date= {b.date}
                                 heure= {b.heure}
                                 isPrivate= {b.isPrivate}
-                                dateDepuis70= {b.dateDepuis70}
                                 commentaires= {b.commentaires}
-                                birds= {birds}
+                                updateIdBirdCourant= {updateIdBirdCourant}
+                                updateListeIdCommentairesCourant= {updateListeIdCommentairesCourant}
                             />
                         </li>
                     )

@@ -11,7 +11,7 @@ function TimeLine({updatePage, userInfos, isConnected, updateUserInfos, birds, p
         )
         .then((response) => {
             setBirds(response.data.sort((a, b)=>(a.dateDepuis70 > b.dateDepuis70 ? -1 : 1))); //pour récupérer les posts du plus récent ou plus ancien
-            setReloadListeBird(false);
+            setReloadListeBird(reloadListeBird +1);
         })
     }, [birds, reloadListeBird, dateRecherche]
     );
@@ -45,12 +45,8 @@ function TimeLine({updatePage, userInfos, isConnected, updateUserInfos, birds, p
                         <li key={b._id}>
                             <Bird
                                 updatePage= {updatePage}
-                                page= {page}
                                 isConnected= {isConnected}
                                 userInfos= {userInfos}
-                                updateUserInfos= {updateUserInfos}
-                                updateIdBirdCourant= {updateIdBirdCourant}
-                                updateListeIdCommentairesCourant= {updateListeIdCommentairesCourant}
                                 reloadListeBird= {reloadListeBird}
                                 setReloadListeBird= {setReloadListeBird}
                                 idBird= {b._id}
@@ -60,9 +56,9 @@ function TimeLine({updatePage, userInfos, isConnected, updateUserInfos, birds, p
                                 date= {b.date}
                                 heure= {b.heure}
                                 isPrivate= {b.isPrivate}
-                                dateDepuis70= {b.dateDepuis70}
                                 commentaires= {b.commentaires}
-                                birds= {birds}
+                                updateIdBirdCourant= {updateIdBirdCourant}
+                                updateListeIdCommentairesCourant= {updateListeIdCommentairesCourant}
                             />
                         </li>
                     )

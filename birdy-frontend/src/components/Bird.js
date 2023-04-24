@@ -1,9 +1,8 @@
 import '../styles/Bird.css';
 import {useState} from 'react';
-import axios from 'axios';
 import PostBird from './PostBird';
 
-function Bird({updatePage, isConnected, userInfos, updateUserInfos, reloadListeBird, setReloadListeBird, page, idBird, pseudo, avatar, content, date, heure, isPrivate, dateDepuis70, commentaires, updateIdBirdCourant, updateListeIdCommentairesCourant, birds}) {
+function Bird({updatePage, isConnected, userInfos, reloadListeBird, setReloadListeBird, idBird, pseudo, avatar, content, date, heure, isPrivate, commentaires, updateIdBirdCourant, updateListeIdCommentairesCourant}) {
     const [afficheCommentaire, updateAfficheCommentaire] = useState(-1);
 
     function setAfficheCommentaire(){
@@ -50,14 +49,11 @@ function Bird({updatePage, isConnected, userInfos, updateUserInfos, reloadListeB
                         {
                         (afficheCommentaire === 0)?
                         <PostBird
-                            updatePage= {updatePage}
-                            page= {page}
                             userInfos= {userInfos}
                             reloadListeBird= {reloadListeBird}
                             setReloadListeBird= {setReloadListeBird}
                             isCommentaire= {true}
                             idBirdCible= {idBird}
-                            birds= {birds}
                         />
                         :
                         null

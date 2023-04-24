@@ -3,25 +3,49 @@ import {useState } from 'react';
 import axios from 'axios';
 
 
-function Authentification({updatePage, isConnected, updateIsConnected, updateUserInfos}){
+function Authentification({updateIsConnected, updateUserInfos}){
     const [afficheFormulaire, updateAfficheFormulaire] = useState(0);
     
     async function inscription(formulaire) {
         formulaire.preventDefault();
-        var retour = await axios.post('http://localhost:8000/api/user/inscription', 
-            {
-                pseudo: formulaire.target[0].value,
-                nom: formulaire.target[1].value,
-                prenom: formulaire.target[2].value,
-                email: formulaire.target[3].value,
-                password: formulaire.target[4].value,
-                dateNaissance: formulaire.target[6].value,
-                avatar: formulaire.target[7].value,
-                listeAmis: []
-            });
-        updateIsConnected(retour.data.isConnected);
-        updateUserInfos(retour.data.userInfos);
-        updateAfficheFormulaire(0);
+        if (formulaire.target[4].value != formulaire.target[5].value){
+            formulaire.target[4].value = '';
+            formulaire.target[5].value = '';
+            alert("Les deux mots de passe sont différents !");
+        }
+        else {
+            var retourPseudo = await axios.post('http://localhost:8000/api/user/checkpseudo', {pseudo: formulaire.target[0].value})
+            if (!retourPseudo.data.isValid){
+                    alert("Ce pseudo est déjà utilisé ! Merci d'en choisir un autre !");
+            }
+            else {
+                var retourEmail = await axios.post('http://localhost:8000/api/user/checkemail', {email: formulaire.target[3].value})
+                if (!retourEmail.data.isValid){
+                        alert("Cette adresse mail est déjà utilisée ! Merci d'en choisir une autre !");
+                }
+                else {
+                    console.log("Ah oe chaud");
+                    var retour = await axios.post('http://localhost:8000/api/user/inscription', 
+                        {
+                            pseudo: formulaire.target[0].value,
+                            nom: formulaire.target[1].value,
+                            prenom: formulaire.target[2].value,
+                            email: formulaire.target[3].value,
+                            password: formulaire.target[4].value,
+                            dateNaissance: formulaire.target[6].value,
+                            avatar: formulaire.target[7].value,
+                            listeAmis: []
+                        }
+                    );
+                    updateIsConnected(retour.data.isConnected);
+                    updateUserInfos(retour.data.userInfos);
+                    if (retour.data.isConnected){
+                        alert('Inscription validée !');
+                        updateAfficheFormulaire(0);
+                    }
+                }
+            }
+        }
     }
 
     async function connexion(formulaire) {
@@ -34,7 +58,12 @@ function Authentification({updatePage, isConnected, updateIsConnected, updateUse
         );
         updateIsConnected(retour.data.isConnected);
         updateUserInfos(retour.data.userInfos);
-        updateAfficheFormulaire(-1);
+        if (retour.data.isConnected){
+            updateAfficheFormulaire(-1);
+        }
+        else {
+            alert('Email ou mot de passe incorrect');
+        }
     }
 
     switch (afficheFormulaire){

@@ -5,17 +5,19 @@ import PostBird from './PostBird';
 import TimeLine from './TimeLine';
 import Recherche from './Recherche';
 import BirdDetail from './BirdDetail';
+import Loading from './Loading';
 
 function MainPage(){
     const [isConnected, updateIsConnected] = useState(false);
     const [userInfos, updateUserInfos] = useState({id: 'non défini'});
-    const [reloadListeBird, setReloadListeBird] = useState(true);
+    const [reloadListeBird, setReloadListeBird] = useState(0);
     const [dateRecherche, setdateRecherche] = useState([Date.now()-(12*3600*1000),Date.now()+1800000]);
     const [page, updatePage] = useState('Mainpage');
     const [birds, setBirds] = useState(0);
     const [idBirdCourant, updateIdBirdCourant] = useState({id: 'non défini'});
     const [listeIdCommentairesCourant, updateListeIdCommentairesCourant] = useState([{id: 'non défini'}]);
     
+
     switch (page){
         case 'Mainpage':
             return (
@@ -29,20 +31,17 @@ function MainPage(){
                             <Profile
                                 updatePage= {updatePage}
                                 userInfos= {userInfos}
-                                isConnected= {isConnected}
                             />
                             <PostBird
-                                updatePage= {updatePage}
-                                page= {page}
                                 userInfos= {userInfos}
+                                reloadListeBird= {reloadListeBird}
                                 setReloadListeBird= {setReloadListeBird}
                                 isCommentaire= {false}
                                 idBirdCible= {null}
-                                birds= {birds}
                             />
                             <Recherche
-                                updatePage= {updatePage}
                                 setdateRecherche= {setdateRecherche}
+                                reloadListeBird= {reloadListeBird}
                                 setReloadListeBird= {setReloadListeBird}
                             />
                             <TimeLine
@@ -68,10 +67,7 @@ function MainPage(){
                             <div>isConnected : {(isConnected) ? "True" : "False"}</div><br></br>
 
                             <Authentification
-                                updatePage= {updatePage}
-                                isConnected = {isConnected}
                                 updateIsConnected = {updateIsConnected}
-                                userInfos = {userInfos}
                                 updateUserInfos = {updateUserInfos}
                             />
                             <Recherche

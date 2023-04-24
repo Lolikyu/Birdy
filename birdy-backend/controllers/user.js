@@ -59,9 +59,10 @@ exports.Connexion = (req, res, next) => {
                         .then(valid => {
                             if (!valid) {
                                 return res.status(201).json(
-                                    { 
+                                    {
                                         message: 'Mot de passe incorrect !',
-                                        isConnected:false,userInfos:{id:'non défini'}
+                                        isConnected: false,
+                                        userInfos: {id:'non défini'}
                                     }
                                 );
                             }
@@ -88,4 +89,50 @@ exports.Connexion = (req, res, next) => {
             }
         )
         .catch(error => res.status(200).json({ isConnected:false}));
- };
+}
+
+exports.CheckEmail = (req, res, next) => {
+    User.findOne({ email: req.body.email })
+        .then((user) => {
+            if (user){
+                res.status(201).json(
+                    {
+                        message: 'Email déjà utilisé',
+                        isValid: false
+                    }
+                );
+            }
+            else {
+                res.status(201).json(
+                    {
+                        message: 'Email libre',
+                        isValid: true
+                    }
+                );
+            }
+        })
+        .catch(error => res.status(400).json({message : "Erreur CheckEmail"}));
+}
+
+exports.CheckPseudo = (req, res, next) => {
+    User.findOne({ pseudo: req.body.pseudo })
+        .then((user) => {
+            if (user){
+                res.status(201).json(
+                    {
+                        message: 'Pseudo déjà utilisé',
+                        isValid: false
+                    }
+                );
+            }
+            else {
+                res.status(201).json(
+                    {
+                        message: 'Pseudo libre',
+                        isValid: true
+                    }
+                );
+            }
+        })
+        .catch(error => res.status(400).json({message : "Erreur CheckPseudo"}));
+}

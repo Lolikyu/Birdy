@@ -14,7 +14,7 @@ function TextAreaWithEnter(props) {
   );
 }
 
-function PostBird({updatePage, userInfos, isConnected, reloadListeBird, setReloadListeBird, isCommentaire, idBirdCible, birds}){
+function PostBird({userInfos, reloadListeBird, setReloadListeBird, isCommentaire, idBirdCible}){
     const [isChecked, setIsChecked] = useState(false);
     const handleOnChange = () => {setIsChecked(!isChecked);};
 
@@ -38,12 +38,13 @@ function PostBird({updatePage, userInfos, isConnected, reloadListeBird, setReloa
           }
         );
         if (isCommentaire) {
-            var retour2 = await axios.post('http://localhost:8000/api/bird/modifyBird',
+            await axios.post('http://localhost:8000/api/bird/modifyBird',
               {idBirdCible: idBirdCible, idBirdCommentaire: retour.data.birdInfos.id}
             );
         };
         formulairePostBird.target[0].value='';
-        setReloadListeBird(true);     
+        console.log('reloadListeBird:', reloadListeBird);
+        setReloadListeBird(reloadListeBird +1);
     };
 
     return (
