@@ -11,10 +11,6 @@ export default function App (){
 	const [userInfos, updateUserInfos] = useState({id: 'non défini'});
 	const [reloadListeBird, setReloadListeBird] = useState(0);
 	const [dateRecherche, setdateRecherche] = useState([Date.now()-(12*3600*1000),Date.now()+1800000]);
-	const [birds, setBirds] = useState(0);
-	const [idBirdCourant, updateIdBirdCourant] = useState({id: 'non défini'});
-	const [listeIdCommentairesCourant, updateListeIdCommentairesCourant] = useState([{id: 'non défini'}]);
-
 
 	return (
 		<div>
@@ -29,20 +25,11 @@ export default function App (){
 					element= {
 						<HomePage
 							isConnected= {isConnected}
-							updateIsConnected= {updateIsConnected}
 							userInfos= {userInfos}
-							updateUserInfos= {updateUserInfos}
-							idBirdCourant= {idBirdCourant}
-							updateIdBirdCourant= {updateIdBirdCourant}
-							listeIdCommentairesCourant= {listeIdCommentairesCourant}
-							updateListeIdCommentairesCourant= {updateListeIdCommentairesCourant}
-							dateRecherche= {dateRecherche}
-							setdateRecherche= {setdateRecherche}
 							reloadListeBird= {reloadListeBird}
 							setReloadListeBird= {setReloadListeBird}
-							birds= {birds}
-							setBirds= {setBirds}
-							
+							dateRecherche= {dateRecherche}
+							setdateRecherche= {setdateRecherche}
 						/>
 					}
 				/>
@@ -56,30 +43,21 @@ export default function App (){
 					}
 				/>
 				<Route
-					path= '/bird'
+					path= '/bird/:id'
 					element= {
 						<>
 							<BirdDetail
-								isConnected= {isConnected}
-								updateUserInfos= {updateUserInfos}
-								idBirdCourant= {idBirdCourant}
-								updateIdBirdCourant= {updateIdBirdCourant}
-								listeIdCommentairesCourant= {listeIdCommentairesCourant}
-								updateListeIdCommentairesCourant= {updateListeIdCommentairesCourant}
-								dateRecherche= {dateRecherche}
 								reloadListeBird= {reloadListeBird}
-								setReloadListeBird= {setReloadListeBird}
-								birds= {birds}
-								setBirds= {setBirds}
-								userInfos= {userInfos}
+								dateRecherche= {dateRecherche}
+								setdateRecherche= {setdateRecherche}
 							/>
+
 							<PostBird
 								isConnected= {isConnected}
 								userInfos= {userInfos}
 								reloadListeBird= {reloadListeBird}
 								setReloadListeBird= {setReloadListeBird}
 								isCommentaire= {true}
-								idBirdCible= {idBirdCourant}
 							/>
 						</>
 					}

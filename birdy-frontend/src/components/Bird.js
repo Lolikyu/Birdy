@@ -1,14 +1,7 @@
 import '../styles/Bird.css';
-import {useState} from 'react';
-import PostBird from './PostBird';
 import { Link } from 'react-router-dom';
 
-function Bird({idBird, pseudo, avatar, content, date, heure, isPrivate, commentaires, updateIdBirdCourant, updateListeIdCommentairesCourant}) {
-    function AfficheDetails(){
-        updateIdBirdCourant(idBird);
-        updateListeIdCommentairesCourant(commentaires);
-    }
-
+function Bird({idBird, pseudo, avatar, content, date, heure, isPrivate}) {
     return (
         <div className='bird'>
             <div>
@@ -29,8 +22,8 @@ function Bird({idBird, pseudo, avatar, content, date, heure, isPrivate, commenta
                         isPrivate : {isPrivate.toString()}
                         <i></i>
                         <i></i>
-                        <nav onClick={AfficheDetails}>
-                            <Link to='/bird'>Détails</Link>
+                        <nav>
+                            <Link to={'/bird/' + String(idBird)}>Détails</Link>
                         </nav>
                     </div>
                 </div>

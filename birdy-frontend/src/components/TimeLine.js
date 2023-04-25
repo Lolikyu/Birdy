@@ -1,32 +1,42 @@
 import '../styles/TimeLine.css'
 import axios from 'axios'
-import {useState,useEffect} from 'react'
+import {useState, useEffect} from 'react'
 import Bird from './Bird'
 
-function TimeLine({updatePage, userInfos, isConnected, updateUserInfos, birds, setBirds, reloadListeBird, setReloadListeBird, condition, dateRecherche, setdateRecherche, updateIdBirdCourant, updateListeIdCommentairesCourant}){
+export default function TimeLine({updatePage, userInfos, isConnected, reloadListeBird, setReloadListeBird, condition, dateRecherche, setdateRecherche}){
+    const [birds, setBirds] = useState(null);
+    const [isLoading, updateIsLoading] = useState(true);
 
-    useEffect(() => {
-        axios.post("http://localhost:8000/api/bird/getBirdsFiltre", 
-            {dateDebut: dateRecherche[0], dateFin: dateRecherche[1]}
-        )
-        .then((response) => {
-            setBirds(response.data.sort((a, b)=>(a.dateDepuis70 > b.dateDepuis70 ? -1 : 1))); //pour récupérer les posts du plus récent ou plus ancien
-            setReloadListeBird(reloadListeBird +1);
-        })
-    }, [birds, reloadListeBird, dateRecherche]
-    );
-
-    if (!birds) return null;
-    
     function unJourPlusTard() {
         const newDateRecherche = [...dateRecherche];
         newDateRecherche[0] = dateRecherche[0] - 24 * 3600000;
         setdateRecherche(newDateRecherche);
     }
 
-    function birdEstPublique(bird) {
+    function isBirdPublic(bird) {
         return (!bird.isPrivate);
     }
+    async function birdFetching() {
+        updateIsLoading(true);
+
+        var response = await axios.post("http://localhost:8000/api/bird/getBirdsFiltre", 
+            {dateDebut: dateRecherche[0], dateFin: dateRecherche[1]}
+        )
+        
+        setBirds(response.data.sort((a, b)=>(a.dateDepuis70 > b.dateDepuis70 ? -1 : 1))); //pour récupérer les posts du plus récent ou plus ancien
+        updateIsLoading(false);
+    }
+
+    useEffect(() => {
+        birdFetching();
+    }, [reloadListeBird, dateRecherche]
+    );
+
+    if (isLoading){
+        return (
+            <h2>Loading ...</h2>
+        )
+    } 
 
     return (
         <div> 
@@ -35,20 +45,13 @@ function TimeLine({updatePage, userInfos, isConnected, updateUserInfos, birds, s
                     birds.filter (
                         (b) => (condition=='private')
                         ?
-                        //Affichage une fois connecté
                         (true)
                         :
-                        //Affichage en déconnecté
-                        (birdEstPublique(b))
+                        (isBirdPublic(b))
                     )
                     .map((b)=>
                         <li key={b._id}>
                             <Bird
-                                updatePage= {updatePage}
-                                isConnected= {isConnected}
-                                userInfos= {userInfos}
-                                reloadListeBird= {reloadListeBird}
-                                setReloadListeBird= {setReloadListeBird}
                                 idBird= {b._id}
                                 pseudo= {b.pseudo}
                                 avatar= {b.avatar}
@@ -56,9 +59,6 @@ function TimeLine({updatePage, userInfos, isConnected, updateUserInfos, birds, s
                                 date= {b.date}
                                 heure= {b.heure}
                                 isPrivate= {b.isPrivate}
-                                commentaires= {b.commentaires}
-                                updateIdBirdCourant= {updateIdBirdCourant}
-                                updateListeIdCommentairesCourant= {updateListeIdCommentairesCourant}
                             />
                         </li>
                     )
@@ -68,4 +68,3 @@ function TimeLine({updatePage, userInfos, isConnected, updateUserInfos, birds, s
         </div>
     )
 }
-export default TimeLine

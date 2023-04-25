@@ -1,14 +1,9 @@
-import {useState} from 'react';
-import Profile from './Profile';
 import PostBird from './PostBird';
 import TimeLine from './TimeLine';
 import Recherche from './Recherche';
-import BirdDetail from './BirdDetail';
-import Panel from './Panel';
-
 import '../styles/HomePage.css';
 
-export default function HomePage({isConnected, updateIsConnected, userInfos, updateUserInfos, birds, setBirds, reloadListeBird, setReloadListeBird, dateRecherche, setdateRecherche, updateIdBirdCourant, updateListeIdCommentairesCourant}){
+export default function HomePage({isConnected, userInfos, reloadListeBird, setReloadListeBird, dateRecherche, setdateRecherche}){
 
     if (isConnected){
         return (
@@ -20,25 +15,16 @@ export default function HomePage({isConnected, updateIsConnected, userInfos, upd
                     reloadListeBird= {reloadListeBird}
                     setReloadListeBird= {setReloadListeBird}
                     isCommentaire= {false}
-                    idBirdCible= {null}
                 />
                 <Recherche
                     setdateRecherche= {setdateRecherche}
                     setReloadListeBird= {setReloadListeBird}
                 />
                 <TimeLine
-                    isConnected= {isConnected}
-                    userInfos= {userInfos}
-                    updateUserInfos= {updateUserInfos}
-                    birds= {birds}
-                    setBirds= {setBirds}
                     reloadListeBird= {reloadListeBird}
-                    setReloadListeBird= {setReloadListeBird}
                     condition= 'private'
                     dateRecherche= {dateRecherche}
                     setdateRecherche= {setdateRecherche}
-                    updateIdBirdCourant= {updateIdBirdCourant}
-                    updateListeIdCommentairesCourant= {updateListeIdCommentairesCourant}
                 />
             </div>
         )
@@ -52,18 +38,10 @@ export default function HomePage({isConnected, updateIsConnected, userInfos, upd
                     setReloadListeBird= {setReloadListeBird}
                 />
                 <TimeLine
-                    isConnected= {isConnected}
-                    userInfos= {userInfos}
-                    updateUserInfos= {updateUserInfos}
-                    birds= {birds}
-                    setBirds= {setBirds}
                     reloadListeBird= {reloadListeBird}
-                    setReloadListeBird= {setReloadListeBird}
                     condition= 'public'
                     dateRecherche= {dateRecherche}
                     setdateRecherche= {setdateRecherche}
-                    updateIdBirdCourant= {updateIdBirdCourant}
-                    updateListeIdCommentairesCourant= {updateListeIdCommentairesCourant}
                 />
             </div>
         )

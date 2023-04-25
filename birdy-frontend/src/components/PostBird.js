@@ -1,23 +1,28 @@
 import '../styles/PostBird.css'
 import axios from 'axios'
-import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { useState } from 'react'
+import { Link, useParams } from 'react-router-dom';
 
-function TextAreaWithEnter(props) {
+function TextAreaWithEnter({placeholder}) {
   const [text, setText] = useState("");
 
   return (
     <textarea
       value= {text}
       onChange= {(e) => setText(e.target.value)}
-      placeholder= {props.placeholder}
+      placeholder= {placeholder}
     />
   );
 }
 
-function PostBird({isConnected, userInfos, reloadListeBird, setReloadListeBird, isCommentaire, idBirdCible}){
+function PostBird({isConnected, userInfos, reloadListeBird, setReloadListeBird, isCommentaire}){
     const [isChecked, setIsChecked] = useState(false);
-    const handleOnChange = () => {setIsChecked(!isChecked);};
+    const params = useParams();
+    const idBirdCible = params.id;
+
+    function handleOnChange() {
+      setIsChecked(!isChecked);
+    };
 
     async function postBird(formulairePostBird) {
         formulairePostBird.preventDefault();
@@ -43,11 +48,9 @@ function PostBird({isConnected, userInfos, reloadListeBird, setReloadListeBird, 
               {idBirdCible: idBirdCible, idBirdCommentaire: retour.data.birdInfos.id}
           );
         };
-        console.log("Ouais ça devait bien se passer jcomprends pas", retour2)
+
         formulairePostBird.target[0].value='';
-        console.log('reloadListeBird:', reloadListeBird);
         setReloadListeBird(reloadListeBird +1);
-        console.log('reloadListeBird:', reloadListeBird);
       }
 
     if (isConnected){
@@ -56,7 +59,7 @@ function PostBird({isConnected, userInfos, reloadListeBird, setReloadListeBird, 
             <form onSubmit={postBird}>
                 <label htmlFor='message'>Nouveau post: </label><br></br>
                 
-                <TextAreaWithEnter placeholder='Contenu du post'/><br></br>
+                <TextAreaWithEnter placeholder='Contenu du Bird'/><br></br>
 
                 <label htmlFor='private'>Rendre le post privé </label>
                 <input type="checkbox" name='isPrivate' checked={isChecked} onChange={handleOnChange} /><br></br>

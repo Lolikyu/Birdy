@@ -2,89 +2,89 @@ import '../styles/BirdDetail.css'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 import Bird from './Bird'
+import { useParams } from 'react-router-dom'
 
-function BirdDetail({isConnected, idBirdCourant, updateIdBirdCourant, listeIdCommentairesCourant, updateListeIdCommentairesCourant, dateRecherche, reloadListeBird, setReloadListeBird, birds, setBirds, userInfos}){
-    const [mainBird, updateMainBird] = useState(0);
+function BirdDetail({reloadListeBird, dateRecherche, setdateRecherche}){
+    const [mainBird, updateMainBird] = useState(null);
+    const [sideBirds, updateSideBirds] = useState(null);
+    const [isLoading, updateIsLoading] = useState(true);
 
-    useEffect(() => {
-        async function getBird(){
-            var retour = await axios.post("http://localhost:8000/api/bird/getBirds",
+    const params = useParams();
+    
+    function unJourPlusTard() {
+        const newDateRecherche = [...dateRecherche];
+        newDateRecherche[0] = dateRecherche[0] - 24 * 3600000;
+        setdateRecherche(newDateRecherche);
+    }
+
+    const birdDetailFetching = async function() {
+        updateIsLoading(true);
+        var idBirdCourant = params.id;
+
+        var response1 = await axios.post("http://localhost:8000/api/bird/getBirds",
             {
                 idBird: {idBirdCourant}
             }
-            )
-            updateMainBird(retour.data);
-        }
-    
-        async function getBirdCommentaires(){
-            var retour = await axios.post("http://localhost:8000/api/bird/getBirdsFiltreIdList",
+        )
+        updateMainBird(response1.data);
+
+        var response2 = await axios.post("http://localhost:8000/api/bird/getBirdsFiltreIdList",
             {
-                listeIdBird: listeIdCommentairesCourant,
+                listeIdBird: response1.data.commentaires,
                 dateDebut: dateRecherche[0],
-                dateFin: dateRecherche[1],
+                dateFin: dateRecherche[1]
             }
-            )
-            setBirds(retour.data.sort((a, b)=>(a.dateDepuis70 > b.dateDepuis70 ? -1 : 1))); //pour récupérer les posts du plus récent ou plus ancien
-            setReloadListeBird(reloadListeBird +1);
-        }
-        getBird();
-        getBirdCommentaires();
-    }, [idBirdCourant, listeIdCommentairesCourant, reloadListeBird]
+        )
+        updateSideBirds(response2.data.sort((a, b)=>(a.dateDepuis70 > b.dateDepuis70 ? -1 : 1))); //pour récupérer les posts du plus récent ou plus ancien
+        updateIsLoading(false);
+    }
+
+    useEffect(() => {setdateRecherche([Date.now()-(12*3600*1000), Date.now()+1800000])}, []);
+    
+    useEffect(() => {
+        birdDetailFetching();
+    }, [params, reloadListeBird]
     );
 
-    if (!mainBird){
+    if (isLoading){
         return (
-            <>{console.log("mainBird", mainBird)} mainBird pas updated</>
+            <h2>Loading ...</h2>
         )
     } 
-    else {
-        return (
-            <div>
-                <ul>
-                    <Bird
-                        isConnected= {isConnected}
-                        userInfos= {userInfos}
-                        reloadListeBird= {reloadListeBird}
-                        setReloadListeBird= {setReloadListeBird}
-                        idBird= {mainBird._id}
-                        pseudo= {mainBird.pseudo}
-                        avatar= {mainBird.avatar}
-                        content= {mainBird.content}
-                        date= {mainBird.date}
-                        heure= {mainBird.heure}
-                        isPrivate= {mainBird.isPrivate}
-                        commentaires= {mainBird.commentaires}
-                        updateIdBirdCourant= {updateIdBirdCourant}
-                        updateListeIdCommentairesCourant= {updateListeIdCommentairesCourant}
-                    />
-
-                    {
-                        birds.filter(() => true)
-                        .map((b)=>
-                            <li key={b._id}>
-                                <Bird
-                                    isConnected= {isConnected}
-                                    userInfos= {userInfos}
-                                    reloadListeBird= {reloadListeBird}
-                                    setReloadListeBird= {setReloadListeBird}
-                                    idBird= {b._id}
-                                    pseudo= {b.pseudo}
-                                    avatar= {b.avatar}
-                                    content= {b.content}
-                                    date= {b.date}
-                                    heure= {b.heure}
-                                    isPrivate= {b.isPrivate}
-                                    commentaires= {b.commentaires}
-                                    updateIdBirdCourant= {updateIdBirdCourant}
-                                    updateListeIdCommentairesCourant= {updateListeIdCommentairesCourant}
-                                />
-                            </li>
-                        )
-                    }
-                </ul>
-            </div>
-        )
-    }
+    
+    return (
+        <div>
+            <ul>
+                <Bird
+                    idBird= {mainBird._id}
+                    pseudo= {mainBird.pseudo}
+                    avatar= {mainBird.avatar}
+                    content= {mainBird.content}
+                    date= {mainBird.date}
+                    heure= {mainBird.heure}
+                    isPrivate= {mainBird.isPrivate}
+                />
+                {
+                    sideBirds.filter(() => true)
+                    .map((b)=>
+                        <li key={b._id}>
+                            <Bird
+                                idBird= {b._id}
+                                pseudo= {b.pseudo}
+                                avatar= {b.avatar}
+                                content= {b.content}
+                                date= {b.date}
+                                heure= {b.heure}
+                                isPrivate= {b.isPrivate}
+                            />
+                        </li>
+                    )
+                }
+            </ul>
+            <button onClick={unJourPlusTard}>Voir plus</button>
+        </div>
+    )
 }
+
 
 export default BirdDetail;
