@@ -39,9 +39,9 @@ exports.postBird = (req, res, next) => {
 exports.getBirdsFiltre = (req, res, next) => { 
     Bird.find(
         {
-        dateDepuis70: {$gte: req.body.dateDebut, $lte: req.body.dateFin},
+            dateDepuis70: {$gte: req.body.dateDebut, $lte: req.body.dateFin},
         }
-    ) //gte <=> plus grand que
+    )
     .then(bird => res.status(201).json(bird))
     .catch(error => res.status(400).json({ message : "Erreur de lecture de Bird filtré" }))
 };
@@ -69,3 +69,12 @@ exports.getBirdsFiltreIdList = (req, res, next) => {
     .catch(error => res.status(400).json({ message : "Erreur de lecture de Bird filtré" }))
 };
 
+exports.deleteBird = (req, res, next) => {
+    Bird.deleteOne(
+        {
+            _id: req.body.idBird
+        }
+    )
+    .then(() => res.status(200).json({ message: "Bird supprimé !" }))
+    .catch((error) => { res.status(500).json({ error })})
+};

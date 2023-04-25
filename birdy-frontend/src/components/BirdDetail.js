@@ -2,19 +2,31 @@ import '../styles/BirdDetail.css'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 import Bird from './Bird'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 
-function BirdDetail({reloadListeBird, dateRecherche, setdateRecherche}){
+function BirdDetail({isConnected, userInfos, reloadListeBird, setReloadListeBird, dateRecherche, setdateRecherche}){
     const [mainBird, updateMainBird] = useState(null);
     const [sideBirds, updateSideBirds] = useState(null);
     const [isLoading, updateIsLoading] = useState(true);
 
     const params = useParams();
+    const navigate = useNavigate();
     
     function unJourPlusTard() {
         const newDateRecherche = [...dateRecherche];
         newDateRecherche[0] = dateRecherche[0] - 24 * 3600000;
         setdateRecherche(newDateRecherche);
+    }
+
+    async function supprimerBird() {
+        var id = params.id;
+        var response = await axios.post("http://localhost:8000/api/bird/deleteBird", 
+            {
+                idBird: id
+            }
+        )
+        navigate('/');
+        setReloadListeBird(reloadListeBird +1);
     }
 
     const birdDetailFetching = async function() {
@@ -51,6 +63,75 @@ function BirdDetail({reloadListeBird, dateRecherche, setdateRecherche}){
             <h2>Loading ...</h2>
         )
     } 
+    if (isConnected) {
+        if (userInfos.pseudo === mainBird.pseudo){
+            return (
+                <div>
+                    <ul>
+                        <Bird
+                            idBird= {mainBird._id}
+                            pseudo= {mainBird.pseudo}
+                            avatar= {mainBird.avatar}
+                            content= {mainBird.content}
+                            date= {mainBird.date}
+                            heure= {mainBird.heure}
+                            isPrivate= {mainBird.isPrivate}
+                        />
+                        <button onClick={supprimerBird}>Supprimer</button>
+                        {
+                            sideBirds.filter(() => true)
+                            .map((b)=>
+                                <li key={b._id}>
+                                    <Bird
+                                        idBird= {b._id}
+                                        pseudo= {b.pseudo}
+                                        avatar= {b.avatar}
+                                        content= {b.content}
+                                        date= {b.date}
+                                        heure= {b.heure}
+                                        isPrivate= {b.isPrivate}
+                                    />
+                                </li>
+                            )
+                        }
+                    </ul>
+                    <button onClick={unJourPlusTard}>Voir plus</button>
+                </div>
+            )
+        }
+        return (
+            <div>
+                <ul>
+                    <Bird
+                        idBird= {mainBird._id}
+                        pseudo= {mainBird.pseudo}
+                        avatar= {mainBird.avatar}
+                        content= {mainBird.content}
+                        date= {mainBird.date}
+                        heure= {mainBird.heure}
+                        isPrivate= {mainBird.isPrivate}
+                    />
+                    {
+                        sideBirds.filter(() => true)
+                        .map((b)=>
+                            <li key={b._id}>
+                                <Bird
+                                    idBird= {b._id}
+                                    pseudo= {b.pseudo}
+                                    avatar= {b.avatar}
+                                    content= {b.content}
+                                    date= {b.date}
+                                    heure= {b.heure}
+                                    isPrivate= {b.isPrivate}
+                                />
+                            </li>
+                        )
+                    }
+                </ul>
+                <button onClick={unJourPlusTard}>Voir plus</button>
+            </div>
+        )
+    }
     
     return (
         <div>

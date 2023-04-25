@@ -8,7 +8,7 @@ import PostBird from './components/PostBird';
 
 export default function App (){
 	const [isConnected, updateIsConnected] = useState(false);
-	const [userInfos, updateUserInfos] = useState({id: 'non défini'});
+	const [userInfos, updateUserInfos] = useState(null);
 	const [reloadListeBird, setReloadListeBird] = useState(0);
 	const [dateRecherche, setdateRecherche] = useState([Date.now()-(12*3600*1000),Date.now()+1800000]);
 
@@ -47,7 +47,10 @@ export default function App (){
 					element= {
 						<>
 							<BirdDetail
+								isConnected= {isConnected}
+								userInfos= {userInfos}
 								reloadListeBird= {reloadListeBird}
+								setReloadListeBird= {setReloadListeBird}
 								dateRecherche= {dateRecherche}
 								setdateRecherche= {setdateRecherche}
 							/>

@@ -3,7 +3,7 @@ import axios from 'axios'
 import {useState, useEffect} from 'react'
 import Bird from './Bird'
 
-export default function TimeLine({updatePage, userInfos, isConnected, reloadListeBird, setReloadListeBird, condition, dateRecherche, setdateRecherche}){
+export default function TimeLine({reloadListeBird, condition, dateRecherche, setdateRecherche}){
     const [birds, setBirds] = useState(null);
     const [isLoading, updateIsLoading] = useState(true);
 
@@ -16,6 +16,7 @@ export default function TimeLine({updatePage, userInfos, isConnected, reloadList
     function isBirdPublic(bird) {
         return (!bird.isPrivate);
     }
+    
     async function birdFetching() {
         updateIsLoading(true);
 
