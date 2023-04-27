@@ -1,15 +1,20 @@
 import '../styles/Panel.css'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSignOut } from 'react-auth-kit';
 import Authentification from './Authentification';
 
-export default function Panel({isConnected, updateIsConnected, updateUserInfos}){
+export default function Panel({isConnected, updateUserInfos}){
+
+    const signOut = useSignOut();
+    const navigate = useNavigate();
 
     function disconnect(){
-        updateIsConnected(false);
         updateUserInfos(null);
+        signOut();
+        navigate('/');
     }
 
-    if (isConnected){
+    if (isConnected()){
         return (
             <>
                 Panel connecté
@@ -29,7 +34,6 @@ export default function Panel({isConnected, updateIsConnected, updateUserInfos})
                     <Link to='/'>HomePage</Link>
                 </nav>
                 <Authentification
-                    updateIsConnected= {updateIsConnected}
                     updateUserInfos= {updateUserInfos}
                 />
             </>

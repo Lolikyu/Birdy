@@ -63,7 +63,7 @@ function BirdDetail({isConnected, userInfos, reloadListeBird, setReloadListeBird
             <h2>Loading ...</h2>
         )
     } 
-    if (isConnected) {
+    if (isConnected()) {
         if (userInfos.pseudo === mainBird.pseudo){
             return (
                 <div>
@@ -75,7 +75,9 @@ function BirdDetail({isConnected, userInfos, reloadListeBird, setReloadListeBird
                             content= {mainBird.content}
                             date= {mainBird.date}
                             heure= {mainBird.heure}
-                            isPrivate= {mainBird.isPrivate}
+                            isPublic= {mainBird.isPublic}
+                            likes= {mainBird.likes}
+                            rebirds= {mainBird.rebirds}
                         />
                         <button onClick={supprimerBird}>Supprimer</button>
                         {
@@ -89,7 +91,9 @@ function BirdDetail({isConnected, userInfos, reloadListeBird, setReloadListeBird
                                         content= {b.content}
                                         date= {b.date}
                                         heure= {b.heure}
-                                        isPrivate= {b.isPrivate}
+                                        isPublic= {b.isPublic}
+                                        likes= {b.likes}
+                                        rebirds= {b.rebirds}
                                     />
                                 </li>
                             )
@@ -109,7 +113,9 @@ function BirdDetail({isConnected, userInfos, reloadListeBird, setReloadListeBird
                         content= {mainBird.content}
                         date= {mainBird.date}
                         heure= {mainBird.heure}
-                        isPrivate= {mainBird.isPrivate}
+                        isPublic= {mainBird.isPublic}
+                        likes= {mainBird.likes}
+                        rebirds= {mainBird.rebirds}
                     />
                     {
                         sideBirds.filter(() => true)
@@ -122,7 +128,9 @@ function BirdDetail({isConnected, userInfos, reloadListeBird, setReloadListeBird
                                     content= {b.content}
                                     date= {b.date}
                                     heure= {b.heure}
-                                    isPrivate= {b.isPrivate}
+                                    isPublic= {b.isPublic}
+                                    likes= {b.likes}
+                                    rebirds= {b.rebirds}
                                 />
                             </li>
                         )
@@ -143,7 +151,9 @@ function BirdDetail({isConnected, userInfos, reloadListeBird, setReloadListeBird
                     content= {mainBird.content}
                     date= {mainBird.date}
                     heure= {mainBird.heure}
-                    isPrivate= {mainBird.isPrivate}
+                    isPublic= {mainBird.isPublic}
+                    likes= {mainBird.likes}
+                    rebirds= {mainBird.rebirds}
                 />
                 {
                     sideBirds.filter(() => true)
@@ -156,7 +166,9 @@ function BirdDetail({isConnected, userInfos, reloadListeBird, setReloadListeBird
                                 content= {b.content}
                                 date= {b.date}
                                 heure= {b.heure}
-                                isPrivate= {b.isPrivate}
+                                isPublic= {b.isPublic}
+                                likes= {b.likes}
+                                rebirds= {b.rebirds}
                             />
                         </li>
                     )

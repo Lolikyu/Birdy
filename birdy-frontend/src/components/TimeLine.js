@@ -12,10 +12,6 @@ export default function TimeLine({reloadListeBird, condition, dateRecherche, set
         newDateRecherche[0] = dateRecherche[0] - 24 * 3600000;
         setdateRecherche(newDateRecherche);
     }
-
-    function isBirdPublic(bird) {
-        return (!bird.isPrivate);
-    }
     
     async function birdFetching() {
         updateIsLoading(true);
@@ -48,7 +44,7 @@ export default function TimeLine({reloadListeBird, condition, dateRecherche, set
                         ?
                         (true)
                         :
-                        (isBirdPublic(b))
+                        (b.isPublic)
                     )
                     .map((b)=>
                         <li key={b._id}>
@@ -59,7 +55,9 @@ export default function TimeLine({reloadListeBird, condition, dateRecherche, set
                                 content= {b.content}
                                 date= {b.date}
                                 heure= {b.heure}
-                                isPrivate= {b.isPrivate}
+                                isPublic= {b.isPublic}
+                                likes= {b.likes}
+                                rebirds= {b.rebirds}
                             />
                         </li>
                     )

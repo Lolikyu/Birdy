@@ -1,7 +1,7 @@
 import '../styles/Bird.css';
 import { Link } from 'react-router-dom';
 
-function Bird({idBird, pseudo, avatar, content, date, heure, isPrivate}) {
+function Bird({idBird, pseudo, avatar, content, date, heure, isPublic, likes, rebirds}) {
     return (
         <div className='bird'>
             <div>
@@ -19,7 +19,9 @@ function Bird({idBird, pseudo, avatar, content, date, heure, isPrivate}) {
                         Posté le {date} à {heure}
                     </div>
                     <div>
-                        isPrivate : {isPrivate.toString()}
+                        isPublic : {isPublic.toString()}<br></br>
+                        Likes : {likes.length}<br></br>
+                        Rebirds : {rebirds.length}<br></br>
                         <i></i>
                         <i></i>
                         <nav>

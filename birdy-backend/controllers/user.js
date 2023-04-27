@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
-const User = require('../models/user');
 const jwt = require('jsonwebtoken');
+const User = require('../models/user');
   
 exports.Inscription = (req, res, next) => {
     bcrypt.hash(req.body.password, 10)
@@ -14,7 +14,12 @@ exports.Inscription = (req, res, next) => {
                     password: hash,
                     dateNaissance: req.body.dateNaissance,
                     avatar: req.body.avatar,
-                    listeAmis: []
+                    birds: req.body.birds,
+                    follows: req.body.follows,
+                    followers: req.body.followers,
+                    likes: req.body.likes,
+                    rebirds: req.body.rebirds,
+                    favorites: req.body.favorites,
                 }
             );
             user.save()
@@ -31,8 +36,13 @@ exports.Inscription = (req, res, next) => {
                             prenom: user.prenom,
                             dateNaissance: user.dateNaissance,
                             avatar: user.avatar,
-                            listeAmis: user.listeAmis
-                            //token: jwt.sign({ userId: user._id },'BIRDY_TOKEN_SECRET',{ expiresIn: '24h' })}
+                            birds: user.birds,
+                            follows: user.follows,
+                            followers: user.followers,
+                            likes: user.likes,
+                            rebirds: user.rebirds,
+                            favorites: user.favorites,
+                            token: jwt.sign({ userId: user._id, email: user.email }, 'BIRDY_SECRET_TOKEN', { expiresIn: '1h' })
                         }
                     }
                 ))
@@ -46,11 +56,11 @@ exports.Connexion = (req, res, next) => {
         .then(user => 
             {
                 if (!user) {
-                    return res.status(200).json(
+                    return res.status(401).json(
                         {
                             message: 'Erreur, utilisateur introuvable',
                             isConnected: false,
-                            userInfos: {id:'non défini'}
+                            userInfos: null
                         }
                     );
                 }
@@ -58,19 +68,19 @@ exports.Connexion = (req, res, next) => {
                     bcrypt.compare(req.body.password, user.password)
                         .then(valid => {
                             if (!valid) {
-                                return res.status(201).json(
+                                return res.status(401).json(
                                     {
                                         message: 'Mot de passe incorrect !',
                                         isConnected: false,
-                                        userInfos: {id:'non défini'}
+                                        userInfos: null
                                     }
                                 );
                             }
                             res.status(200).json(
                                 { 
-                                    message:'Utilisateur dans la base',
-                                    isConnected:true,
-                                    userInfos:{
+                                    message: 'Utilisateur dans la base',
+                                    isConnected: true,
+                                    userInfos: {
                                         id: user._id,
                                         pseudo: user.pseudo,
                                         email: user.email,
@@ -78,8 +88,13 @@ exports.Connexion = (req, res, next) => {
                                         prenom: user.prenom,
                                         dateNaissance: user.dateNaissance,
                                         avatar: user.avatar,
-                                        listeAmis: user.listeAmis
-                                        //token: jwt.sign({ userId: user._id },'BIRDY_TOKEN_SECRET',{expiresIn:'24h'})
+                                        birds: user.birds,
+                                        follows: user.follows,
+                                        followers: user.followers,
+                                        likes: user.likes,
+                                        rebirds: user.rebirds,
+                                        favorites: user.favorites,
+                                        token: jwt.sign({ userId: user._id, email: user.email }, 'BIRDY_SECRET_TOKEN', { expiresIn: '1h' })
                                     }
                                 }
                             );
@@ -135,4 +150,42 @@ exports.CheckPseudo = (req, res, next) => {
             }
         })
         .catch(error => res.status(400).json({message : "Erreur CheckPseudo"}));
+}
+
+exports.GetUserInfos = (req, res, next) => {
+    User.findOne({ _id: req.body.id })
+        .then((user) => {
+            if (user){
+                res.status(200).json(
+                    { 
+                        message:'Utilisateur dans la base',
+                        isConnected: true,
+                        userInfos:{
+                            id: user._id,
+                            pseudo: user.pseudo,
+                            email: user.email,
+                            nom: user.nom,
+                            prenom: user.prenom,
+                            dateNaissance: user.dateNaissance,
+                            avatar: user.avatar,
+                            birds: user.birds,
+                            follows: user.follows,
+                            followers: user.followers,
+                            likes: user.likes,
+                            rebirds: user.rebirds,
+                            favorites: user.favorites
+                        }
+                    }
+                );
+            }
+            else {
+                res.status(201).json(
+                    {
+                        message: 'Erreur utilisateur non-trouvé',
+                        isConnected: false
+                    }
+                );
+            }
+        })
+        .catch(error => res.status(404).json({message : "Erreur utilisateur non-trouvé", isConnected: false}));
 }

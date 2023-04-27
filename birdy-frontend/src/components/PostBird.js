@@ -30,22 +30,25 @@ function PostBird({isConnected, userInfos, reloadListeBird, setReloadListeBird, 
         var heure = new Date().toLocaleTimeString("fr");
         var dateDepuis70 = Date.now();//pour classer les posts par ordre chrono
         
-        
-        //si le message est privé alors ## isPrivate = true ##
-        var retour = await axios.post('http://localhost:8000/api/bird/postBird', 
+        //si le message est privé alors ## isPublic = false ##
+        var retour = await axios.post('http://localhost:8000/api/bird/postBird',
           {
             pseudo: userInfos.pseudo,
             avatar: userInfos.avatar,
             content: formulairePostBird.target[0].value,
             date: date,
             heure: heure,
-            isPrivate: isChecked,
+            isPublic: isChecked,
             dateDepuis70: dateDepuis70
           }
+        
         );
         if (isCommentaire) {
           var retour2 = await axios.post('http://localhost:8000/api/bird/modifyBird',
-              {idBirdCible: idBirdCible, idBirdCommentaire: retour.data.birdInfos.id}
+            {
+              idBirdCible: idBirdCible,
+              idBirdCommentaire: retour.data.birdInfos.id
+            }
           );
         };
 
@@ -53,16 +56,16 @@ function PostBird({isConnected, userInfos, reloadListeBird, setReloadListeBird, 
         setReloadListeBird(reloadListeBird +1);
       }
 
-    if (isConnected){
+    if (isConnected()){
       return (
         <div>
             <form onSubmit={postBird}>
-                <label htmlFor='message'>Nouveau post: </label><br></br>
+                <label htmlFor='message'>Nouveau bird: </label><br></br>
                 
                 <TextAreaWithEnter placeholder='Contenu du Bird'/><br></br>
 
-                <label htmlFor='private'>Rendre le post privé </label>
-                <input type="checkbox" name='isPrivate' checked={isChecked} onChange={handleOnChange} /><br></br>
+                <label htmlFor='public'>Rendre le bird publique </label>
+                <input type="checkbox" name='isPublic' checked={isChecked} onChange={handleOnChange} /><br></br>
                 
                 <button type='submit'>Envoyer</button>
             </form>

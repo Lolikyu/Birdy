@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 
 export default function Profile ({isConnected, userInfos}){
-    if (isConnected){
+    if (isConnected()){
         return (
             <div>
                 Pseudo : {userInfos.pseudo}<br></br>

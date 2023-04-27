@@ -5,7 +5,7 @@ import '../styles/HomePage.css';
 
 export default function HomePage({isConnected, userInfos, reloadListeBird, setReloadListeBird, dateRecherche, setdateRecherche}){
 
-    if (isConnected){
+    if (isConnected()){
         return (
             <div>
                 HomePage connecté

@@ -1,10 +1,13 @@
 import '../styles/Authentification.css';
-import {useState } from 'react';
+import { useState } from 'react';
+import { useSignIn } from 'react-auth-kit';
 import axios from 'axios';
 
 
-function Authentification({updateIsConnected, updateUserInfos}){
+function Authentification({updateUserInfos}){
     const [afficheFormulaire, updateAfficheFormulaire] = useState(0);
+
+    const signIn = useSignIn();
     
     async function inscription(formulaire) {
         formulaire.preventDefault();
@@ -24,7 +27,6 @@ function Authentification({updateIsConnected, updateUserInfos}){
                         alert("Cette adresse mail est déjà utilisée ! Merci d'en choisir une autre !");
                 }
                 else {
-                    console.log("Ah oe chaud");
                     var retour = await axios.post('http://localhost:8000/api/user/inscription', 
                         {
                             pseudo: formulaire.target[0].value,
@@ -34,14 +36,24 @@ function Authentification({updateIsConnected, updateUserInfos}){
                             password: formulaire.target[4].value,
                             dateNaissance: formulaire.target[6].value,
                             avatar: formulaire.target[7].value,
-                            listeAmis: []
+                            birds: [],
+                            follows: [],
+                            followers: [],
+                            likes: [],
+                            rebirds: [],
+                            favorites: []
                         }
                     );
-                    updateIsConnected(retour.data.isConnected);
                     updateUserInfos(retour.data.userInfos);
-                    if (retour.data.isConnected){
+                    if (retour.data.isConnected) {
                         alert('Inscription validée !');
                         updateAfficheFormulaire(0);
+                        signIn({
+                            token: retour.data.userInfos.token,
+                            expiresIn: 3600,
+                            tokenType: "Bearer",
+                            authState: {id: retour.data.userInfos.id, email: retour.data.userInfos.email}
+                        });
                     }
                 }
             }
@@ -56,9 +68,15 @@ function Authentification({updateIsConnected, updateUserInfos}){
                 password: formulaire.target[1].value
             }
         );
-        updateIsConnected(retour.data.isConnected);
+
         updateUserInfos(retour.data.userInfos);
         if (retour.data.isConnected){
+            signIn({
+                token: retour.data.userInfos.token,
+                expiresIn: 3600,
+                tokenType: "Bearer",
+                authState: {id: retour.data.userInfos.id, email: retour.data.userInfos.email}
+            });
             updateAfficheFormulaire(-1);
         }
         else {
