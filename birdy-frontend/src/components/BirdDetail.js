@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import Bird from './Bird'
 import { useParams, useNavigate } from 'react-router-dom'
 
-function BirdDetail({isConnected, userInfos, reloadListeBird, setReloadListeBird, dateRecherche, setdateRecherche}){
+export default function BirdDetail({isConnected, userInfos, reloadListeBird, setReloadListeBird, dateRecherche, setdateRecherche, reloadUserInfos, setReloadUserInfos}){
     const [mainBird, updateMainBird] = useState(null);
     const [sideBirds, updateSideBirds] = useState(null);
     const [isLoading, updateIsLoading] = useState(true);
@@ -65,6 +65,7 @@ function BirdDetail({isConnected, userInfos, reloadListeBird, setReloadListeBird
     } 
     if (isConnected()) {
         if (userInfos.pseudo === mainBird.pseudo){
+            //CONNECTE ET PROPRIETAIRE DU BIRD
             return (
                 <div>
                     <ul>
@@ -78,6 +79,12 @@ function BirdDetail({isConnected, userInfos, reloadListeBird, setReloadListeBird
                             isPublic= {mainBird.isPublic}
                             likes= {mainBird.likes}
                             rebirds= {mainBird.rebirds}
+                            userInfos= {userInfos}
+                            isConnected= {isConnected}
+                            reloadListeBird= {reloadListeBird}
+                            setReloadListeBird= {setReloadListeBird}
+                            reloadUserInfos= {reloadUserInfos}
+							setReloadUserInfos= {setReloadUserInfos}
                         />
                         <button onClick={supprimerBird}>Supprimer</button>
                         {
@@ -94,6 +101,12 @@ function BirdDetail({isConnected, userInfos, reloadListeBird, setReloadListeBird
                                         isPublic= {b.isPublic}
                                         likes= {b.likes}
                                         rebirds= {b.rebirds}
+                                        userInfos= {userInfos}
+                                        isConnected= {isConnected}
+                                        reloadListeBird= {reloadListeBird}
+                                        setReloadListeBird= {setReloadListeBird}
+                                        reloadUserInfos= {reloadUserInfos}
+							            setReloadUserInfos= {setReloadUserInfos}
                                     />
                                 </li>
                             )
@@ -103,6 +116,7 @@ function BirdDetail({isConnected, userInfos, reloadListeBird, setReloadListeBird
                 </div>
             )
         }
+        //CONNECTE ET NON-PROPRIETAIRE DU BIRD
         return (
             <div>
                 <ul>
@@ -116,6 +130,12 @@ function BirdDetail({isConnected, userInfos, reloadListeBird, setReloadListeBird
                         isPublic= {mainBird.isPublic}
                         likes= {mainBird.likes}
                         rebirds= {mainBird.rebirds}
+                        userInfos= {userInfos}
+                        isConnected= {isConnected}
+                        reloadListeBird= {reloadListeBird}
+                        setReloadListeBird= {setReloadListeBird}
+                        reloadUserInfos= {reloadUserInfos}
+						setReloadUserInfos= {setReloadUserInfos}
                     />
                     {
                         sideBirds.filter(() => true)
@@ -131,6 +151,12 @@ function BirdDetail({isConnected, userInfos, reloadListeBird, setReloadListeBird
                                     isPublic= {b.isPublic}
                                     likes= {b.likes}
                                     rebirds= {b.rebirds}
+                                    userInfos= {userInfos}
+                                    isConnected= {isConnected}
+                                    reloadListeBird= {reloadListeBird}
+                                    setReloadListeBird= {setReloadListeBird}
+                                    reloadUserInfos= {reloadUserInfos}
+							        setReloadUserInfos= {setReloadUserInfos}
                                 />
                             </li>
                         )
@@ -140,7 +166,7 @@ function BirdDetail({isConnected, userInfos, reloadListeBird, setReloadListeBird
             </div>
         )
     }
-    
+    //DECONNECTE
     return (
         <div>
             <ul>
@@ -154,6 +180,12 @@ function BirdDetail({isConnected, userInfos, reloadListeBird, setReloadListeBird
                     isPublic= {mainBird.isPublic}
                     likes= {mainBird.likes}
                     rebirds= {mainBird.rebirds}
+                    userInfos= {userInfos}
+                    isConnected= {isConnected}
+                    reloadListeBird= {reloadListeBird}
+                    setReloadListeBird= {setReloadListeBird}
+                    reloadUserInfos= {reloadUserInfos}
+				    setReloadUserInfos= {setReloadUserInfos}
                 />
                 {
                     sideBirds.filter(() => true)
@@ -169,6 +201,12 @@ function BirdDetail({isConnected, userInfos, reloadListeBird, setReloadListeBird
                                 isPublic= {b.isPublic}
                                 likes= {b.likes}
                                 rebirds= {b.rebirds}
+                                userInfos= {userInfos}
+                                isConnected= {isConnected}
+                                reloadListeBird= {reloadListeBird}
+                                setReloadListeBird= {setReloadListeBird}
+                                reloadUserInfos= {reloadUserInfos}
+							    setReloadUserInfos= {setReloadUserInfos}
                             />
                         </li>
                     )
@@ -178,6 +216,3 @@ function BirdDetail({isConnected, userInfos, reloadListeBird, setReloadListeBird
         </div>
     )
 }
-
-
-export default BirdDetail;

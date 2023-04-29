@@ -8,5 +8,9 @@ router.post('/getBirdsFiltreIdList', birdCtrl.getBirdsFiltreIdList);
 router.post('/postBird', birdCtrl.postBird);
 router.post('/modifyBird', birdCtrl.modifyBird);
 router.post('/deleteBird', birdCtrl.deleteBird);
+router.post('/likeBird', birdCtrl.likeBird);
+router.post('/dislikeBird', birdCtrl.dislikeBird);
+router.post('/favBird', birdCtrl.favBird);
+router.post('/unfavBird', birdCtrl.unfavBird);
 
 module.exports = router;

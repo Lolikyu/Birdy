@@ -4,7 +4,7 @@ import { useSignIn } from 'react-auth-kit';
 import axios from 'axios';
 
 
-function Authentification({updateUserInfos}){
+export default function Authentification({updateUserInfos}){
     const [afficheFormulaire, updateAfficheFormulaire] = useState(0);
 
     const signIn = useSignIn();
@@ -151,4 +151,3 @@ function Authentification({updateUserInfos}){
             )
     }
 }
-export default Authentification

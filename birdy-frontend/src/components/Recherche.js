@@ -1,7 +1,6 @@
 import '../styles/Recherche.css'
 
-function Recherche({setdateRecherche, reloadListeBird, setReloadListeBird}){
-    
+export default function Recherche({setdateRecherche, reloadListeBird, setReloadListeBird}){
     var dateduJour = new Date();
     dateduJour = dateduJour.toLocaleDateString('fr');
     
@@ -33,4 +32,3 @@ function Recherche({setdateRecherche, reloadListeBird, setReloadListeBird}){
         </div>
     )
 }
-export default Recherche

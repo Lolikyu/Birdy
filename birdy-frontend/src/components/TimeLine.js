@@ -3,7 +3,7 @@ import axios from 'axios'
 import {useState, useEffect} from 'react'
 import Bird from './Bird'
 
-export default function TimeLine({reloadListeBird, condition, dateRecherche, setdateRecherche}){
+export default function TimeLine({isConnected, userInfos, reloadListeBird, setReloadListeBird, condition, dateRecherche, setdateRecherche, reloadUserInfos, setReloadUserInfos}){
     const [birds, setBirds] = useState(null);
     const [isLoading, updateIsLoading] = useState(true);
 
@@ -58,6 +58,12 @@ export default function TimeLine({reloadListeBird, condition, dateRecherche, set
                                 isPublic= {b.isPublic}
                                 likes= {b.likes}
                                 rebirds= {b.rebirds}
+                                userInfos= {userInfos}
+                                isConnected= {isConnected}
+                                reloadListeBird= {reloadListeBird}
+                                setReloadListeBird= {setReloadListeBird}
+                                reloadUserInfos= {reloadUserInfos}
+							    setReloadUserInfos= {setReloadUserInfos}
                             />
                         </li>
                     )

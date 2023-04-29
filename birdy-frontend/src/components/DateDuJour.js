@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react'
 import '../styles/DateDuJour.css'
 
-function DateDuJour(){
+export default function DateDuJour(){
   const [date, setDate] = useState(new Date());
  
   useEffect(() => {
@@ -18,5 +18,3 @@ function DateDuJour(){
     </div>
   );
 }
-
-export default DateDuJour

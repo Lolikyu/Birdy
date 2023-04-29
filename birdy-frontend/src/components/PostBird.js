@@ -3,23 +3,23 @@ import axios from 'axios'
 import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
 
-function TextAreaWithEnter({placeholder}) {
-  const [text, setText] = useState("");
-
-  return (
-    <textarea
-      value= {text}
-      onChange= {(e) => setText(e.target.value)}
-      placeholder= {placeholder}
-    />
-  );
-}
-
-function PostBird({isConnected, userInfos, reloadListeBird, setReloadListeBird, isCommentaire}){
+export default function PostBird({isConnected, userInfos, reloadListeBird, setReloadListeBird, isCommentaire}){
     const [isChecked, setIsChecked] = useState(false);
     const params = useParams();
     const idBirdCible = params.id;
 
+    function TextAreaWithEnter({placeholder}) {
+      const [text, setText] = useState("");
+    
+      return (
+        <textarea
+          value= {text}
+          onChange= {(e) => setText(e.target.value)}
+          placeholder= {placeholder}
+        />
+      );
+    }
+    
     function handleOnChange() {
       setIsChecked(!isChecked);
     };
@@ -83,4 +83,3 @@ function PostBird({isConnected, userInfos, reloadListeBird, setReloadListeBird, 
       )
     }
 }
-export default PostBird

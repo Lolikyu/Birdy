@@ -1,4 +1,5 @@
 const Bird = require('../models/bird');
+const User = require('../models/user');
 
 //get : on filtre les birds > date du jour - 1 pour ne pas renvoyer une liste trop longue
 exports.getBirdsFiltre = (req, res, next) => { 
@@ -79,4 +80,64 @@ exports.deleteBird = (req, res, next) => {
     )
     .then(() => res.status(200).json({ message: "Bird supprimé !" }))
     .catch((error) => { res.status(500).json({ error })})
+};
+
+exports.likeBird = (req, res, next) => {
+    Bird.updateOne({_id: req.body.idBirdCible}, {$push: {likes: req.body.idUser}})
+    .then(() => {
+        User.updateOne({_id: req.body.idUser}, {$push: {likes: req.body.idBirdCible}})
+        .then(() => res.status(200).json({ message: "Bird liké" }))
+        .catch((error) => { res.status(500).json({ error })})
+    })
+    .catch((error) => { res.status(500).json({ error })}) 
+};
+
+exports.dislikeBird = (req, res, next) => {
+    Bird.updateOne({_id: req.body.idBirdCible}, {$pull: {likes: req.body.idUser}})
+    .then(() => { 
+        User.updateOne({_id: req.body.idUser}, {$pull: {likes: req.body.idBirdCible}})
+        .then(() => res.status(200).json({ message: "Bird disliké" }))
+        .catch((error) => { res.status(500).json({ error })})
+    })
+    .catch((error) => { res.status(500).json({ error })}) 
+};
+
+exports.favBird = (req, res, next) => {
+    Bird.updateOne({_id: req.body.idBirdCible}, {$push: {favorites: req.body.idUser}})
+    .then(() => {
+        User.updateOne({_id: req.body.idUser}, {$push: {favorites: req.body.idBirdCible}})
+        .then(() => res.status(200).json({ message: "Bird ajouté aux favoris" }))
+        .catch((error) => { res.status(500).json({ error })})
+    })
+    .catch((error) => { res.status(500).json({ error })}) 
+};
+
+exports.unfavBird = (req, res, next) => {
+    Bird.updateOne({_id: req.body.idBirdCible}, {$pull: {favorites: req.body.idUser}})
+    .then(() => { 
+        User.updateOne({_id: req.body.idUser}, {$pull: {favorites: req.body.idBirdCible}})
+        .then(() => res.status(200).json({ message: "Bird retiré aux favoris" }))
+        .catch((error) => { res.status(500).json({ error })})
+    })
+    .catch((error) => { res.status(500).json({ error })}) 
+};
+
+exports.rebirdBird = (req, res, next) => {
+    Bird.updateOne({_id: req.body.idBirdCible}, {$push: {rebirds: req.body.idUser}})
+    .then(() => {
+        User.updateOne({_id: req.body.idUser}, {$push: {rebirds: req.body.idBirdCible}})
+        .then(() => res.status(200).json({ message: "Bird rebird" }))
+        .catch((error) => { res.status(500).json({ error })})
+    })
+    .catch((error) => { res.status(500).json({ error })}) 
+};
+
+exports.unrebirdBird = (req, res, next) => {
+    Bird.updateOne({_id: req.body.idBirdCible}, {$pull: {rebirds: req.body.idUser}})
+    .then(() => { 
+        User.updateOne({_id: req.body.idUser}, {$pull: {rebirds: req.body.idBirdCible}})
+        .then(() => res.status(200).json({ message: "Bird retiré des Rebirds" }))
+        .catch((error) => { res.status(500).json({ error })})
+    })
+    .catch((error) => { res.status(500).json({ error })}) 
 };

@@ -12,6 +12,7 @@ export default function App (){
 	const userAuthInfos = useAuthUser();
 	const isConnected = useIsAuthenticated();
 	const [userInfos, updateUserInfos] = useState(null);
+	const [reloadUserInfos, setReloadUserInfos] = useState(0);
 	const [reloadListeBird, setReloadListeBird] = useState(0);
 	const [dateRecherche, setdateRecherche] = useState([Date.now()-(12*3600*1000),Date.now()+1800000]);
 
@@ -26,12 +27,10 @@ export default function App (){
 
 	useEffect(() => {
 		if (isConnected()) {
-			if (!userInfos) {
-				userInfosRefresh();
-			}
+			userInfosRefresh();
 		}
 	}
-	, []);
+	, [reloadUserInfos]);
 
 	return (
 		<div>
@@ -51,6 +50,8 @@ export default function App (){
 							setReloadListeBird= {setReloadListeBird}
 							dateRecherche= {dateRecherche}
 							setdateRecherche= {setdateRecherche}
+							reloadUserInfos= {reloadUserInfos}
+							setReloadUserInfos= {setReloadUserInfos}
 						/>
 						</>
 					}
@@ -77,16 +78,17 @@ export default function App (){
 								setReloadListeBird= {setReloadListeBird}
 								dateRecherche= {dateRecherche}
 								setdateRecherche= {setdateRecherche}
+								reloadUserInfos= {reloadUserInfos}
+								setReloadUserInfos= {setReloadUserInfos}
+								
 							/>
-							<RequireAuth loginPath='/'>
-								<PostBird
-									isConnected= {isConnected}
-									userInfos= {userInfos}
-									reloadListeBird= {reloadListeBird}
-									setReloadListeBird= {setReloadListeBird}
-									isCommentaire= {true}
-								/>
-							</RequireAuth>
+							<PostBird
+								isConnected= {isConnected}
+								userInfos= {userInfos}
+								reloadListeBird= {reloadListeBird}
+								setReloadListeBird= {setReloadListeBird}
+								isCommentaire= {true}
+							/>
 						</>
 					}
 				/>
