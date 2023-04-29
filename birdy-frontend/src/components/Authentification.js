@@ -17,12 +17,12 @@ export default function Authentification({updateUserInfos}){
             alert("Les deux mots de passe sont différents !");
         }
         else {
-            var retourPseudo = await axios.post('http://localhost:8000/api/user/checkpseudo', {pseudo: formulaire.target[0].value})
+            var retourPseudo = await axios.post('http://localhost:8000/api/user/checkPseudo', {pseudo: formulaire.target[0].value})
             if (!retourPseudo.data.isValid){
                     alert("Ce pseudo est déjà utilisé ! Merci d'en choisir un autre !");
             }
             else {
-                var retourEmail = await axios.post('http://localhost:8000/api/user/checkemail', {email: formulaire.target[3].value})
+                var retourEmail = await axios.post('http://localhost:8000/api/user/checkEmail', {email: formulaire.target[3].value})
                 if (!retourEmail.data.isValid){
                         alert("Cette adresse mail est déjà utilisée ! Merci d'en choisir une autre !");
                 }

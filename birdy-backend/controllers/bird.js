@@ -45,11 +45,15 @@ exports.postBird = (req, res, next) => {
         }
     );
     bird.save()
-        .then(() => res.status(201).json (
+    .then(() => {
+        User.updateOne({_id: req.body.userId}, {$push: {birds: String(bird._id)}})
+        .then (() => 
+            res.status(201).json (
             {
                 message: 'Bird posté !',
                 birdInfos: 
-                {   id: bird._id,
+                {   
+                    id: bird._id,
                     pseudo: bird.pseudo,
                     avatar: bird.avatar,
                     content: bird.content,
@@ -61,9 +65,13 @@ exports.postBird = (req, res, next) => {
                     likes: bird.likes,
                     rebirds: bird.rebirds
                 }
-            }
-        ))
-        .catch(error => res.status(400).json({ message : 'Erreur de sauvegarde du Bird dans la BDD' }));
+            })
+    
+        )
+        .catch((error) => { res.status(500).json({ error })})
+    }
+    )
+    .catch(error => res.status(400).json({ message : 'Erreur de sauvegarde du Bird dans la BDD' }));
 };
 
 exports.modifyBird = (req, res, next) => {
@@ -73,13 +81,25 @@ exports.modifyBird = (req, res, next) => {
 };
 
 exports.deleteBird = (req, res, next) => {
-    Bird.deleteOne(
-        {
-            _id: req.body.idBird
-        }
+    User.updateMany({}, {$pull: {birds: req.body.idBird}})
+    .then(() => 
+        User.updateMany({}, {$pull: {likes: req.body.idBird}})
+        .then(() => 
+            User.updateMany({}, {$pull: {favorites: req.body.idBird}})
+            .then(() => 
+                Bird.deleteOne(
+                    {
+                        _id: req.body.idBird
+                    }
+                )
+                .then(() => res.status(200).json({ message: "Bird supprimé !" }))
+                .catch((error) => { console.log("erreur suppr"); res.status(500).json({ error })})
+            )
+            .catch((error) => { console.log("erreur update favs"); res.status(500).json({ error })})
+        )
+        .catch((error) => { console.log("erreur update likes"); res.status(500).json({ error })})
     )
-    .then(() => res.status(200).json({ message: "Bird supprimé !" }))
-    .catch((error) => { res.status(500).json({ error })})
+    .catch((error) => { console.log("erreur update birds"); res.status(500).json({ error })})  
 };
 
 exports.likeBird = (req, res, next) => {
@@ -117,26 +137,6 @@ exports.unfavBird = (req, res, next) => {
     .then(() => { 
         User.updateOne({_id: req.body.idUser}, {$pull: {favorites: req.body.idBirdCible}})
         .then(() => res.status(200).json({ message: "Bird retiré aux favoris" }))
-        .catch((error) => { res.status(500).json({ error })})
-    })
-    .catch((error) => { res.status(500).json({ error })}) 
-};
-
-exports.rebirdBird = (req, res, next) => {
-    Bird.updateOne({_id: req.body.idBirdCible}, {$push: {rebirds: req.body.idUser}})
-    .then(() => {
-        User.updateOne({_id: req.body.idUser}, {$push: {rebirds: req.body.idBirdCible}})
-        .then(() => res.status(200).json({ message: "Bird rebird" }))
-        .catch((error) => { res.status(500).json({ error })})
-    })
-    .catch((error) => { res.status(500).json({ error })}) 
-};
-
-exports.unrebirdBird = (req, res, next) => {
-    Bird.updateOne({_id: req.body.idBirdCible}, {$pull: {rebirds: req.body.idUser}})
-    .then(() => { 
-        User.updateOne({_id: req.body.idUser}, {$pull: {rebirds: req.body.idBirdCible}})
-        .then(() => res.status(200).json({ message: "Bird retiré des Rebirds" }))
         .catch((error) => { res.status(500).json({ error })})
     })
     .catch((error) => { res.status(500).json({ error })}) 

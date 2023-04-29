@@ -59,37 +59,44 @@ export default function Bird({idBird, pseudo, avatar, content, date, heure, isPu
     }
 
     if (isConnected()) {
-        return (
-            <div className='bird'>
-                <div>
-                    <div>
-                        <img className='avatar' src={avatar}/>
-                        <div>
-                            <div>{pseudo}</div>
-                        </div>
-                    </div>
-                    <div>
-                        {content}
-                    </div>
+        if (userInfos) {
+            return (
+                <div className='bird'>
                     <div>
                         <div>
-                            Posté le {date} à {heure}
+                            <img className='avatar' src={avatar}/>
+                            <div>
+                                <div>{pseudo}</div>
+                            </div>
                         </div>
                         <div>
-                            isPublic : {isPublic.toString()}<br></br>
-                            <div onClick={likeBird}>Likes : {likes.length}<br></br></div>
-                            Rebirds : {rebirds.length}<br></br>
-                            <div onClick={favBird}>Favoris : {isInArray(idBird, userInfos.favorites)? "Oui" : "Non"}</div>
-                            <i></i>
-                            <i></i>
-                            <nav>
-                                <Link to={'/bird/' + String(idBird)}>Détails</Link>
-                            </nav>
+                            {content}
+                        </div>
+                        <div>
+                            <div>
+                                Posté le {date} à {heure}
+                            </div>
+                            <div>
+                                isPublic : {isPublic.toString()}<br></br>
+                                <div onClick={likeBird}>Likes : {likes.length}<br></br></div>
+                                Rebirds : {rebirds.length}<br></br>
+                                <div onClick={favBird}>Favoris : {isInArray(idBird, userInfos.favorites)? "Oui" : "Non"}</div>
+                                <i></i>
+                                <i></i>
+                                <nav>
+                                    <Link to={'/bird/' + String(idBird)}>Détails</Link>
+                                </nav>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        );
+            );
+        }
+        else {
+            return (
+                <h2>Loading ...</h2>
+            )
+        }
     }
     else {
         return (

@@ -17,7 +17,7 @@ export default function App (){
 	const [dateRecherche, setdateRecherche] = useState([Date.now()-(12*3600*1000),Date.now()+1800000]);
 
 	async function userInfosRefresh() {
-        var retour = await axios.post('http://localhost:8000/api/user/getuserinfos',
+        var retour = await axios.post('http://localhost:8000/api/user/getUserInfosById',
             {
                 id: userAuthInfos().id,
             }
@@ -36,6 +36,7 @@ export default function App (){
 		<div>
 			<Panel
 				isConnected= {isConnected}
+				userInfos= {userInfos}
 				updateUserInfos= {updateUserInfos}
 			/>
 			<Routes>
@@ -57,12 +58,18 @@ export default function App (){
 					}
 				/>
 				<Route
-					path= '/profile'
+					path= '/profile/:pseudo'
 					element= {
 						<RequireAuth loginPath='/'>
 							<Profile
 								isConnected= {isConnected}
 								userInfos= {userInfos}
+								reloadListeBird= {reloadListeBird}
+								setReloadListeBird= {setReloadListeBird}
+								dateRecherche= {dateRecherche}
+								setdateRecherche= {setdateRecherche}
+								reloadUserInfos= {reloadUserInfos}
+								setReloadUserInfos= {setReloadUserInfos}
 							/>
 						</RequireAuth>
 					}

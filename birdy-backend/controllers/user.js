@@ -152,8 +152,46 @@ exports.CheckPseudo = (req, res, next) => {
         .catch(error => res.status(400).json({message : "Erreur CheckPseudo"}));
 }
 
-exports.GetUserInfos = (req, res, next) => {
+exports.GetUserInfosById = (req, res, next) => {
     User.findOne({ _id: req.body.id })
+        .then((user) => {
+            if (user){
+                res.status(200).json(
+                    { 
+                        message:'Utilisateur dans la base',
+                        isConnected: true,
+                        userInfos:{
+                            id: user._id,
+                            pseudo: user.pseudo,
+                            email: user.email,
+                            nom: user.nom,
+                            prenom: user.prenom,
+                            dateNaissance: user.dateNaissance,
+                            avatar: user.avatar,
+                            birds: user.birds,
+                            follows: user.follows,
+                            followers: user.followers,
+                            likes: user.likes,
+                            rebirds: user.rebirds,
+                            favorites: user.favorites
+                        }
+                    }
+                );
+            }
+            else {
+                res.status(201).json(
+                    {
+                        message: 'Erreur utilisateur non-trouvé',
+                        isConnected: false
+                    }
+                );
+            }
+        })
+        .catch(error => res.status(404).json({message : "Erreur utilisateur non-trouvé", isConnected: false}));
+}
+
+exports.GetUserInfosByPseudo = (req, res, next) => {
+    User.findOne({ pseudo: req.body.pseudo })
         .then((user) => {
             if (user){
                 res.status(200).json(
