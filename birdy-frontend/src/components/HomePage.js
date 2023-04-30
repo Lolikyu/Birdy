@@ -14,7 +14,6 @@ export default function HomePage({isConnected, userInfos, reloadListeBird, setRe
                     userInfos= {userInfos}
                     reloadListeBird= {reloadListeBird}
                     setReloadListeBird= {setReloadListeBird}
-                    isCommentaire= {false}
                 />
                 <Recherche
                     setdateRecherche= {setdateRecherche}

@@ -3,7 +3,7 @@ import axios from 'axios'
 import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
 
-export default function PostBird({isConnected, userInfos, reloadListeBird, setReloadListeBird, isCommentaire}){
+export default function PostBird({isConnected, userInfos, reloadListeBird, setReloadListeBird}){
     const [isChecked, setIsChecked] = useState(false);
     const params = useParams();
     const idBirdCible = params.id;
@@ -40,19 +40,10 @@ export default function PostBird({isConnected, userInfos, reloadListeBird, setRe
             date: date,
             heure: heure,
             isPublic: isChecked,
+            isComment: idBirdCible,
             dateDepuis70: dateDepuis70
           }
-        
         );
-        if (isCommentaire) {
-          var retour2 = await axios.post('http://localhost:8000/api/bird/modifyBird',
-            {
-              idBirdCible: idBirdCible,
-              idBirdCommentaire: retour.data.id
-            }
-          );
-        };
-
         formulairePostBird.target[0].value='';
         setReloadListeBird(reloadListeBird +1);
       }

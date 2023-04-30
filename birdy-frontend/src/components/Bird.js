@@ -2,7 +2,7 @@ import '../styles/Bird.css';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 
-export default function Bird({idBird, pseudo, avatar, content, date, heure, isPublic, likes, rebirds, userInfos, isConnected, reloadListeBird, setReloadListeBird, reloadUserInfos, setReloadUserInfos}) {
+export default function Bird({idBird, pseudo, avatar, content, date, heure, isPublic, isComment, isRebird, likes, rebirds, userInfos, isConnected, reloadListeBird, setReloadListeBird, reloadUserInfos, setReloadUserInfos}) {
     const navigate = useNavigate();
 
     function checkProfile() {
@@ -84,6 +84,8 @@ export default function Bird({idBird, pseudo, avatar, content, date, heure, isPu
                             </div>
                             <div>
                                 isPublic : {isPublic.toString()}<br></br>
+                                isComment : {(isComment)? isComment : "None"}<br></br>
+                                isRebird : {(isRebird)? isRebird : "None"}<br></br>
                                 <div onClick={likeBird}>Likes : {likes.length}<br></br></div>
                                 Rebirds : {rebirds.length}<br></br>
                                 <div onClick={favBird}>Favoris : {isInArray(idBird, userInfos.favorites)? "Oui" : "Non"}</div>

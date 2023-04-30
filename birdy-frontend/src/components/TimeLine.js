@@ -69,6 +69,8 @@ export default function TimeLine({isConnected, userInfos, reloadListeBird, setRe
                                 date= {b.date}
                                 heure= {b.heure}
                                 isPublic= {b.isPublic}
+                                isComment= {b.isComment}
+                                isRebird= {b.isRebird}
                                 likes= {b.likes}
                                 rebirds= {b.rebirds}
                                 userInfos= {userInfos}

@@ -94,7 +94,6 @@ export default function App (){
 								userInfos= {userInfos}
 								reloadListeBird= {reloadListeBird}
 								setReloadListeBird= {setReloadListeBird}
-								isCommentaire= {true}
 							/>
 						</>
 					}

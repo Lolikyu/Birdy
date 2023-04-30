@@ -9,6 +9,8 @@ const birdSchema = mongoose.Schema(
         date: {type: String, required: true},
         heure: {type: String, required: true},
         isPublic: {type: Boolean, required: true},
+        isComment: {type: String, default: null},
+        isRebird: {type: String, default: null},
         dateDepuis70: {type: Number, required: true},
         commentaires: {type: Array, default: []},
         likes: {type: Array, default: []},

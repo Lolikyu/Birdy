@@ -7,7 +7,9 @@ import { useParams, useNavigate } from 'react-router-dom'
 export default function BirdDetail({isConnected, userInfos, reloadListeBird, setReloadListeBird, dateRecherche, setdateRecherche, reloadUserInfos, setReloadUserInfos}){
     const [mainBird, updateMainBird] = useState(null);
     const [sideBirds, updateSideBirds] = useState(null);
+    const [fatherBird, updateFatherBird] = useState(null);
     const [isLoading, updateIsLoading] = useState(true);
+    const [isLoadingBis, updateIsLoadingBis] = useState(true);
 
     const params = useParams();
     const navigate = useNavigate();
@@ -33,9 +35,9 @@ export default function BirdDetail({isConnected, userInfos, reloadListeBird, set
         updateIsLoading(true);
         var idBirdCourant = params.id;
 
-        var response1 = await axios.post("http://localhost:8000/api/bird/getBirds",
+        var response1 = await axios.post("http://localhost:8000/api/bird/getBirdById",
             {
-                idBird: {idBirdCourant}
+                idBird: idBirdCourant
             }
         )
         updateMainBird(response1.data);
@@ -51,24 +53,67 @@ export default function BirdDetail({isConnected, userInfos, reloadListeBird, set
         updateIsLoading(false);
     }
 
+    const birdFatherFechting = async function() {
+        updateIsLoadingBis(true);
+        if (mainBird) {
+            var response3 = await axios.post("http://localhost:8000/api/bird/getBirdById",
+                {
+                    idBird: mainBird.isComment
+                }
+            )
+            updateFatherBird(response3.data);
+        }
+        updateIsLoadingBis(false);
+    }
+
     useEffect(() => {setdateRecherche([Date.now()-(12*3600*1000), Date.now()+1800000])}, []);
     
     useEffect(() => {
         birdDetailFetching();
-    }, [params, reloadListeBird]
-    );
+    }, [params, reloadListeBird]);
 
-    if (isLoading){
+    useEffect(() => {
+        birdFatherFechting();
+    }, [mainBird]);
+
+    if (isLoading || isLoadingBis){
         return (
             <h2>Loading ...</h2>
         )
     } 
+
     if (isConnected()) {
         if (userInfos.pseudo === mainBird.pseudo){
             //CONNECTE ET PROPRIETAIRE DU BIRD
             return (
                 <div>
                     <ul>
+                        {(fatherBird) ?
+                            <Bird
+                                idBird= {fatherBird._id}
+                                pseudo= {fatherBird.pseudo}
+                                avatar= {fatherBird.avatar}
+                                content= {fatherBird.content}
+                                date= {fatherBird.date}
+                                heure= {fatherBird.heure}
+                                isPublic= {fatherBird.isPublic}
+                                isComment= {fatherBird.isComment}
+                                isRebird= {fatherBird.isRebird}
+                                likes= {fatherBird.likes}
+                                rebirds= {fatherBird.rebirds}
+                                userInfos= {userInfos}
+                                isConnected= {isConnected}
+                                reloadListeBird= {reloadListeBird}
+                                setReloadListeBird= {setReloadListeBird}
+                                reloadUserInfos= {reloadUserInfos}
+                                setReloadUserInfos= {setReloadUserInfos}
+                            />
+                            :
+                            (mainBird.isComment) ?
+                                <div>Le tweet n'existe plus, il a été supprimé !</div>
+                                :
+                                null
+                        }
                         <Bird
                             idBird= {mainBird._id}
                             pseudo= {mainBird.pseudo}
@@ -77,6 +122,8 @@ export default function BirdDetail({isConnected, userInfos, reloadListeBird, set
                             date= {mainBird.date}
                             heure= {mainBird.heure}
                             isPublic= {mainBird.isPublic}
+                            isComment= {mainBird.isComment}
+                            isRebird= {mainBird.isRebird}
                             likes= {mainBird.likes}
                             rebirds= {mainBird.rebirds}
                             userInfos= {userInfos}
@@ -84,7 +131,7 @@ export default function BirdDetail({isConnected, userInfos, reloadListeBird, set
                             reloadListeBird= {reloadListeBird}
                             setReloadListeBird= {setReloadListeBird}
                             reloadUserInfos= {reloadUserInfos}
-							setReloadUserInfos= {setReloadUserInfos}
+                            setReloadUserInfos= {setReloadUserInfos}
                         />
                         <button onClick={supprimerBird}>Supprimer</button>
                         {
@@ -99,6 +146,8 @@ export default function BirdDetail({isConnected, userInfos, reloadListeBird, set
                                         date= {b.date}
                                         heure= {b.heure}
                                         isPublic= {b.isPublic}
+                                        isComment= {b.isComment}
+                                        isRebird= {b.isRebird}
                                         likes= {b.likes}
                                         rebirds= {b.rebirds}
                                         userInfos= {userInfos}
@@ -106,7 +155,7 @@ export default function BirdDetail({isConnected, userInfos, reloadListeBird, set
                                         reloadListeBird= {reloadListeBird}
                                         setReloadListeBird= {setReloadListeBird}
                                         reloadUserInfos= {reloadUserInfos}
-							            setReloadUserInfos= {setReloadUserInfos}
+                                        setReloadUserInfos= {setReloadUserInfos}
                                     />
                                 </li>
                             )
@@ -120,6 +169,32 @@ export default function BirdDetail({isConnected, userInfos, reloadListeBird, set
         return (
             <div>
                 <ul>
+                    {(fatherBird) ?
+                            <Bird
+                                idBird= {fatherBird._id}
+                                pseudo= {fatherBird.pseudo}
+                                avatar= {fatherBird.avatar}
+                                content= {fatherBird.content}
+                                date= {fatherBird.date}
+                                heure= {fatherBird.heure}
+                                isPublic= {fatherBird.isPublic}
+                                isComment= {fatherBird.isComment}
+                                isRebird= {fatherBird.isRebird}
+                                likes= {fatherBird.likes}
+                                rebirds= {fatherBird.rebirds}
+                                userInfos= {userInfos}
+                                isConnected= {isConnected}
+                                reloadListeBird= {reloadListeBird}
+                                setReloadListeBird= {setReloadListeBird}
+                                reloadUserInfos= {reloadUserInfos}
+                                setReloadUserInfos= {setReloadUserInfos}
+                            />
+                            :
+                            (mainBird.isComment) ?
+                                <div>Le tweet n'existe plus, il a été supprimé !</div>
+                                :
+                                null
+                        }
                     <Bird
                         idBird= {mainBird._id}
                         pseudo= {mainBird.pseudo}
@@ -128,6 +203,8 @@ export default function BirdDetail({isConnected, userInfos, reloadListeBird, set
                         date= {mainBird.date}
                         heure= {mainBird.heure}
                         isPublic= {mainBird.isPublic}
+                        isComment= {mainBird.isComment}
+                        isRebird= {mainBird.isRebird}
                         likes= {mainBird.likes}
                         rebirds= {mainBird.rebirds}
                         userInfos= {userInfos}
@@ -135,7 +212,7 @@ export default function BirdDetail({isConnected, userInfos, reloadListeBird, set
                         reloadListeBird= {reloadListeBird}
                         setReloadListeBird= {setReloadListeBird}
                         reloadUserInfos= {reloadUserInfos}
-						setReloadUserInfos= {setReloadUserInfos}
+                        setReloadUserInfos= {setReloadUserInfos}
                     />
                     {
                         sideBirds.filter(() => true)
@@ -149,6 +226,8 @@ export default function BirdDetail({isConnected, userInfos, reloadListeBird, set
                                     date= {b.date}
                                     heure= {b.heure}
                                     isPublic= {b.isPublic}
+                                    isComment= {b.isComment}
+                                    isRebird= {b.isRebird}
                                     likes= {b.likes}
                                     rebirds= {b.rebirds}
                                     userInfos= {userInfos}
@@ -156,7 +235,7 @@ export default function BirdDetail({isConnected, userInfos, reloadListeBird, set
                                     reloadListeBird= {reloadListeBird}
                                     setReloadListeBird= {setReloadListeBird}
                                     reloadUserInfos= {reloadUserInfos}
-							        setReloadUserInfos= {setReloadUserInfos}
+                                    setReloadUserInfos= {setReloadUserInfos}
                                 />
                             </li>
                         )
@@ -170,6 +249,32 @@ export default function BirdDetail({isConnected, userInfos, reloadListeBird, set
     return (
         <div>
             <ul>
+                {(fatherBird) ?
+                    <Bird
+                        idBird= {fatherBird._id}
+                        pseudo= {fatherBird.pseudo}
+                        avatar= {fatherBird.avatar}
+                        content= {fatherBird.content}
+                        date= {fatherBird.date}
+                        heure= {fatherBird.heure}
+                        isPublic= {fatherBird.isPublic}
+                        isComment= {fatherBird.isComment}
+                        isRebird= {fatherBird.isRebird}
+                        likes= {fatherBird.likes}
+                        rebirds= {fatherBird.rebirds}
+                        userInfos= {userInfos}
+                        isConnected= {isConnected}
+                        reloadListeBird= {reloadListeBird}
+                        setReloadListeBird= {setReloadListeBird}
+                        reloadUserInfos= {reloadUserInfos}
+                        setReloadUserInfos= {setReloadUserInfos}
+                    />
+                    :
+                    (mainBird.isComment) ?
+                        <div>Le tweet n'existe plus, il a été supprimé !</div>
+                        :
+                        null
+                }
                 <Bird
                     idBird= {mainBird._id}
                     pseudo= {mainBird.pseudo}
@@ -178,6 +283,8 @@ export default function BirdDetail({isConnected, userInfos, reloadListeBird, set
                     date= {mainBird.date}
                     heure= {mainBird.heure}
                     isPublic= {mainBird.isPublic}
+                    isComment= {mainBird.isComment}
+                    isRebird= {mainBird.isRebird}
                     likes= {mainBird.likes}
                     rebirds= {mainBird.rebirds}
                     userInfos= {userInfos}
@@ -185,7 +292,7 @@ export default function BirdDetail({isConnected, userInfos, reloadListeBird, set
                     reloadListeBird= {reloadListeBird}
                     setReloadListeBird= {setReloadListeBird}
                     reloadUserInfos= {reloadUserInfos}
-				    setReloadUserInfos= {setReloadUserInfos}
+                    setReloadUserInfos= {setReloadUserInfos}
                 />
                 {
                     sideBirds.filter(() => true)
@@ -199,6 +306,8 @@ export default function BirdDetail({isConnected, userInfos, reloadListeBird, set
                                 date= {b.date}
                                 heure= {b.heure}
                                 isPublic= {b.isPublic}
+                                isComment= {b.isComment}
+                                isRebird= {b.isRebird}
                                 likes= {b.likes}
                                 rebirds= {b.rebirds}
                                 userInfos= {userInfos}
@@ -206,7 +315,7 @@ export default function BirdDetail({isConnected, userInfos, reloadListeBird, set
                                 reloadListeBird= {reloadListeBird}
                                 setReloadListeBird= {setReloadListeBird}
                                 reloadUserInfos= {reloadUserInfos}
-							    setReloadUserInfos= {setReloadUserInfos}
+                                setReloadUserInfos= {setReloadUserInfos}
                             />
                         </li>
                     )
@@ -215,4 +324,5 @@ export default function BirdDetail({isConnected, userInfos, reloadListeBird, set
             <button onClick={unJourPlusTard}>Voir plus</button>
         </div>
     )
+    
 }

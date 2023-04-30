@@ -12,8 +12,8 @@ exports.getBirdsFiltre = (req, res, next) => {
     .catch(error => res.status(400).json({ message : "Erreur de lecture de Bird filtré" }))
 };
 
-exports.getBirds = (req, res, next) => {
-    Bird.findById(req.body.idBird.idBirdCourant)
+exports.getBirdById = (req, res, next) => {
+    Bird.findById(req.body.idBird)
         .then(bird => res.status(201).json(bird))
         .catch(error => res.status(400).json({ message : "Erreur de lecture de Bird" }))
 };
@@ -39,6 +39,8 @@ exports.postBird = (req, res, next) => {
             date: req.body.date,
             heure: req.body.heure,
             isPublic: req.body.isPublic,
+            isComment: req.body.isComment,
+            isRebird: req.body.isRebird,
             dateDepuis70: req.body.dateDepuis70,
             commentaires: req.body.commentaires,
             likes: req.body.likes,
@@ -47,18 +49,22 @@ exports.postBird = (req, res, next) => {
     );
     bird.save()
     .then(() => {
-        User.updateOne({_id: req.body.idUser}, {$push: {birds: String(bird._id)}})
-        .then (() => res.status(201).json ({ message: 'Bird posté !', id: bird.id }))
+        User.updateOne({_id: req.body.idUser}, {$push: {birds: bird.id}})
+        .then (() => {
+            if (bird.isComment) {
+            Bird.updateOne({_id: bird.isComment}, {$push: {commentaires: bird.id}})
+            .then(() => res.status(201).json ({ message: 'Bird posté !', id: bird.id }))
+            .catch(error => res.status(400).json({ message : "Erreur d'update du Bird cible dans la BDD" }))
+            }
+            else {
+                res.status(201).json ({ message: 'Bird posté !', id: bird.id });
+            }
+        }
+        )
         .catch((error) => { res.status(500).json({ error })})
     }
     )
     .catch(error => res.status(400).json({ message : 'Erreur de sauvegarde du Bird dans la BDD' }));
-};
-
-exports.modifyBird = (req, res, next) => {
-    Bird.updateOne({_id: req.body.idBirdCible}, {$push: {commentaires: req.body.idBirdCommentaire}})
-        .then(bird => res.status(201).json(bird))
-        .catch(error => res.status(400).json({ message : "Erreur de modification de Bird" }))
 };
 
 exports.deleteBird = (req, res, next) => {
