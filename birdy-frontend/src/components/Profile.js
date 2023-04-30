@@ -23,6 +23,15 @@ export default function Profile ({isConnected, userInfos, reloadListeBird, setRe
         updateMode('favorites');
     }
 
+    function isInArray(elem, array){
+        for (var i=0; i < array.length; i++){
+            if (array[i] === elem){
+                return true;
+            }
+        }
+        return false;
+    }
+
     async function getUserInfos() {
         updateIsLoading(true);
         var retour = await axios.post('http://localhost:8000/api/user/getUserInfosByPseudo',
@@ -34,9 +43,35 @@ export default function Profile ({isConnected, userInfos, reloadListeBird, setRe
         updateIsLoading(false);
 	}
 
+    async function followUser() {
+        updateIsLoading(true);
+        var retour = await axios.post('http://localhost:8000/api/user/FollowUser',
+            {
+                idUser: userInfos.id,
+                idUserCible: userInfosCible.id
+            }
+        );
+        setReloadUserInfos(reloadUserInfos +1);
+        updateIsLoading(false);
+	}
+
+    async function unfollowUser() {
+        updateIsLoading(true);
+        var retour = await axios.post('http://localhost:8000/api/user/UnfollowUser',
+            {
+                idUser: userInfos.id,
+                idUserCible: userInfosCible.id
+            }
+        );
+        setReloadUserInfos(reloadUserInfos +1);
+        updateIsLoading(false);
+	}
+
+    
+
     useEffect(() => {
         getUserInfos();
-    }, [params]);
+    }, [params, reloadUserInfos]);
 
     //SI LE CHARGEMENT DES RESSOURCES N'EST PAS ENCORE TERMINE
     if (isLoading){
@@ -89,34 +124,69 @@ export default function Profile ({isConnected, userInfos, reloadListeBird, setRe
             }
             //SI ON EST SUR LE PROFIL D'UN AUTRE UTILISATEUR
             else {
-                return (
-                    <div>
-                        Pseudo : {userInfosCible.pseudo}<br></br>
-                        Prénom : {userInfosCible.prenom}<br></br>
-                        Nom : {userInfosCible.nom}<br></br>
-                        Adresse mail : {userInfosCible.email}<br></br>
-                        Date de naissance : {userInfosCible.dateNaissance}<br></br>
-                        Avatar : <br></br>
-                        <img className="avatar" src={userInfosCible.avatar} rel="pdp"></img><br></br>
-
-                        <button onClick={modeBirds}>Birds</button><br></br>
-                        <button onClick={modeLikes}>Likes</button><br></br>
-
-                        <ProfileBirds
-                            mode= {mode}
-                            userInfosCible= {userInfosCible}
-                            isConnected= {isConnected}
-                            userInfos= {userInfos}
-                            reloadListeBird= {reloadListeBird}
-                            setReloadListeBird= {setReloadListeBird}
-                            condition= 'private'
-                            dateRecherche= {dateRecherche}
-                            setdateRecherche= {setdateRecherche}
-                            reloadUserInfos= {reloadUserInfos}
-                            setReloadUserInfos= {setReloadUserInfos}
-                        />
-                    </div>
-                )
+                //SI ON FOLLOW DEJA L'UTILISATEUR
+                if (isInArray(userInfosCible.id, userInfos.follows)){
+                    
+                    return (
+                        <div>
+                            Pseudo : {userInfosCible.pseudo}<br></br>
+                            Prénom : {userInfosCible.prenom}<br></br>
+                            Nom : {userInfosCible.nom}<br></br>
+                            Adresse mail : {userInfosCible.email}<br></br>
+                            Date de naissance : {userInfosCible.dateNaissance}<br></br>
+                            Avatar : <br></br>
+                            <img className="avatar" src={userInfosCible.avatar} rel="pdp"></img><br></br>
+                            <button onClick={unfollowUser}>Unfollow</button><br></br><br></br>
+                            <button onClick={modeBirds}>Birds</button><br></br>
+                            <button onClick={modeLikes}>Likes</button><br></br>
+    
+                            <ProfileBirds
+                                mode= {mode}
+                                userInfosCible= {userInfosCible}
+                                isConnected= {isConnected}
+                                userInfos= {userInfos}
+                                reloadListeBird= {reloadListeBird}
+                                setReloadListeBird= {setReloadListeBird}
+                                condition= 'private'
+                                dateRecherche= {dateRecherche}
+                                setdateRecherche= {setdateRecherche}
+                                reloadUserInfos= {reloadUserInfos}
+                                setReloadUserInfos= {setReloadUserInfos}
+                            />
+                        </div>
+                    )
+                }
+                //SI ON NE FOLLOW PAS L'UTILISATEUR
+                else {
+                    return (
+                        <div>
+                            Pseudo : {userInfosCible.pseudo}<br></br>
+                            Prénom : {userInfosCible.prenom}<br></br>
+                            Nom : {userInfosCible.nom}<br></br>
+                            Adresse mail : {userInfosCible.email}<br></br>
+                            Date de naissance : {userInfosCible.dateNaissance}<br></br>
+                            Avatar : <br></br>
+                            <img className="avatar" src={userInfosCible.avatar} rel="pdp"></img><br></br>
+                            <button onClick={followUser}>Follow</button><br></br><br></br>
+                            <button onClick={modeBirds}>Birds</button><br></br>
+                            <button onClick={modeLikes}>Likes</button><br></br>
+    
+                            <ProfileBirds
+                                mode= {mode}
+                                userInfosCible= {userInfosCible}
+                                isConnected= {isConnected}
+                                userInfos= {userInfos}
+                                reloadListeBird= {reloadListeBird}
+                                setReloadListeBird= {setReloadListeBird}
+                                condition= 'private'
+                                dateRecherche= {dateRecherche}
+                                setdateRecherche= {setdateRecherche}
+                                reloadUserInfos= {reloadUserInfos}
+                                setReloadUserInfos= {setReloadUserInfos}
+                            />
+                        </div>
+                    )
+                }
             }
         }
         //SI ON EST SUR UN PROFIL INVALIDE

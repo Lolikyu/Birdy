@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
   
-exports.Inscription = (req, res, next) => {
+exports.inscription = (req, res, next) => {
     bcrypt.hash(req.body.password, 10)
         .then(hash => {
             const user = new User(
@@ -51,7 +51,7 @@ exports.Inscription = (req, res, next) => {
         .catch(error => res.status(500).json({ error }));
 }
 
-exports.Connexion = (req, res, next) => {
+exports.connexion = (req, res, next) => {
     User.findOne({ email: req.body.email })
         .then(user => 
             {
@@ -106,7 +106,7 @@ exports.Connexion = (req, res, next) => {
         .catch(error => res.status(200).json({ isConnected:false}));
 }
 
-exports.CheckEmail = (req, res, next) => {
+exports.checkEmail = (req, res, next) => {
     User.findOne({ email: req.body.email })
         .then((user) => {
             if (user){
@@ -129,7 +129,7 @@ exports.CheckEmail = (req, res, next) => {
         .catch(error => res.status(400).json({message : "Erreur CheckEmail"}));
 }
 
-exports.CheckPseudo = (req, res, next) => {
+exports.checkPseudo = (req, res, next) => {
     User.findOne({ pseudo: req.body.pseudo })
         .then((user) => {
             if (user){
@@ -152,7 +152,7 @@ exports.CheckPseudo = (req, res, next) => {
         .catch(error => res.status(400).json({message : "Erreur CheckPseudo"}));
 }
 
-exports.GetUserInfosById = (req, res, next) => {
+exports.getUserInfosById = (req, res, next) => {
     User.findOne({ _id: req.body.id })
         .then((user) => {
             if (user){
@@ -190,7 +190,7 @@ exports.GetUserInfosById = (req, res, next) => {
         .catch(error => res.status(404).json({message : "Erreur utilisateur non-trouvé", isConnected: false}));
 }
 
-exports.GetUserInfosByPseudo = (req, res, next) => {
+exports.getUserInfosByPseudo = (req, res, next) => {
     User.findOne({ pseudo: req.body.pseudo })
         .then((user) => {
             if (user){
@@ -226,4 +226,24 @@ exports.GetUserInfosByPseudo = (req, res, next) => {
             }
         })
         .catch(error => res.status(404).json({message : "Erreur utilisateur non-trouvé", isConnected: false}));
+}
+
+exports.followUser = (req, res, next) => {
+    User.updateOne({_id: req.body.idUserCible}, {$push: {followers: req.body.idUser}})
+    .then(() => {
+        User.updateOne({_id: req.body.idUser}, {$push: {follows: req.body.idUserCible}})
+        .then(() => res.status(200).json({ message: "Utilisateur suivi" }))
+        .catch((error) => { res.status(500).json({ error })})
+    })
+    .catch((error) => { res.status(500).json({ error })}) 
+}
+
+exports.unfollowUser = (req, res, next) => {
+    User.updateOne({_id: req.body.idUserCible}, {$pull: {followers: req.body.idUser}})
+    .then(() => {
+        User.updateOne({_id: req.body.idUser}, {$pull: {follows: req.body.idUserCible}})
+        .then(() => res.status(200).json({ message: "Utilisateur non-suivi" }))
+        .catch((error) => { res.status(500).json({ error })})
+    })
+    .catch((error) => { res.status(500).json({ error })}) 
 }

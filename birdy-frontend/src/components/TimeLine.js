@@ -13,6 +13,15 @@ export default function TimeLine({isConnected, userInfos, reloadListeBird, setRe
         setdateRecherche(newDateRecherche);
     }
     
+    function isInArray(elem, array){
+        for (var i=0; i < array.length; i++){
+            if (array[i] === elem){
+                return true;
+            }
+        }
+        return false;
+    }
+
     async function birdFetching() {
         updateIsLoading(true);
 
@@ -22,6 +31,10 @@ export default function TimeLine({isConnected, userInfos, reloadListeBird, setRe
         
         setBirds(response.data.sort((a, b)=>(a.dateDepuis70 > b.dateDepuis70 ? -1 : 1))); //pour récupérer les posts du plus récent ou plus ancien
         updateIsLoading(false);
+    }
+
+    function privateBirds(bird){
+        return ((bird.idUser === userInfos.id) || isInArray(bird.idUser, userInfos.follows));
     }
 
     useEffect(() => {
@@ -42,7 +55,7 @@ export default function TimeLine({isConnected, userInfos, reloadListeBird, setRe
                     birds.filter (
                         (b) => (condition=='private')
                         ?
-                        (true)
+                        (privateBirds(b) || b.isPublic)
                         :
                         (b.isPublic)
                     )

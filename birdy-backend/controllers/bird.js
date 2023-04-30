@@ -31,7 +31,8 @@ exports.getBirdsFiltreIdList = (req, res, next) => {
 
 exports.postBird = (req, res, next) => {
     const bird = new Bird(
-        {
+        {   
+            idUser: req.body.idUser,
             pseudo: req.body.pseudo,
             avatar: req.body.avatar,
             content: req.body.content,
@@ -46,28 +47,8 @@ exports.postBird = (req, res, next) => {
     );
     bird.save()
     .then(() => {
-        User.updateOne({_id: req.body.userId}, {$push: {birds: String(bird._id)}})
-        .then (() => 
-            res.status(201).json (
-            {
-                message: 'Bird posté !',
-                birdInfos: 
-                {   
-                    id: bird._id,
-                    pseudo: bird.pseudo,
-                    avatar: bird.avatar,
-                    content: bird.content,
-                    date: bird.date,
-                    heure: bird.heure,
-                    isPublic: bird.isPublic,
-                    dateDepuis70: bird.dateDepuis70,
-                    commentaires: bird.commentaires,
-                    likes: bird.likes,
-                    rebirds: bird.rebirds
-                }
-            })
-    
-        )
+        User.updateOne({_id: req.body.idUser}, {$push: {birds: String(bird._id)}})
+        .then (() => res.status(201).json ({ message: 'Bird posté !', id: bird.id }))
         .catch((error) => { res.status(500).json({ error })})
     }
     )

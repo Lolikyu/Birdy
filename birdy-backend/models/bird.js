@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 
 const birdSchema = mongoose.Schema(
-    {
+    {   
+        idUser: {type: String, required: true},
         pseudo: {type: String, required: true},
         avatar: {type: String, required: true},
         content: {type: String, required: true},

@@ -1,8 +1,14 @@
 import '../styles/Bird.css';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Bird({idBird, pseudo, avatar, content, date, heure, isPublic, likes, rebirds, userInfos, isConnected, reloadListeBird, setReloadListeBird, reloadUserInfos, setReloadUserInfos}) {
+    const navigate = useNavigate();
+
+    function checkProfile() {
+        navigate('/profile/' + String(pseudo));
+    }
+    
     function isInArray(elem, array){
         for (var i=0; i < array.length; i++){
             if (array[i] === elem){
@@ -63,7 +69,7 @@ export default function Bird({idBird, pseudo, avatar, content, date, heure, isPu
             return (
                 <div className='bird'>
                     <div>
-                        <div>
+                        <div onClick={checkProfile}>
                             <img className='avatar' src={avatar}/>
                             <div>
                                 <div>{pseudo}</div>

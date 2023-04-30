@@ -33,7 +33,7 @@ export default function PostBird({isConnected, userInfos, reloadListeBird, setRe
         //si le message est privé alors ## isPublic = false ##
         var retour = await axios.post('http://localhost:8000/api/bird/postBird',
           {
-            userId: userInfos.id,
+            idUser: userInfos.id,
             pseudo: userInfos.pseudo,
             avatar: userInfos.avatar,
             content: formulairePostBird.target[0].value,
@@ -48,7 +48,7 @@ export default function PostBird({isConnected, userInfos, reloadListeBird, setRe
           var retour2 = await axios.post('http://localhost:8000/api/bird/modifyBird',
             {
               idBirdCible: idBirdCible,
-              idBirdCommentaire: retour.data.birdInfos.id
+              idBirdCommentaire: retour.data.id
             }
           );
         };
