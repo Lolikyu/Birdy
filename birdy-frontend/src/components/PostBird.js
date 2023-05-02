@@ -1,4 +1,4 @@
-import '../styles/PostBird.css'
+import styles from '../styles/PostBird.module.css'
 import axios from 'axios'
 import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom';
@@ -12,7 +12,7 @@ export default function PostBird({isConnected, userInfos, reloadListeBird, setRe
       const [text, setText] = useState("");
     
       return (
-        <textarea
+        <textarea className={styles.textarea}
           value= {text}
           onChange= {(e) => setText(e.target.value)}
           placeholder= {placeholder}
@@ -50,14 +50,19 @@ export default function PostBird({isConnected, userInfos, reloadListeBird, setRe
 
     if (isConnected()){
       return (
-        <div>
+        <div className={styles.postBird}>
             <form onSubmit={postBird}>
-                <label htmlFor='message'>Nouveau bird: </label><br></br>
+                <div>Nouveau bird: </div><br></br>
                 
-                <TextAreaWithEnter placeholder='Contenu du Bird'/><br></br>
+                <textarea className={styles.textarea}
+                  placeholder= {"Contenu du Bird"}
+                /><br></br>
 
-                <label htmlFor='public'>Rendre le bird publique </label>
-                <input type="checkbox" name='isPublic' checked={isChecked} onChange={handleOnChange} /><br></br>
+                <div>
+                  Rendre le bird publique 
+                  <input type="checkbox" name='isPublic' checked={isChecked} onChange={handleOnChange}/>
+                </div>
+                
                 
                 <button type='submit'>Envoyer</button>
             </form>
@@ -66,7 +71,7 @@ export default function PostBird({isConnected, userInfos, reloadListeBird, setRe
     }
     else {
       return (
-        <div>
+        <div className={styles.error}>
             Vous ne pouvez pas commenter sans être connecté 😢<br></br>
             <nav>
                 <Link to='/'>Retourner à l'écran d'accueil</Link>

@@ -1,4 +1,4 @@
-import '../styles/BirdDetail.css'
+import styles from '../styles/BirdDetail.module.css'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 import Bird from './Bird'
@@ -86,7 +86,7 @@ export default function BirdDetail({isConnected, userInfos, reloadListeBird, set
         if (userInfos.pseudo === mainBird.pseudo){
             //CONNECTE ET PROPRIETAIRE DU BIRD
             return (
-                <div>
+                <div className={styles.birdDetail}>
                     <ul>
                         {(fatherBird) ?
                             <Bird
@@ -167,7 +167,7 @@ export default function BirdDetail({isConnected, userInfos, reloadListeBird, set
         }
         //CONNECTE ET NON-PROPRIETAIRE DU BIRD
         return (
-            <div>
+            <div className={styles.birdDetail}>
                 <ul>
                     {(fatherBird) ?
                             <Bird
@@ -247,7 +247,7 @@ export default function BirdDetail({isConnected, userInfos, reloadListeBird, set
     }
     //DECONNECTE
     return (
-        <div>
+        <div className={styles.birdDetail}>
             <ul>
                 {(fatherBird) ?
                     <Bird

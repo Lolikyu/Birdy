@@ -1,13 +1,13 @@
+import styles from '../styles/HomePage.module.css'
 import PostBird from './PostBird';
 import TimeLine from './TimeLine';
 import Recherche from './Recherche';
-import '../styles/HomePage.css';
 
 export default function HomePage({isConnected, userInfos, reloadListeBird, setReloadListeBird, dateRecherche, setdateRecherche, reloadUserInfos, setReloadUserInfos}){
 
     if (isConnected()){
         return (
-            <div>
+            <div className={styles.homePage}>
                 HomePage connecté
                 <PostBird
                     isConnected= {isConnected}
@@ -35,7 +35,7 @@ export default function HomePage({isConnected, userInfos, reloadListeBird, setRe
     }
     else {
         return (
-            <div>
+            <div className={styles.homePage}>
                 HomePage déconnecté
                 <Recherche
                     setdateRecherche= {setdateRecherche}

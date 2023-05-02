@@ -1,0 +1,52 @@
+.panel {
+    background-color: var(--bgcolor);
+    height: 100%;
+    width: 20%;
+    display: flexbox;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    margin: 0;
+    padding: 24px;
+    border: 1px solid var(--objcolor);
+    border-radius: 5px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    
+}
+
+.icon {
+    align-self: center;
+    width: 64px;
+}
+
+.elemMenu {
+    display: block;
+    width: 100%;
+    padding: 16px;
+    text-align: left;
+    border: none;
+    background: none;
+    font-size: 18px;
+    color: var(--objcolor);
+    cursor: pointer;
+}
+      
+.elemMenu:hover {
+    background-color: rgba(29, 161, 242, 0.1);
+      
+}
+
+.deconnexion {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%); /* pour centrer horizontalement */
+}
+
+span {
+    align-self: bottom;
+}

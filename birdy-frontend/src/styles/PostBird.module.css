@@ -1,0 +1,37 @@
+.postBird {
+    align-self: center;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    margin: 16px 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bgcolor);
+    border: 1px solid var(--objcolor);
+    border-radius: 5px;
+}
+  
+.textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 8px;
+    border: 2.5px solid #ccc;
+    border-radius: 8px;
+    resize: none;
+    font-size: 18px;
+    line-height: 1.5;
+    outline: none;
+    transition: all 0.2s ease-in-out;
+}
+  
+.textarea:focus {
+    border-color: var(--objcolor);;
+}
+
+.error {
+    align-items: center;
+    text-align: center;
+    padding-top: 15%;
+}
+

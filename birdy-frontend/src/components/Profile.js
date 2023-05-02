@@ -1,4 +1,4 @@
-import '../styles/Profile.css';
+import styles from '../styles/Profile.module.css';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
@@ -93,14 +93,14 @@ export default function Profile ({isConnected, userInfos, reloadListeBird, setRe
             //SI ON EST SUR SON PROPRE PROFIL
             if (userInfosCible.id === userInfos.id){
                 return (
-                    <div>
+                    <div className={styles.profile}>
                         Pseudo : {userInfosCible.pseudo}<br></br>
                         Prénom : {userInfosCible.prenom}<br></br>
                         Nom : {userInfosCible.nom}<br></br>
                         Adresse mail : {userInfosCible.email}<br></br>
                         Date de naissance : {userInfosCible.dateNaissance}<br></br>
                         Avatar : <br></br>
-                        <img className="avatar" src={userInfosCible.avatar} rel="pdp"></img><br></br>
+                        <img className={styles.avatar} src={userInfosCible.avatar} rel="pdp"></img><br></br>
 
                         <button onClick={modeBirds}>Birds</button><br></br>
                         <button onClick={modeLikes}>Likes</button><br></br>
@@ -128,14 +128,14 @@ export default function Profile ({isConnected, userInfos, reloadListeBird, setRe
                 if (isInArray(userInfosCible.id, userInfos.follows)){
                     
                     return (
-                        <div>
+                        <div className={styles.profile}>
                             Pseudo : {userInfosCible.pseudo}<br></br>
                             Prénom : {userInfosCible.prenom}<br></br>
                             Nom : {userInfosCible.nom}<br></br>
                             Adresse mail : {userInfosCible.email}<br></br>
                             Date de naissance : {userInfosCible.dateNaissance}<br></br>
                             Avatar : <br></br>
-                            <img className="avatar" src={userInfosCible.avatar} rel="pdp"></img><br></br>
+                            <img className={styles.avatar} src={userInfosCible.avatar} rel="pdp"></img><br></br>
                             <button onClick={unfollowUser}>Unfollow</button><br></br><br></br>
                             <button onClick={modeBirds}>Birds</button><br></br>
                             <button onClick={modeLikes}>Likes</button><br></br>
@@ -159,14 +159,14 @@ export default function Profile ({isConnected, userInfos, reloadListeBird, setRe
                 //SI ON NE FOLLOW PAS L'UTILISATEUR
                 else {
                     return (
-                        <div>
+                        <div className={styles.profile}>
                             Pseudo : {userInfosCible.pseudo}<br></br>
                             Prénom : {userInfosCible.prenom}<br></br>
                             Nom : {userInfosCible.nom}<br></br>
                             Adresse mail : {userInfosCible.email}<br></br>
                             Date de naissance : {userInfosCible.dateNaissance}<br></br>
                             Avatar : <br></br>
-                            <img className="avatar" src={userInfosCible.avatar} rel="pdp"></img><br></br>
+                            <img className={styles.avatar} src={userInfosCible.avatar} rel="pdp"></img><br></br>
                             <button onClick={followUser}>Follow</button><br></br><br></br>
                             <button onClick={modeBirds}>Birds</button><br></br>
                             <button onClick={modeLikes}>Likes</button><br></br>

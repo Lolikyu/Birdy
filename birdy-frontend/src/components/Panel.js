@@ -1,4 +1,4 @@
-import '../styles/Panel.css'
+import styles from '../styles/Panel.module.css'
 import { Link, useNavigate } from 'react-router-dom';
 import { useSignOut } from 'react-auth-kit';
 import Authentification from './Authentification';
@@ -14,17 +14,38 @@ export default function Panel({isConnected, userInfos, updateUserInfos}){
         navigate('/');
     }
 
+    function goToHome(){
+        navigate('/');
+    }
+
+    function goToHome(){
+        navigate('/');
+    }
+
+    function goToProfile(){
+        navigate('/profile/' + String(userInfos.pseudo));
+    }
+    
+
     if (isConnected()){
         if (userInfos) {
             return (
-                <>
+                <div className={styles.panel}>
                     Panel connecté
+                    
                     <nav>
-                        <Link to='/'>HomePage</Link><br></br>
-                        <Link to={'/profile/' + String(userInfos.pseudo)}>Profil</Link><br></br>
+                        <div className={styles.elemMenu} onClick={goToHome}>
+                            <i className={styles.icon}><span class="material-icons">home</span></i>
+                            HomePage
+                        </div><br></br>
+                        <div className={styles.elemMenu} onClick={goToProfile}>
+                            Profil
+                        </div><br></br>
+                        <br></br>
+                        
                     </nav>
-                    <button onClick={disconnect}>Déconnexion</button><br></br>
-                </>
+                    <button className={styles.deconnexion} onClick={disconnect}>Déconnexion</button><br></br>
+                </div>
             )
         }
         else {
@@ -35,15 +56,18 @@ export default function Panel({isConnected, userInfos, updateUserInfos}){
     }
     else {
         return (
-            <>
+            <div className={styles.panel}>
                 Panel déconnecté<br></br>
                 <nav>
-                    <Link to='/'>HomePage</Link><br></br>
+                    <div className={styles.elemMenu} onClick={goToHome}>
+                        <i className={styles.icon}><span class="material-icons">home</span></i>
+                        HomePage
+                    </div><br></br>
                 </nav>
                 <Authentification
                     updateUserInfos= {updateUserInfos}
                 />
-            </>
+            </div>
         )
     }
 }

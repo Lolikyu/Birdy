@@ -1,4 +1,4 @@
-import '../styles/Recherche.css'
+import styles from '../styles/Recherche.module.css'
 
 export default function Recherche({setdateRecherche, reloadListeBird, setReloadListeBird}){
     var dateduJour = new Date();
@@ -23,12 +23,12 @@ export default function Recherche({setdateRecherche, reloadListeBird, setReloadL
         <div>
             <form onSubmit={checkDate}>
                 Recherche de posts entre le 
-                <input name ="debut" type="date" required/> 
+                <input className={styles.input} name ="debut" type="date" required/> 
                 et le 
-                <input name = "fin" type='date' required max={dateduJour}/>
+                <input className={styles.input} name = "fin" type='date' required max={dateduJour}/>
                 <button type="submit">Valider</button>
-            </form>
-            <button onClick={initDate}>Init</button>
+                <button onClick={initDate}>Init</button>
+            </form>  
         </div>
     )
 }

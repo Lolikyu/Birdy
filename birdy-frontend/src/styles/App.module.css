@@ -1,0 +1,46 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    --bgcolor: rgb(20, 20, 20);
+    --objcolor: rgb(0, 140, 179);
+}
+
+body {
+    color: white;
+    background-color: var(--bgcolor);
+}
+
+ul {
+    list-style: none;
+}
+
+.details {
+    margin-left: 20%;
+}
+
+button {
+    display: inline-block;
+    padding: 5px 9px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 9999px;
+    color: white;
+    background-color: var(--objcolor);
+    transition: all 0.2s ease-in-out;
+}
+  /* Lorsque le bouton est survolé */
+button:hover {
+    background-color: #0E71C8;
+    cursor: pointer;
+}
+  
+  /* Lorsque le bouton est pressé */
+button:active {
+    background-color: #0A5099;
+}
+

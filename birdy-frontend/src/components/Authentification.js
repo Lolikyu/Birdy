@@ -1,4 +1,4 @@
-import '../styles/Authentification.css';
+import styles from '../styles/Authentification.module.css';
 import { useState } from 'react';
 import { useSignIn } from 'react-auth-kit';
 import axios from 'axios';
@@ -87,7 +87,8 @@ export default function Authentification({updateUserInfos}){
     switch (afficheFormulaire){
         case 0:
             return (
-                <div className='formulaireOff'>
+                //Accueil
+                <div className={styles.auth}>
                     Pas encore connecté ?<br></br>
                     Connecte-toi ou rejoins la communauté !<br></br>
                     <button onClick={() => updateAfficheFormulaire(1)}>Je me connecte</button>
@@ -97,7 +98,8 @@ export default function Authentification({updateUserInfos}){
         
         case 1:
             return (
-                <div className='formulaireConnexion'>
+                //Formulaire de connexion
+                <div className={styles.auth}>
                     <form onSubmit={connexion}>
                         <label htmlFor='Email'>Adresse mail </label>
                         <input name='Email' type='email' required/><br></br>
@@ -113,7 +115,8 @@ export default function Authentification({updateUserInfos}){
         
         case 2:
             return (
-                <div className='formulaireInscription'>
+                //Formulaire d'inscription
+                <div className={styles.auth}>
                     <form onSubmit={inscription}>
                         <label htmlFor='Pseudo'>Pseudo: </label>
                         <input name='Pseudo' type='text' required/><br></br>

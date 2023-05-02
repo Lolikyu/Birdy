@@ -1,3 +1,4 @@
+import styles from './styles/App.module.css'
 import { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom'
 import { RequireAuth, useAuthUser, useIsAuthenticated } from 'react-auth-kit';
@@ -33,7 +34,8 @@ export default function App (){
 	, [reloadUserInfos]);
 
 	return (
-		<div>
+		<div className={styles.app}>
+
 			<Panel
 				isConnected= {isConnected}
 				userInfos= {userInfos}
@@ -77,7 +79,7 @@ export default function App (){
 				<Route
 					path= '/bird/:id'
 					element= {
-						<>
+						<div className={styles.details}>
 							<BirdDetail
 								isConnected= {isConnected}
 								userInfos= {userInfos}
@@ -95,7 +97,7 @@ export default function App (){
 								reloadListeBird= {reloadListeBird}
 								setReloadListeBird= {setReloadListeBird}
 							/>
-						</>
+						</div>
 					}
 				/>
 			</Routes>

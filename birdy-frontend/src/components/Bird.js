@@ -1,11 +1,13 @@
-import '../styles/Bird.css';
+import styles from '../styles/Bird.module.css';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 
 export default function Bird({idBird, pseudo, avatar, content, date, heure, isPublic, isComment, isRebird, likes, rebirds, userInfos, isConnected, reloadListeBird, setReloadListeBird, reloadUserInfos, setReloadUserInfos}) {
     const navigate = useNavigate();
 
-    function checkProfile() {
+    function checkProfile(e) {
+        e.stopPropagation();
+
         navigate('/profile/' + String(pseudo));
     }
     
@@ -18,7 +20,9 @@ export default function Bird({idBird, pseudo, avatar, content, date, heure, isPu
         return false;
     }
 
-    async function likeBird() {
+    async function likeBird(e) {
+        e.stopPropagation();
+
         if (isInArray(idBird, userInfos.likes)) {
             await axios.post("http://localhost:8000/api/bird/dislikeBird", 
                 {
@@ -41,7 +45,9 @@ export default function Bird({idBird, pseudo, avatar, content, date, heure, isPu
         }
     }
 
-    async function favBird() {
+    async function favBird(e) {
+        e.stopPropagation();
+
         if (isInArray(idBird, userInfos.favorites)) {
             await axios.post("http://localhost:8000/api/bird/unfavBird", 
                 {
@@ -64,22 +70,27 @@ export default function Bird({idBird, pseudo, avatar, content, date, heure, isPu
         }
     }
 
+    function details() {
+        navigate('/bird/' + String(idBird));
+    }
+
     if (isConnected()) {
         if (userInfos) {
             return (
-                <div className='bird'>
+                <div className={styles.bird} onClick={details}>
                     <div>
                         <div onClick={checkProfile}>
-                            <img className='avatar' src={avatar}/>
-                            <div>
-                                <div>{pseudo}</div>
-                            </div>
+                            <img className={styles.avatar} src={avatar}/>
+
+                            <div className={styles.pseudo}>{pseudo}</div>
+
                         </div>
-                        <div>
+
+                        <div className={styles.content}>
                             {content}
                         </div>
                         <div>
-                            <div>
+                            <div className={styles.date}>
                                 Posté le {date} à {heure}
                             </div>
                             <div>
@@ -89,11 +100,6 @@ export default function Bird({idBird, pseudo, avatar, content, date, heure, isPu
                                 <div onClick={likeBird}>Likes : {likes.length}<br></br></div>
                                 Rebirds : {rebirds.length}<br></br>
                                 <div onClick={favBird}>Favoris : {isInArray(idBird, userInfos.favorites)? "Oui" : "Non"}</div>
-                                <i></i>
-                                <i></i>
-                                <nav>
-                                    <Link to={'/bird/' + String(idBird)}>Détails</Link>
-                                </nav>
                             </div>
                         </div>
                     </div>
@@ -108,30 +114,25 @@ export default function Bird({idBird, pseudo, avatar, content, date, heure, isPu
     }
     else {
         return (
-            <div className='bird'>
+            <div className={styles.bird} onClick={details}>
                 <div>
                     <div>
-                        <img className='avatar' src={avatar}/>
+                        <img className={styles.avatar} src={avatar}/>
                         <div>
-                            <div>{pseudo}</div>
+                            <div className={styles.pseudo}>{pseudo}</div>
                         </div>
                     </div>
-                    <div>
+                    <div className={styles.content}>
                         {content}
                     </div>
                     <div>
-                        <div>
+                        <div className={styles.date}>
                             Posté le {date} à {heure}
                         </div>
                         <div>
                             isPublic : {isPublic.toString()}<br></br>
                             Likes : {likes.length}<br></br>
                             Rebirds : {rebirds.length}<br></br>
-                            <i></i>
-                            <i></i>
-                            <nav>
-                                <Link to={'/bird/' + String(idBird)}>Détails</Link>
-                            </nav>
                         </div>
                     </div>
                 </div>
