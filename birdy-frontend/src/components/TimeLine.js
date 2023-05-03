@@ -34,7 +34,9 @@ export default function TimeLine({isConnected, userInfos, reloadListeBird, setRe
     }
 
     function privateBirds(bird){
-        return ((bird.idUser === userInfos.id) || isInArray(bird.idUser, userInfos.follows));
+        if (bird) {
+            return ((bird.idUser === userInfos.id) || isInArray(bird.idUser, userInfos.follows));
+        }
     }
 
     useEffect(() => {
@@ -48,43 +50,45 @@ export default function TimeLine({isConnected, userInfos, reloadListeBird, setRe
         )
     } 
 
-    return (
-        <div> 
-            <ul>
-                {
-                    birds.filter (
-                        (b) => (condition=='private')
-                        ?
-                        (privateBirds(b) || b.isPublic)
-                        :
-                        (b.isPublic)
-                    )
-                    .map((b)=>
-                        <li key={b._id}>
-                            <Bird
-                                idBird= {b._id}
-                                pseudo= {b.pseudo}
-                                avatar= {b.avatar}
-                                content= {b.content}
-                                date= {b.date}
-                                heure= {b.heure}
-                                isPublic= {b.isPublic}
-                                isComment= {b.isComment}
-                                isRebird= {b.isRebird}
-                                likes= {b.likes}
-                                rebirds= {b.rebirds}
-                                userInfos= {userInfos}
-                                isConnected= {isConnected}
-                                reloadListeBird= {reloadListeBird}
-                                setReloadListeBird= {setReloadListeBird}
-                                reloadUserInfos= {reloadUserInfos}
-							    setReloadUserInfos= {setReloadUserInfos}
-                            />
-                        </li>
-                    )
-                }
-            </ul>
-            <button onClick={unJourPlusTard}>Voir plus</button>
-        </div>
-    )
+    if (birds) {
+        return (
+            <div> 
+                <ul>
+                    {
+                        birds.filter (
+                            (b) => (condition === 'private')
+                            ?
+                            (privateBirds(b) || b.isPublic)
+                            :
+                            (b.isPublic)
+                        )
+                        .map((b)=>
+                            <li key={b._id}>
+                                <Bird
+                                    idBird= {b._id}
+                                    pseudo= {b.pseudo}
+                                    avatar= {b.avatar}
+                                    content= {b.content}
+                                    date= {b.date}
+                                    heure= {b.heure}
+                                    isPublic= {b.isPublic}
+                                    isComment= {b.isComment}
+                                    isRebird= {b.isRebird}
+                                    likes= {b.likes}
+                                    rebirds= {b.rebirds}
+                                    userInfos= {userInfos}
+                                    isConnected= {isConnected}
+                                    reloadListeBird= {reloadListeBird}
+                                    setReloadListeBird= {setReloadListeBird}
+                                    reloadUserInfos= {reloadUserInfos}
+                                    setReloadUserInfos= {setReloadUserInfos}
+                                />
+                            </li>
+                        )
+                    }
+                </ul>
+                <button onClick={unJourPlusTard}>Voir plus</button>
+            </div>
+        )
+    }
 }

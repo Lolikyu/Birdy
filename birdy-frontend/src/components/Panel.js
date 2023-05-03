@@ -1,5 +1,5 @@
 import styles from '../styles/Panel.module.css'
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useSignOut } from 'react-auth-kit';
 import Authentification from './Authentification';
 
@@ -11,10 +11,6 @@ export default function Panel({isConnected, userInfos, updateUserInfos}){
     function disconnect(){
         updateUserInfos(null);
         signOut();
-        navigate('/');
-    }
-
-    function goToHome(){
         navigate('/');
     }
 
@@ -35,7 +31,7 @@ export default function Panel({isConnected, userInfos, updateUserInfos}){
                     
                     <nav>
                         <div className={styles.elemMenu} onClick={goToHome}>
-                            <i className={styles.icon}><span class="material-icons">home</span></i>
+                            <i className={styles.icon}><span className="material-icons">home</span></i>
                             HomePage
                         </div><br></br>
                         <div className={styles.elemMenu} onClick={goToProfile}>

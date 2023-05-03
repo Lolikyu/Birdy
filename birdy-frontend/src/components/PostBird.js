@@ -8,18 +8,6 @@ export default function PostBird({isConnected, userInfos, reloadListeBird, setRe
     const params = useParams();
     const idBirdCible = params.id;
 
-    function TextAreaWithEnter({placeholder}) {
-      const [text, setText] = useState("");
-    
-      return (
-        <textarea className={styles.textarea}
-          value= {text}
-          onChange= {(e) => setText(e.target.value)}
-          placeholder= {placeholder}
-        />
-      );
-    }
-    
     function handleOnChange() {
       setIsChecked(!isChecked);
     };
@@ -31,7 +19,7 @@ export default function PostBird({isConnected, userInfos, reloadListeBird, setRe
         var dateDepuis70 = Date.now();//pour classer les posts par ordre chrono
         
         //si le message est privé alors ## isPublic = false ##
-        var retour = await axios.post('http://localhost:8000/api/bird/postBird',
+        await axios.post('http://localhost:8000/api/bird/postBird',
           {
             idUser: userInfos.id,
             pseudo: userInfos.pseudo,
@@ -52,15 +40,15 @@ export default function PostBird({isConnected, userInfos, reloadListeBird, setRe
       return (
         <div className={styles.postBird}>
             <form onSubmit={postBird}>
-                <div>Nouveau bird: </div><br></br>
+                <div>Nouveau Bird: </div><br></br>
                 
                 <textarea className={styles.textarea}
                   placeholder= {"Contenu du Bird"}
                 /><br></br>
 
-                <div>
-                  Rendre le bird publique 
-                  <input type="checkbox" name='isPublic' checked={isChecked} onChange={handleOnChange}/>
+                <div className={styles.checkbox}>
+                  <input className={styles.input} type="checkbox" id="isPublic" checked={isChecked} onChange={handleOnChange}/>
+                  <label className={styles.label} for='isPublic'>Bird public</label>
                 </div>
                 
                 
