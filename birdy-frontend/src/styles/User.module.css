@@ -1,0 +1,48 @@
+.user {
+    display: flex;
+    flex-direction: column;
+    margin: 1%;
+    padding: 16px;
+    border-radius: 8px;
+    background-color: var(--bgcolor);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+    transition: all 0.2s ease-in-out;
+    border: 1px solid var(--objcolor);
+    border-radius: 5px;
+}
+
+/* Le nom d'utilisateur du tweet */
+.pseudo {
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--objcolor);;
+}
+
+/* Le contenu du tweet */
+.content {
+    white-space: pre;
+    margin-top: 8px;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* Le temps du tweet */
+.date {
+    margin-top: 8px;
+    font-size: 12px;
+    color: #666;
+}
+
+/* Lorsque le tweet est survolé */
+.user:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+    transform: translateY(-2px);
+}
+
+.avatar {
+    display: inline-block;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover; /* Assurez-vous que l'image est entièrement visible */
+}

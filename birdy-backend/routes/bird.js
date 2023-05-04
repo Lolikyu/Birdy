@@ -11,5 +11,6 @@ router.post('/likeBird', birdCtrl.likeBird);
 router.post('/dislikeBird', birdCtrl.dislikeBird);
 router.post('/favBird', birdCtrl.favBird);
 router.post('/unfavBird', birdCtrl.unfavBird);
+router.post('/getBirdsByPage', birdCtrl.getBirdsByPage);
 
 module.exports = router;

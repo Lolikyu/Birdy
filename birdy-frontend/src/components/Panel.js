@@ -22,6 +22,13 @@ export default function Panel({isConnected, userInfos, updateUserInfos}){
         navigate('/profile/' + String(userInfos.pseudo));
     }
     
+    function goToFollows(){
+        navigate('/follows');
+    }
+
+    function goToFollowers(){
+        navigate('/followers');
+    }
 
     if (isConnected()){
         if (userInfos) {
@@ -37,8 +44,12 @@ export default function Panel({isConnected, userInfos, updateUserInfos}){
                         <div className={styles.elemMenu} onClick={goToProfile}>
                             Profil
                         </div><br></br>
-                        <br></br>
-                        
+                        <div className={styles.elemMenu} onClick={goToFollows}>
+                            Follows
+                        </div><br></br>
+                        <div className={styles.elemMenu} onClick={goToFollowers}>
+                            Followers
+                        </div><br></br>        
                     </nav>
                     <button className={styles.deconnexion} onClick={disconnect}>Déconnexion</button><br></br>
                 </div>

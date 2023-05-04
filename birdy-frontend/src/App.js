@@ -7,6 +7,7 @@ import Panel from './components/Panel';
 import Profile from './components/Profile';
 import BirdDetail from './components/BirdDetail';
 import PostBird from './components/PostBird';
+import ListeUsers from './components/ListeUsers';
 import axios from 'axios';
 
 export default function App (){
@@ -24,14 +25,13 @@ export default function App (){
             }
         );
         updateUserInfos(retour.data.userInfos);
-		}
+	}
 
 	useEffect(() => {
 		if (isConnected()) {
 			userInfosRefresh();
 		}
-	}
-	, [reloadUserInfos]);
+	}, [reloadUserInfos]);
 
 	return (
 		<div className={styles.app}>
@@ -45,7 +45,6 @@ export default function App (){
 				<Route
 					path= '/'
 					element= {
-						<>
 						<HomePage
 							isConnected= {isConnected}
 							userInfos= {userInfos}
@@ -56,7 +55,6 @@ export default function App (){
 							reloadUserInfos= {reloadUserInfos}
 							setReloadUserInfos= {setReloadUserInfos}
 						/>
-						</>
 					}
 				/>
 				<Route
@@ -96,6 +94,30 @@ export default function App (){
 								userInfos= {userInfos}
 								reloadListeBird= {reloadListeBird}
 								setReloadListeBird= {setReloadListeBird}
+							/>
+						</div>
+					}
+				/>
+				<Route
+					path= '/follows'
+					element= {
+						<div className={styles.details}>
+							<ListeUsers
+								isConnected= {isConnected}
+								userInfos= {userInfos}
+								mode= 'follows'
+							/>
+						</div>
+					}
+				/>
+				<Route
+					path= '/followers'
+					element= {
+						<div className={styles.details}>
+							<ListeUsers
+								isConnected= {isConnected}
+								userInfos= {userInfos}
+								mode= 'followers'
 							/>
 						</div>
 					}

@@ -1,6 +1,6 @@
 import styles from '../styles/Bird.module.css';
 import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function Bird({idBird, pseudo, avatar, content, date, heure, isPublic, isComment, isRebird, likes, rebirds, userInfos, isConnected, reloadListeBird, setReloadListeBird, reloadUserInfos, setReloadUserInfos}) {
     const navigate = useNavigate();

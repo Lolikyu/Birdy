@@ -15,10 +15,6 @@ export default function HomePage({isConnected, userInfos, reloadListeBird, setRe
                     reloadListeBird= {reloadListeBird}
                     setReloadListeBird= {setReloadListeBird}
                 />
-                <Recherche
-                    setdateRecherche= {setdateRecherche}
-                    setReloadListeBird= {setReloadListeBird}
-                />
                 <TimeLine
                     isConnected= {isConnected}
                     userInfos= {userInfos}

@@ -247,3 +247,13 @@ exports.unfollowUser = (req, res, next) => {
     })
     .catch((error) => { res.status(500).json({ error })}) 
 }
+
+exports.getUsersListeId = (req, res, next) => {
+    User.find(
+        {
+            _id: {$in: req.body.listeIdUser}
+        }
+    )
+    .then(users => res.status(201).json(users))
+    .catch(error => res.status(400).json({ message : "Erreur de getUser" }))
+}

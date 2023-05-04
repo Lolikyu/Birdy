@@ -99,6 +99,8 @@ export default function Profile ({isConnected, userInfos, reloadListeBird, setRe
                         Nom : {userInfosCible.nom}<br></br>
                         Adresse mail : {userInfosCible.email}<br></br>
                         Date de naissance : {userInfosCible.dateNaissance}<br></br>
+                        Follows : {userInfosCible.follows.length}<br></br>
+                        Followers : {userInfosCible.followers.length}<br></br>
                         Avatar : <br></br>
                         <img className={styles.avatar} src={userInfosCible.avatar} rel="pdp"></img><br></br>
 
@@ -130,10 +132,9 @@ export default function Profile ({isConnected, userInfos, reloadListeBird, setRe
                     return (
                         <div className={styles.profile}>
                             Pseudo : {userInfosCible.pseudo}<br></br>
-                            Prénom : {userInfosCible.prenom}<br></br>
-                            Nom : {userInfosCible.nom}<br></br>
-                            Adresse mail : {userInfosCible.email}<br></br>
                             Date de naissance : {userInfosCible.dateNaissance}<br></br>
+                            Follows : {userInfosCible.follows.length}<br></br>
+                            Followers : {userInfosCible.followers.length}<br></br>
                             Avatar : <br></br>
                             <img className={styles.avatar} src={userInfosCible.avatar} rel="pdp"></img><br></br>
                             <button onClick={unfollowUser}>Unfollow</button><br></br><br></br>
@@ -161,10 +162,8 @@ export default function Profile ({isConnected, userInfos, reloadListeBird, setRe
                     return (
                         <div className={styles.profile}>
                             Pseudo : {userInfosCible.pseudo}<br></br>
-                            Prénom : {userInfosCible.prenom}<br></br>
-                            Nom : {userInfosCible.nom}<br></br>
-                            Adresse mail : {userInfosCible.email}<br></br>
-                            Date de naissance : {userInfosCible.dateNaissance}<br></br>
+                            Follows : {userInfosCible.follows.length}<br></br>
+                            Followers : {userInfosCible.followers.length}<br></br>
                             Avatar : <br></br>
                             <img className={styles.avatar} src={userInfosCible.avatar} rel="pdp"></img><br></br>
                             <button onClick={followUser}>Follow</button><br></br><br></br>

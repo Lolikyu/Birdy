@@ -10,5 +10,6 @@ router.post('/getUserInfosById', userCtrl.getUserInfosById);
 router.post('/getUserInfosByPseudo', userCtrl.getUserInfosByPseudo);
 router.post('/FollowUser', userCtrl.followUser);
 router.post('/UnfollowUser', userCtrl.unfollowUser);
+router.post('/getUsersListeId', userCtrl.getUsersListeId);
 
 module.exports = router;

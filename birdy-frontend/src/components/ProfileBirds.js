@@ -47,7 +47,6 @@ export default function ProfileBirds({mode, userInfosCible, isConnected, userInf
                     }
                 }
             }
-            
             setBirds(response.data.sort((a, b)=>(a.dateDepuis70 > b.dateDepuis70 ? -1 : 1))); //pour récupérer les posts du plus récent ou plus ancien
             updateIsLoading(false);
         }

@@ -128,3 +128,29 @@ exports.unfavBird = (req, res, next) => {
     })
     .catch((error) => { res.status(500).json({ error })}) 
 };
+
+exports.getBirdsByPage = (req, res, next) => {
+    const nb = 6;
+    var nbskip = nb * req.body.page;
+
+    if (req.body.condition === 'public') {
+        Bird.find (
+            {isPublic: true},
+            null,
+            { sort: { dateDepuis70: -1 }, skip: nbskip, limit: nb }
+        )
+        .then(birds => res.status(201).json(birds))
+        .catch(error => res.status(400).json({ message : "Erreur de getBirdsByPage" }))
+    }
+    else {
+        Bird.find(
+            { $or: [{ idUser: req.body.idUser },
+                    { idUser: { $in: req.body.follows } },
+                    { isPublic: true }]},
+            null,
+            { sort: { dateDepuis70: -1 }, skip: nbskip, limit: nb }
+        )
+        .then((birds) => res.status(201).json(birds))
+        .catch((error) =>res.status(400).json({ message: "Erreur de getBirdsByPage" }));
+    }  
+};

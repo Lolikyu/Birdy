@@ -18,6 +18,7 @@
     border: 2.5px solid var(--objcolor);
     border-radius: 8px;
     resize: none;
+    color:white;
     background-color: var(--bgcolor);
     font-size: 18px;
     line-height: 1.5;
