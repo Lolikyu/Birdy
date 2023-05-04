@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { StrictMode } from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from "react-router-dom";
 import { AuthProvider } from "react-auth-kit"
@@ -21,9 +21,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 			cookieSecure= {false}
 		>
 			<BrowserRouter>
-
+				<StrictMode>
 					<App/>
-				
+				</StrictMode>
 			</BrowserRouter>
 		</AuthProvider>
 	</div>

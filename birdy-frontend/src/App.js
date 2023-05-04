@@ -31,6 +31,9 @@ export default function App (){
 		if (isConnected()) {
 			userInfosRefresh();
 		}
+		else {
+			setReloadUserInfos(null);
+		}
 	}, [reloadUserInfos]);
 
 	return (

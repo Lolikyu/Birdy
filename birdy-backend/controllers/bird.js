@@ -129,28 +129,70 @@ exports.unfavBird = (req, res, next) => {
     .catch((error) => { res.status(500).json({ error })}) 
 };
 
-exports.getBirdsByPage = (req, res, next) => {
+exports.getBirdsByPageConnected = (req, res, next) => {
     const nb = 6;
     var nbskip = nb * req.body.page;
 
-    if (req.body.condition === 'public') {
-        Bird.find (
-            {isPublic: true},
-            null,
-            { sort: { dateDepuis70: -1 }, skip: nbskip, limit: nb }
-        )
-        .then(birds => res.status(201).json(birds))
-        .catch(error => res.status(400).json({ message : "Erreur de getBirdsByPage" }))
-    }
-    else {
-        Bird.find(
-            { $or: [{ idUser: req.body.idUser },
-                    { idUser: { $in: req.body.follows } },
-                    { isPublic: true }]},
-            null,
-            { sort: { dateDepuis70: -1 }, skip: nbskip, limit: nb }
-        )
-        .then((birds) => res.status(201).json(birds))
-        .catch((error) =>res.status(400).json({ message: "Erreur de getBirdsByPage" }));
-    }  
+    Bird.find(
+        { $or: [{ idUser: req.body.idUser },
+                { idUser: { $in: req.body.follows } },
+                { isPublic: true }]},
+        null,
+        { sort: { dateDepuis70: -1 }, skip: nbskip, limit: nb }
+    )
+    .then((birds) => res.status(201).json(birds))
+    .catch((error) =>res.status(400).json({ message: "Erreur de getBirdsByPageConnected" }));
+};
+
+exports.getBirdsByPageDisconnected = (req, res, next) => {
+    const nb = 6;
+    var nbskip = nb * req.body.page;
+
+    Bird.find (
+        {isPublic: true},
+        null,
+        { sort: { dateDepuis70: -1 }, skip: nbskip, limit: nb }
+    )
+    .then(birds => res.status(201).json(birds))
+    .catch(error => res.status(400).json({ message : "Erreur de getBirdsByPageDisconnected" }))
+};
+
+
+exports.getBirdsByPageProfileBirds = (req, res, next) => {
+    const nb = 6;
+    var nbskip = nb * req.body.page;
+
+    Bird.find(
+        { idUser: req.body.idUser },
+        null,
+        { sort: { dateDepuis70: -1 }, skip: nbskip, limit: nb }
+    )
+    .then((birds) => res.status(201).json(birds))
+    .catch((error) =>res.status(400).json({ message: "Erreur de getBirdsByPageProfileBirds" }));
+};
+
+exports.getBirdsByPageProfileLikes = (req, res, next) => {
+    const nb = 6;
+    var nbskip = nb * req.body.page;
+
+    Bird.find(
+        { _id: {$in: req.body.likes} },
+        null,
+        { sort: { dateDepuis70: -1 }, skip: nbskip, limit: nb }
+    )
+    .then((birds) => res.status(201).json(birds))
+    .catch((error) =>res.status(400).json({ message: "Erreur de getBirdsByPageProfileLikes" }));
+};
+
+exports.getBirdsByPageProfileFavorites = (req, res, next) => {
+    const nb = 6;
+    var nbskip = nb * req.body.page;
+
+    Bird.find(
+        { _id: {$in: req.body.favorites} },
+        null,
+        { sort: { dateDepuis70: -1 }, skip: nbskip, limit: nb }
+    )
+    .then((birds) => res.status(201).json(birds))
+    .catch((error) =>res.status(400).json({ message: "Erreur de getBirdsByPageProfileFavorites" }));
 };

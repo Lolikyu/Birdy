@@ -48,7 +48,7 @@ export default function PostBird({isConnected, userInfos, reloadListeBird, setRe
 
                 <div className={styles.checkbox}>
                   <input className={styles.input} type="checkbox" id="isPublic" checked={isChecked} onChange={handleOnChange}/>
-                  <label className={styles.label} for='isPublic'>Bird public</label>
+                  <label className={styles.label} htmlFor='isPublic'>Bird public</label>
                 </div>
                 
                 

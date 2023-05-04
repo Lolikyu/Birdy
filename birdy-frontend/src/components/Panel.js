@@ -67,7 +67,7 @@ export default function Panel({isConnected, userInfos, updateUserInfos}){
                 Panel déconnecté<br></br>
                 <nav>
                     <div className={styles.elemMenu} onClick={goToHome}>
-                        <i className={styles.icon}><span class="material-icons">home</span></i>
+                        <i className={styles.icon}></i>
                         HomePage
                     </div><br></br>
                 </nav>

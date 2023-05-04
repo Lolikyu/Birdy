@@ -6,34 +6,28 @@ import User from './User';
 
 export default function ListeUsers({isConnected, userInfos, mode}) {
     const [users, setUsers] = useState(null);
-    const [isLoading, updateIsLoading] = useState(true);
 
     async function usersFetching(mode) {
-        updateIsLoading(true);
-        if (mode === 'follows') {
-            var response = await axios.post("http://localhost:8000/api/user/getUsersListeId",
-                {listeIdUser: userInfos.follows}
-            )
-            setUsers(response.data);
+        if (userInfos) {
+            if (mode === 'follows') {
+                var response = await axios.post("http://localhost:8000/api/user/getUsersListeId",
+                    {listeIdUser: userInfos.follows}
+                )
+                setUsers(response.data);
+            }
+            if (mode === 'followers') {
+                var response = await axios.post("http://localhost:8000/api/user/getUsersListeId",
+                    {listeIdUser: userInfos.followers}
+                )
+                setUsers(response.data);
+            }
         }
-        if (mode === 'followers') {
-            var response = await axios.post("http://localhost:8000/api/user/getUsersListeId",
-                {listeIdUser: userInfos.followers}
-            )
-            setUsers(response.data);
-        }
-        updateIsLoading(false);
     }
 
     useEffect(() => {
         usersFetching(mode);
-    }, []);
+    }, [userInfos, mode]);
 
-    if (isLoading){
-        return (
-            <h2>Loading ...</h2>
-        )
-    } 
     if (isConnected) {
         if (users) {
             return (

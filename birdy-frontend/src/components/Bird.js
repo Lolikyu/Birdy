@@ -2,7 +2,7 @@ import styles from '../styles/Bird.module.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-export default function Bird({idBird, pseudo, avatar, content, date, heure, isPublic, isComment, isRebird, likes, rebirds, userInfos, isConnected, reloadListeBird, setReloadListeBird, reloadUserInfos, setReloadUserInfos}) {
+export default function Bird({idBird, pseudo, avatar, content, date, heure, isPublic, isComment, isRebird, likes, rebirds, userInfos, isConnected, reloadUserInfos, setReloadUserInfos}) {
     const navigate = useNavigate();
 
     function checkProfile(e) {
@@ -20,6 +20,13 @@ export default function Bird({idBird, pseudo, avatar, content, date, heure, isPu
         return false;
     }
 
+    function deleteFromArray(array, elem) {
+        const index = array.indexOf(elem);
+        if (index > -1) {
+            array.splice(index, 1);
+        }
+    }
+
     async function likeBird(e) {
         e.stopPropagation();
 
@@ -30,8 +37,8 @@ export default function Bird({idBird, pseudo, avatar, content, date, heure, isPu
                     idUser: userInfos.id
                 }
             )
+            deleteFromArray(likes, userInfos.id);
             setReloadUserInfos(reloadUserInfos +1);
-            setReloadListeBird(reloadListeBird +1);
         }
         else {
             await axios.post("http://localhost:8000/api/bird/likeBird", 
@@ -40,8 +47,8 @@ export default function Bird({idBird, pseudo, avatar, content, date, heure, isPu
                     idUser: userInfos.id
                 }
             )
+            likes.push(userInfos.id);
             setReloadUserInfos(reloadUserInfos +1);
-            setReloadListeBird(reloadListeBird +1);
         }
     }
 
@@ -56,7 +63,6 @@ export default function Bird({idBird, pseudo, avatar, content, date, heure, isPu
                 }
             )
             setReloadUserInfos(reloadUserInfos +1);
-            setReloadListeBird(reloadListeBird +1);
         }
         else {
             await axios.post("http://localhost:8000/api/bird/favBird", 
@@ -66,7 +72,6 @@ export default function Bird({idBird, pseudo, avatar, content, date, heure, isPu
                 }
             )
             setReloadUserInfos(reloadUserInfos +1);
-            setReloadListeBird(reloadListeBird +1);
         }
     }
 
@@ -105,11 +110,6 @@ export default function Bird({idBird, pseudo, avatar, content, date, heure, isPu
                     </div>
                 </div>
             );
-        }
-        else {
-            return (
-                <h2>Loading ...</h2>
-            )
         }
     }
     else {

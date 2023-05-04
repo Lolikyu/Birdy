@@ -11,6 +11,10 @@ router.post('/likeBird', birdCtrl.likeBird);
 router.post('/dislikeBird', birdCtrl.dislikeBird);
 router.post('/favBird', birdCtrl.favBird);
 router.post('/unfavBird', birdCtrl.unfavBird);
-router.post('/getBirdsByPage', birdCtrl.getBirdsByPage);
+router.post('/getBirdsByPageConnected', birdCtrl.getBirdsByPageConnected);
+router.post('/getBirdsByPageDisconnected', birdCtrl.getBirdsByPageDisconnected);
+router.post('/getBirdsByPageProfileBirds', birdCtrl.getBirdsByPageProfileBirds);
+router.post('/getBirdsByPageProfileLikes', birdCtrl.getBirdsByPageProfileLikes);
+router.post('/getBirdsByPageProfileFavorites', birdCtrl.getBirdsByPageProfileFavorites);
 
 module.exports = router;
