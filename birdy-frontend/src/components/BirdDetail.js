@@ -21,25 +21,27 @@ export default function BirdDetail({isConnected, userInfos, reloadListeBird, set
     }
     
     useEffect(() => {
+        updateIsLoading(true);
         birdMainFetching();
     }, [reloadListeBird, params])
 
+    if (isLoading) {
+        return null
+    }
 
-
-        if (mainBird) {
-            return (
-                <div className= {styles.birdDetail}>
-                    <BirdDetailBirds
-                        isConnected= {isConnected}
-                        userInfos= {userInfos}
-                        reloadListeBird= {reloadListeBird}
-                        setReloadListeBird= {setReloadListeBird}
-                        reloadUserInfos= {reloadUserInfos}
-                        setReloadUserInfos= {setReloadUserInfos}
-                        mainBird= {mainBird}
-                    />
-                </div>
-            )
-        }
-    
+    if (mainBird) {
+        return (
+            <div className= {styles.birdDetail}>
+                <BirdDetailBirds
+                    isConnected= {isConnected}
+                    userInfos= {userInfos}
+                    reloadListeBird= {reloadListeBird}
+                    setReloadListeBird= {setReloadListeBird}
+                    reloadUserInfos= {reloadUserInfos}
+                    setReloadUserInfos= {setReloadUserInfos}
+                    mainBird= {mainBird}
+                />
+            </div>
+        )
+    }
 }

@@ -64,6 +64,12 @@ export default function BirdDetailBirds({isConnected, userInfos, reloadListeBird
     }, []);
 
     useEffect(() => {
+        updateFatherBird(null);
+        updateSideBirds([]);
+        updatePage(0);
+    }, [mainBird]);
+
+    useEffect(() => {
         birdCommentairesFetching();
         birdFatherFechting();
     }, [page]);
