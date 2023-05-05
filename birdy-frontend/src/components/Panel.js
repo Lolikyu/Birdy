@@ -2,8 +2,11 @@ import styles from '../styles/Panel.module.css'
 import { useNavigate } from 'react-router-dom';
 import { useSignOut } from 'react-auth-kit';
 import Authentification from './Authentification';
+import { AppContext } from '../App';
+import { useContext } from 'react';
 
-export default function Panel({isConnected, userInfos, updateUserInfos}){
+export default function Panel () {
+    const { isConnected, userInfos, updateUserInfos } = useContext(AppContext);
 
     const signOut = useSignOut();
     const navigate = useNavigate();

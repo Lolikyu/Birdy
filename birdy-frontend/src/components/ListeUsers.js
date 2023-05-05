@@ -1,11 +1,14 @@
 import styles from '../styles/ListeUsers.module.css';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import User from './User';
+import { AppContext } from '../App';
 
-export default function ListeUsers({isConnected, userInfos, mode}) {
+export default function ListeUsers({mode}) {
     const [users, setUsers] = useState(null);
+
+    const { isConnected, userInfos } = useContext(AppContext);
 
     async function usersFetching(mode) {
         if (userInfos) {

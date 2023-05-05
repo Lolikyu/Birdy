@@ -1,7 +1,6 @@
 import Bird from "./Bird"
 
-export default function ListeBirds({isConnected, userInfos, reloadUserInfos, setReloadUserInfos, birds}) {
-    
+export default function ListeBirds({ birds }) {
     return (
         <ul>
             {
@@ -19,10 +18,6 @@ export default function ListeBirds({isConnected, userInfos, reloadUserInfos, set
                             isRebird= {b.isRebird}
                             likes= {b.likes}
                             rebirds= {b.rebirds}
-                            userInfos= {userInfos}
-                            isConnected= {isConnected}
-                            reloadUserInfos= {reloadUserInfos}
-                            setReloadUserInfos= {setReloadUserInfos}
                         />
                     </li>
                 )

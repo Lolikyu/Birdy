@@ -1,13 +1,15 @@
 import styles from '../styles/Authentification.module.css';
-import { useState } from 'react';
+import { useState , useContext } from 'react';
 import { useSignIn } from 'react-auth-kit';
 import axios from 'axios';
+import { AppContext } from '../App';
 
 
-export default function Authentification({updateUserInfos}){
+export default function Authentification(){
     const [afficheFormulaire, updateAfficheFormulaire] = useState(0);
-
     const signIn = useSignIn();
+
+    const { updateUserInfos } = useContext(AppContext);
     
     async function inscription(formulaire) {
         formulaire.preventDefault();

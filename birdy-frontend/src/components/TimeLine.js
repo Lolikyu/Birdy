@@ -1,12 +1,15 @@
 import '../styles/TimeLine.css'
 import axios from 'axios'
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useContext} from 'react'
 import ListeBirds from './ListeBirds';
+import { AppContext } from '../App';
 
-export default function TimeLine({isConnected, userInfos, reloadListeBird, condition, reloadUserInfos, setReloadUserInfos}){
+export default function TimeLine ({ condition }) {
     const [birds, setBirds] = useState([]);
     const [page, updatePage] = useState(0);
     var ignore = false;
+
+    const { userInfos, reloadListeBird } = useContext(AppContext);
 
     function handleScroll () {
         if (window.innerHeight + document.documentElement.scrollTop + 1 >= document.documentElement.scrollHeight) {
@@ -62,10 +65,6 @@ export default function TimeLine({isConnected, userInfos, reloadListeBird, condi
         return (
             <div> 
                 <ListeBirds
-                    isConnected= {isConnected}
-                    userInfos= {userInfos}
-                    reloadUserInfos= {reloadUserInfos}
-                    setReloadUserInfos= {setReloadUserInfos}
                     birds= {birds}
                 />
             </div>

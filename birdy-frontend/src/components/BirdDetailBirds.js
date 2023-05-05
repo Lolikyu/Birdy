@@ -1,15 +1,17 @@
 import styles from '../styles/BirdDetailBirds.module.css'
 import axios from 'axios'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Bird from './Bird'
-import ListeBirds from './ListeBirds'
 import PostBird from './PostBird'
+import { AppContext } from '../App';
     
-export default function BirdDetailBirds({isConnected, userInfos, reloadListeBird, setReloadListeBird, reloadUserInfos, setReloadUserInfos, mainBird}) {
+export default function BirdDetailBirds({mainBird}) {
     const [fatherBird, updateFatherBird] = useState(null);
     const [sideBirds, updateSideBirds] = useState([]);
     const [page, updatePage] = useState(0); 
+
+    const { isConnected, userInfos, reloadListeBird, setReloadListeBird } = useContext(AppContext);
 
     const navigate = useNavigate();
 
@@ -99,10 +101,6 @@ export default function BirdDetailBirds({isConnected, userInfos, reloadListeBird
                                                 isRebird= {fatherBird.isRebird}
                                                 likes= {fatherBird.likes}
                                                 rebirds= {fatherBird.rebirds}
-                                                userInfos= {userInfos}
-                                                isConnected= {isConnected}
-                                                reloadUserInfos= {reloadUserInfos}
-                                                setReloadUserInfos= {setReloadUserInfos}
                                             />
                                         </div>
                                     </div>
@@ -126,10 +124,6 @@ export default function BirdDetailBirds({isConnected, userInfos, reloadListeBird
                                         isRebird= {mainBird.isRebird}
                                         likes= {mainBird.likes}
                                         rebirds= {mainBird.rebirds}
-                                        userInfos= {userInfos}
-                                        isConnected= {isConnected}
-                                        reloadUserInfos= {reloadUserInfos}
-                                        setReloadUserInfos= {setReloadUserInfos}
                                     />
                                 </div>
                                 <button className={styles.button} onClick={supprimerBird}>Supprimer</button>
@@ -159,10 +153,6 @@ export default function BirdDetailBirds({isConnected, userInfos, reloadListeBird
                                                                 isRebird= {b.isRebird}
                                                                 likes= {b.likes}
                                                                 rebirds= {b.rebirds}
-                                                                userInfos= {userInfos}
-                                                                isConnected= {isConnected}
-                                                                reloadUserInfos= {reloadUserInfos}
-                                                                setReloadUserInfos= {setReloadUserInfos}
                                                             />
                                                         </li>
                                                     )
@@ -198,10 +188,6 @@ export default function BirdDetailBirds({isConnected, userInfos, reloadListeBird
                                                 isRebird= {fatherBird.isRebird}
                                                 likes= {fatherBird.likes}
                                                 rebirds= {fatherBird.rebirds}
-                                                userInfos= {userInfos}
-                                                isConnected= {isConnected}
-                                                reloadUserInfos= {reloadUserInfos}
-                                                setReloadUserInfos= {setReloadUserInfos}
                                             />
                                         </div>
                                     </div>
@@ -225,10 +211,6 @@ export default function BirdDetailBirds({isConnected, userInfos, reloadListeBird
                                         isRebird= {mainBird.isRebird}
                                         likes= {mainBird.likes}
                                         rebirds= {mainBird.rebirds}
-                                        userInfos= {userInfos}
-                                        isConnected= {isConnected}
-                                        reloadUserInfos= {reloadUserInfos}
-                                        setReloadUserInfos= {setReloadUserInfos}
                                     />
                                 </div>
                                 <PostBird
@@ -257,10 +239,6 @@ export default function BirdDetailBirds({isConnected, userInfos, reloadListeBird
                                                                 isRebird= {b.isRebird}
                                                                 likes= {b.likes}
                                                                 rebirds= {b.rebirds}
-                                                                userInfos= {userInfos}
-                                                                isConnected= {isConnected}
-                                                                reloadUserInfos= {reloadUserInfos}
-                                                                setReloadUserInfos= {setReloadUserInfos}
                                                             />
                                                         </li>
                                                     )
@@ -297,10 +275,6 @@ export default function BirdDetailBirds({isConnected, userInfos, reloadListeBird
                                     isRebird= {fatherBird.isRebird}
                                     likes= {fatherBird.likes}
                                     rebirds= {fatherBird.rebirds}
-                                    userInfos= {userInfos}
-                                    isConnected= {isConnected}
-                                    reloadUserInfos= {reloadUserInfos}
-                                    setReloadUserInfos= {setReloadUserInfos}
                                 />
                             </div>
                         </div>
@@ -324,10 +298,6 @@ export default function BirdDetailBirds({isConnected, userInfos, reloadListeBird
                             isRebird= {mainBird.isRebird}
                             likes= {mainBird.likes}
                             rebirds= {mainBird.rebirds}
-                            userInfos= {userInfos}
-                            isConnected= {isConnected}
-                            reloadUserInfos= {reloadUserInfos}
-                            setReloadUserInfos= {setReloadUserInfos}
                         />
                     </div>
                     {   
@@ -351,10 +321,6 @@ export default function BirdDetailBirds({isConnected, userInfos, reloadListeBird
                                                         isRebird= {b.isRebird}
                                                         likes= {b.likes}
                                                         rebirds= {b.rebirds}
-                                                        userInfos= {userInfos}
-                                                        isConnected= {isConnected}
-                                                        reloadUserInfos= {reloadUserInfos}
-                                                        setReloadUserInfos= {setReloadUserInfos}
                                                     />
                                                 </li>
                                             )

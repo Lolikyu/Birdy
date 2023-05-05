@@ -1,6 +1,7 @@
 import styles from '../styles/Recherche.module.css'
 
-export default function Recherche({setdateRecherche, reloadListeBird, setReloadListeBird}){
+export default function Recherche () {
+    //const [dateRecherche, setdateRecherche] = useState([Date.now()-(12*3600*1000),Date.now()+1800000]);
     var dateduJour = new Date();
     dateduJour = dateduJour.toLocaleDateString('fr');
     

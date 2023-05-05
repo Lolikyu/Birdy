@@ -1,16 +1,19 @@
 import styles from '../styles/Profile.module.css';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import ProfileBirds from './ProfileBirds';
+import { AppContext } from '../App';
 
 
-export default function Profile ({isConnected, userInfos, reloadListeBird, setReloadListeBird, reloadUserInfos, setReloadUserInfos}){
-    const params = useParams();
-
+export default function Profile () {
     const [userInfosCible, updateUserInfosCible] = useState(null); 
     const [mode, updateMode] = useState("birds");
 
+    const { isConnected, userInfos, reloadUserInfos, setReloadUserInfos } = useContext(AppContext);
+    
+    const params = useParams();
+    
     function modeBirds(){
         updateMode('birds');
     }
@@ -98,12 +101,6 @@ export default function Profile ({isConnected, userInfos, reloadListeBird, setRe
                         <ProfileBirds
                             mode= {mode}
                             userInfosCible= {userInfosCible}
-                            isConnected= {isConnected}
-                            userInfos= {userInfos}
-                            reloadListeBird= {reloadListeBird}
-                            setReloadListeBird= {setReloadListeBird}
-                            reloadUserInfos= {reloadUserInfos}
-                            setReloadUserInfos= {setReloadUserInfos}
                         />
                     </div>
                 )
@@ -128,12 +125,6 @@ export default function Profile ({isConnected, userInfos, reloadListeBird, setRe
                             <ProfileBirds
                                 mode= {mode}
                                 userInfosCible= {userInfosCible}
-                                isConnected= {isConnected}
-                                userInfos= {userInfos}
-                                reloadListeBird= {reloadListeBird}
-                                setReloadListeBird= {setReloadListeBird}
-                                reloadUserInfos= {reloadUserInfos}
-                                setReloadUserInfos= {setReloadUserInfos}
                             />
                         </div>
                     )
@@ -154,12 +145,6 @@ export default function Profile ({isConnected, userInfos, reloadListeBird, setRe
                             <ProfileBirds
                                 mode= {mode}
                                 userInfosCible= {userInfosCible}
-                                isConnected= {isConnected}
-                                userInfos= {userInfos}
-                                reloadListeBird= {reloadListeBird}
-                                setReloadListeBird= {setReloadListeBird}
-                                reloadUserInfos= {reloadUserInfos}
-                                setReloadUserInfos= {setReloadUserInfos}
                             />
                         </div>
                     )

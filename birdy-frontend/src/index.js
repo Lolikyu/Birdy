@@ -21,9 +21,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 			cookieSecure= {false}
 		>
 			<BrowserRouter>
-
+				<StrictMode>
 					<App/>
-
+				</StrictMode>
 			</BrowserRouter>
 		</AuthProvider>
 	</div>

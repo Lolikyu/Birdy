@@ -1,13 +1,16 @@
 import styles from '../styles/BirdDetail.module.css'
 import axios from 'axios'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { useParams } from 'react-router-dom'
 import BirdDetailBirds from './BirdDetailBirds';
+import { AppContext } from '../App';
 
-export default function BirdDetail({isConnected, userInfos, reloadListeBird, setReloadListeBird, reloadUserInfos, setReloadUserInfos}){
+export default function BirdDetail () {
     const [mainBird, updateMainBird] = useState(null);
     const [isLoading, updateIsLoading] = useState(false);
     const params = useParams();
+
+    const { reloadListeBird } = useContext(AppContext);
 
     const birdMainFetching = async function() {
         updateIsLoading(true);
@@ -33,12 +36,6 @@ export default function BirdDetail({isConnected, userInfos, reloadListeBird, set
         return (
             <div className= {styles.birdDetail}>
                 <BirdDetailBirds
-                    isConnected= {isConnected}
-                    userInfos= {userInfos}
-                    reloadListeBird= {reloadListeBird}
-                    setReloadListeBird= {setReloadListeBird}
-                    reloadUserInfos= {reloadUserInfos}
-                    setReloadUserInfos= {setReloadUserInfos}
                     mainBird= {mainBird}
                 />
             </div>

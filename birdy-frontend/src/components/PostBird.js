@@ -1,10 +1,14 @@
 import styles from '../styles/PostBird.module.css'
 import axios from 'axios'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { Link, useParams } from 'react-router-dom';
+import { AppContext } from '../App';
 
-export default function PostBird({isConnected, userInfos, reloadListeBird, setReloadListeBird}){
+export default function PostBird () {
     const [isChecked, setIsChecked] = useState(false);
+
+    const { isConnected, userInfos, reloadListeBird, setReloadListeBird } = useContext(AppContext);
+
     const params = useParams();
     const idBirdCible = params.id;
 

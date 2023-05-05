@@ -1,9 +1,13 @@
 import styles from '../styles/Bird.module.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { AppContext } from '../App';
+import { useContext } from 'react';
 
-export default function Bird({idBird, pseudo, avatar, content, date, heure, isPublic, isComment, isRebird, likes, rebirds, userInfos, isConnected, reloadUserInfos, setReloadUserInfos}) {
+export default function Bird({idBird, pseudo, avatar, content, date, heure, isPublic, isComment, isRebird, likes, rebirds}) {
     const navigate = useNavigate();
+
+    const { isConnected, userInfos, reloadUserInfos, setReloadUserInfos } = useContext(AppContext);
 
     function checkProfile(e) {
         e.stopPropagation();

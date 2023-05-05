@@ -1,9 +1,9 @@
 import '../styles/ProfileBirds.css'
 import axios from 'axios'
-import {useState, useEffect} from 'react'
+import {useState, useEffect } from 'react'
 import ListeBirds from './ListeBirds';
 
-export default function ProfileBirds({mode, userInfosCible, isConnected, userInfos, reloadListeBird, setReloadListeBird, reloadUserInfos, setReloadUserInfos}){
+export default function ProfileBirds({mode, userInfosCible}){
     const [birds, setBirds] = useState([]);
     const [page, updatePage] = useState(0);
     let ignore = false;
@@ -75,12 +75,6 @@ export default function ProfileBirds({mode, userInfosCible, isConnected, userInf
         return (
             <div> 
                 <ListeBirds
-                    isConnected= {isConnected}
-                    userInfos= {userInfos}
-                    reloadListeBird= {reloadListeBird}
-                    setReloadListeBird= {setReloadListeBird}
-                    reloadUserInfos= {reloadUserInfos}
-                    setReloadUserInfos= {setReloadUserInfos}
                     birds= {birds}
                 />
             </div>
