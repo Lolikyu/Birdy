@@ -29,20 +29,20 @@ export default function ProfileBirds({mode, userInfosCible, isConnected, userInf
                     }
                     else {
                         if (mode === 'likes') {
-                            await axios.post("http://localhost:8000/api/bird/getBirdsByPageProfileLikes", 
+                            await axios.post("http://localhost:8000/api/bird/getBirdsByPageListeId", 
                                 {
                                     page: page,
-                                    likes: userInfosCible.likes
+                                    listeId: userInfosCible.likes
                                 }
                             )
                             .then((response) => { setBirds(prev => [...prev, ...response.data])});
                         }
                         else {
                             if (mode === 'favorites') {
-                                await axios.post("http://localhost:8000/api/bird/getBirdsByPageProfileFavorites", 
+                                await axios.post("http://localhost:8000/api/bird/getBirdsByPageListeId", 
                                     {
                                         page: page,
-                                        favorites: userInfosCible.favorites
+                                        listeId: userInfosCible.favorites
                                     }
                                 )
                                 .then((response) => { setBirds(prev => [...prev, ...response.data])});

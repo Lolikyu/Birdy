@@ -3,7 +3,7 @@ import axios from 'axios'
 import {useState, useEffect} from 'react'
 import ListeBirds from './ListeBirds';
 
-export default function TimeLine({isConnected, userInfos, reloadListeBird, setReloadListeBird, condition, dateRecherche, setdateRecherche, reloadUserInfos, setReloadUserInfos}){
+export default function TimeLine({isConnected, userInfos, reloadListeBird, condition, reloadUserInfos, setReloadUserInfos}){
     const [birds, setBirds] = useState([]);
     const [page, updatePage] = useState(0);
     var ignore = false;

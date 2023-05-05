@@ -14,7 +14,6 @@ router.post('/unfavBird', birdCtrl.unfavBird);
 router.post('/getBirdsByPageConnected', birdCtrl.getBirdsByPageConnected);
 router.post('/getBirdsByPageDisconnected', birdCtrl.getBirdsByPageDisconnected);
 router.post('/getBirdsByPageProfileBirds', birdCtrl.getBirdsByPageProfileBirds);
-router.post('/getBirdsByPageProfileLikes', birdCtrl.getBirdsByPageProfileLikes);
-router.post('/getBirdsByPageProfileFavorites', birdCtrl.getBirdsByPageProfileFavorites);
+router.post('/getBirdsByPageListeId', birdCtrl.getBirdsByPageListeId);
 
 module.exports = router;

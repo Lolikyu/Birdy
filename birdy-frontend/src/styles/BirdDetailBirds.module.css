@@ -1,0 +1,19 @@
+.birdDetail {
+    padding: 1%;
+    align-content: center;
+    background-color: var(--bgcolor);
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+}
+
+.Bird {
+    display: flex;
+    flex-direction: column;
+    margin: 1%;
+    padding: 16px;
+    border-radius: 8px;
+    background-color: var(--bgcolor);
+    border: 1px solid var(--objcolor);
+    border-radius: 5px;
+}

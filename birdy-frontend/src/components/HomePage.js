@@ -19,6 +19,7 @@ export default function HomePage({isConnected, userInfos, reloadListeBird, setRe
                         isConnected= {isConnected}
                         userInfos= {userInfos}
                         reloadListeBird= {reloadListeBird}
+                        setReloadListeBird= {setReloadListeBird}
                         condition= 'private'
                         reloadUserInfos= {reloadUserInfos}
                         setReloadUserInfos= {setReloadUserInfos}
@@ -35,6 +36,7 @@ export default function HomePage({isConnected, userInfos, reloadListeBird, setRe
                     isConnected= {isConnected}
                     userInfos= {userInfos}
                     reloadListeBird= {reloadListeBird}
+                    setReloadListeBird= {setReloadListeBird}
                     condition= 'public'
                     reloadUserInfos= {reloadUserInfos}
 					setReloadUserInfos= {setReloadUserInfos}

@@ -171,28 +171,15 @@ exports.getBirdsByPageProfileBirds = (req, res, next) => {
     .catch((error) =>res.status(400).json({ message: "Erreur de getBirdsByPageProfileBirds" }));
 };
 
-exports.getBirdsByPageProfileLikes = (req, res, next) => {
+exports.getBirdsByPageListeId = (req, res, next) => {
     const nb = 6;
     var nbskip = nb * req.body.page;
 
     Bird.find(
-        { _id: {$in: req.body.likes} },
+        { _id: {$in: req.body.listeId} },
         null,
         { sort: { dateDepuis70: -1 }, skip: nbskip, limit: nb }
     )
     .then((birds) => res.status(201).json(birds))
-    .catch((error) =>res.status(400).json({ message: "Erreur de getBirdsByPageProfileLikes" }));
-};
-
-exports.getBirdsByPageProfileFavorites = (req, res, next) => {
-    const nb = 6;
-    var nbskip = nb * req.body.page;
-
-    Bird.find(
-        { _id: {$in: req.body.favorites} },
-        null,
-        { sort: { dateDepuis70: -1 }, skip: nbskip, limit: nb }
-    )
-    .then((birds) => res.status(201).json(birds))
-    .catch((error) =>res.status(400).json({ message: "Erreur de getBirdsByPageProfileFavorites" }));
+    .catch((error) =>res.status(400).json({ message: "Erreur de getBirdsByPageListeId" }));
 };

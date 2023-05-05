@@ -31,9 +31,6 @@ export default function App (){
 		if (isConnected()) {
 			userInfosRefresh();
 		}
-		else {
-			setReloadUserInfos(null);
-		}
 	}, [reloadUserInfos]);
 
 	return (
@@ -86,17 +83,9 @@ export default function App (){
 								userInfos= {userInfos}
 								reloadListeBird= {reloadListeBird}
 								setReloadListeBird= {setReloadListeBird}
-								dateRecherche= {dateRecherche}
-								setdateRecherche= {setdateRecherche}
 								reloadUserInfos= {reloadUserInfos}
 								setReloadUserInfos= {setReloadUserInfos}
 								
-							/>
-							<PostBird
-								isConnected= {isConnected}
-								userInfos= {userInfos}
-								reloadListeBird= {reloadListeBird}
-								setReloadListeBird= {setReloadListeBird}
 							/>
 						</div>
 					}
