@@ -66,8 +66,6 @@ export default function App (){
 								userInfos= {userInfos}
 								reloadListeBird= {reloadListeBird}
 								setReloadListeBird= {setReloadListeBird}
-								dateRecherche= {dateRecherche}
-								setdateRecherche= {setdateRecherche}
 								reloadUserInfos= {reloadUserInfos}
 								setReloadUserInfos= {setReloadUserInfos}
 							/>

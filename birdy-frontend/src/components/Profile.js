@@ -1,15 +1,13 @@
 import styles from '../styles/Profile.module.css';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import ProfileBirds from './ProfileBirds';
 
 
-export default function Profile ({isConnected, userInfos, reloadListeBird, setReloadListeBird, dateRecherche, setdateRecherche, reloadUserInfos, setReloadUserInfos}){
+export default function Profile ({isConnected, userInfos, reloadListeBird, setReloadListeBird, reloadUserInfos, setReloadUserInfos}){
     const params = useParams();
-    const navigate = useNavigate();
 
-    const [isLoading, updateIsLoading] = useState(true);
     const [userInfosCible, updateUserInfosCible] = useState(null); 
     const [mode, updateMode] = useState("birds");
 
@@ -33,52 +31,39 @@ export default function Profile ({isConnected, userInfos, reloadListeBird, setRe
     }
 
     async function getUserInfos() {
-        updateIsLoading(true);
         var retour = await axios.post('http://localhost:8000/api/user/getUserInfosByPseudo',
             {
                 pseudo: params.pseudo,
             }
         );
         updateUserInfosCible(retour.data.userInfos)
-        updateIsLoading(false);
 	}
 
     async function followUser() {
-        updateIsLoading(true);
-        var retour = await axios.post('http://localhost:8000/api/user/FollowUser',
+        await axios.post('http://localhost:8000/api/user/FollowUser',
             {
                 idUser: userInfos.id,
                 idUserCible: userInfosCible.id
             }
         );
         setReloadUserInfos(reloadUserInfos +1);
-        updateIsLoading(false);
 	}
 
     async function unfollowUser() {
-        updateIsLoading(true);
-        var retour = await axios.post('http://localhost:8000/api/user/UnfollowUser',
+        await axios.post('http://localhost:8000/api/user/UnfollowUser',
             {
                 idUser: userInfos.id,
                 idUserCible: userInfosCible.id
             }
         );
         setReloadUserInfos(reloadUserInfos +1);
-        updateIsLoading(false);
 	}
 
-    
 
     useEffect(() => {
         getUserInfos();
     }, [params, reloadUserInfos]);
 
-    //SI LE CHARGEMENT DES RESSOURCES N'EST PAS ENCORE TERMINE
-    if (isLoading){
-        return (
-            <h2>Loading ...</h2>
-        )
-    }
 
     if (isConnected()){
         //SI ON EST SUR UN PROFIL VALIDE
@@ -115,9 +100,6 @@ export default function Profile ({isConnected, userInfos, reloadListeBird, setRe
                             userInfos= {userInfos}
                             reloadListeBird= {reloadListeBird}
                             setReloadListeBird= {setReloadListeBird}
-                            condition= 'private'
-                            dateRecherche= {dateRecherche}
-                            setdateRecherche= {setdateRecherche}
                             reloadUserInfos= {reloadUserInfos}
                             setReloadUserInfos= {setReloadUserInfos}
                         />
@@ -148,9 +130,6 @@ export default function Profile ({isConnected, userInfos, reloadListeBird, setRe
                                 userInfos= {userInfos}
                                 reloadListeBird= {reloadListeBird}
                                 setReloadListeBird= {setReloadListeBird}
-                                condition= 'private'
-                                dateRecherche= {dateRecherche}
-                                setdateRecherche= {setdateRecherche}
                                 reloadUserInfos= {reloadUserInfos}
                                 setReloadUserInfos= {setReloadUserInfos}
                             />
@@ -177,9 +156,6 @@ export default function Profile ({isConnected, userInfos, reloadListeBird, setRe
                                 userInfos= {userInfos}
                                 reloadListeBird= {reloadListeBird}
                                 setReloadListeBird= {setReloadListeBird}
-                                condition= 'private'
-                                dateRecherche= {dateRecherche}
-                                setdateRecherche= {setdateRecherche}
                                 reloadUserInfos= {reloadUserInfos}
                                 setReloadUserInfos= {setReloadUserInfos}
                             />
@@ -190,7 +166,14 @@ export default function Profile ({isConnected, userInfos, reloadListeBird, setRe
         }
         //SI ON EST SUR UN PROFIL INVALIDE
         else {
-            navigate('/');
+            return (
+                <div>
+                    Utilisateur introuvable<br></br>
+                    <nav>
+                        <Link to='/'>Retourner à l'écran d'accueil</Link>
+                    </nav>
+                </div>
+            )
         }
     }
 
