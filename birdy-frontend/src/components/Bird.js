@@ -76,7 +76,6 @@ export default function Bird({idBird, pseudo, avatar, content, date, heure, isPu
     }
 
     function details() {
-        navigate('/');
         navigate('/bird/' + String(idBird));
     }
 

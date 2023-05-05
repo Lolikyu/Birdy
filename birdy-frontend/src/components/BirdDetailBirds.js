@@ -55,16 +55,18 @@ export default function BirdDetailBirds({isConnected, userInfos, reloadListeBird
     }
 
     useEffect(() => {
+        console.log("BirdDetail monté");
         window.addEventListener("scroll", handleScroll);
         return () => {
+            console.log("BirdDetail démonté");
             window.removeEventListener("scroll", handleScroll);
         }
     }, []);
 
     useEffect(() => {
-        birdFatherFechting();
         birdCommentairesFetching();
-    }, [page, reloadListeBird]);
+        birdFatherFechting();
+    }, [page]);
     
     if (mainBird) {
         if (isConnected()) {
@@ -136,13 +138,29 @@ export default function BirdDetailBirds({isConnected, userInfos, reloadListeBird
                                         <div>
                                             <div className={styles.titreCommentaires}>Commentaires</div>
                                                 <div className={styles.commentaires}>
-                                                <ListeBirds
-                                                    isConnected= {isConnected}
-                                                    userInfos= {userInfos}
-                                                    reloadUserInfos= {reloadUserInfos}
-                                                    setReloadUserInfos= {setReloadUserInfos}
-                                                    birds= {sideBirds}
-                                                />
+                                                {
+                                                    sideBirds.map((b) =>
+                                                        <li key={b._id}>
+                                                            <Bird
+                                                                idBird= {b._id}
+                                                                pseudo= {b.pseudo}
+                                                                avatar= {b.avatar}
+                                                                content= {b.content}
+                                                                date= {b.date}
+                                                                heure= {b.heure}
+                                                                isPublic= {b.isPublic}
+                                                                isComment= {b.isComment}
+                                                                isRebird= {b.isRebird}
+                                                                likes= {b.likes}
+                                                                rebirds= {b.rebirds}
+                                                                userInfos= {userInfos}
+                                                                isConnected= {isConnected}
+                                                                reloadUserInfos= {reloadUserInfos}
+                                                                setReloadUserInfos= {setReloadUserInfos}
+                                                            />
+                                                        </li>
+                                                    )
+                                                }
                                             </div>  
                                         </div>
                                         :
@@ -218,13 +236,29 @@ export default function BirdDetailBirds({isConnected, userInfos, reloadListeBird
                                         <div>
                                             <div className={styles.titreCommentaires}>Commentaires</div>
                                                 <div className={styles.commentaires}>
-                                                <ListeBirds
-                                                    isConnected= {isConnected}
-                                                    userInfos= {userInfos}
-                                                    reloadUserInfos= {reloadUserInfos}
-                                                    setReloadUserInfos= {setReloadUserInfos}
-                                                    birds= {sideBirds}
-                                                />
+                                                {
+                                                    sideBirds.map((b) =>
+                                                        <li key={b._id}>
+                                                            <Bird
+                                                                idBird= {b._id}
+                                                                pseudo= {b.pseudo}
+                                                                avatar= {b.avatar}
+                                                                content= {b.content}
+                                                                date= {b.date}
+                                                                heure= {b.heure}
+                                                                isPublic= {b.isPublic}
+                                                                isComment= {b.isComment}
+                                                                isRebird= {b.isRebird}
+                                                                likes= {b.likes}
+                                                                rebirds= {b.rebirds}
+                                                                userInfos= {userInfos}
+                                                                isConnected= {isConnected}
+                                                                reloadUserInfos= {reloadUserInfos}
+                                                                setReloadUserInfos= {setReloadUserInfos}
+                                                            />
+                                                        </li>
+                                                    )
+                                                }
                                             </div>  
                                         </div>
                                         :
@@ -295,13 +329,31 @@ export default function BirdDetailBirds({isConnected, userInfos, reloadListeBird
                             <div>
                                 <div className={styles.titreCommentaires}>Commentaires</div>
                                     <div className={styles.commentaires}>
-                                    <ListeBirds
-                                        isConnected= {isConnected}
-                                        userInfos= {userInfos}
-                                        reloadUserInfos= {reloadUserInfos}
-                                        setReloadUserInfos= {setReloadUserInfos}
-                                        birds= {sideBirds}
-                                    />
+                                    <ul>
+                                        {
+                                            sideBirds.map((b) =>
+                                                <li key={b._id}>
+                                                    <Bird
+                                                        idBird= {b._id}
+                                                        pseudo= {b.pseudo}
+                                                        avatar= {b.avatar}
+                                                        content= {b.content}
+                                                        date= {b.date}
+                                                        heure= {b.heure}
+                                                        isPublic= {b.isPublic}
+                                                        isComment= {b.isComment}
+                                                        isRebird= {b.isRebird}
+                                                        likes= {b.likes}
+                                                        rebirds= {b.rebirds}
+                                                        userInfos= {userInfos}
+                                                        isConnected= {isConnected}
+                                                        reloadUserInfos= {reloadUserInfos}
+                                                        setReloadUserInfos= {setReloadUserInfos}
+                                                    />
+                                                </li>
+                                            )
+                                        }
+                                    </ul>
                                 </div>  
                             </div>
                             :

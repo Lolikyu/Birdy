@@ -48,12 +48,12 @@ export default function TimeLine({isConnected, userInfos, reloadListeBird, condi
 
     useEffect(() => {
         updatePage(0);
-        setBirds([])
+        setBirds([]);
     }, [reloadListeBird]);
 
     useEffect(() => {
         birdFetching();
-    }, [page]);
+    }, [page, reloadListeBird]);
     
     if (ignore === true){
         return (null)
