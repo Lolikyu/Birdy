@@ -6,3 +6,11 @@
     border: 1px solid var(--objcolor);
     border-radius: 5px;
 }
+
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: xx-large;
+    margin-bottom: 2%;
+}

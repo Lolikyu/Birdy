@@ -26,7 +26,6 @@ export default function BirdDetailBirds({isConnected, userInfos, reloadListeBird
                     idBird: mainBird._id
                 }
             )
-            .then((response) => {console.log(mainBird, response)});
             setReloadListeBird(reloadListeBird +1);
             navigate('/');
         }
@@ -76,64 +75,75 @@ export default function BirdDetailBirds({isConnected, userInfos, reloadListeBird
                         <div className={styles.birdDetail}>
                             <ul>
                                 {(fatherBird) ?
-                                    <Bird
-                                        idBird= {fatherBird._id}
-                                        pseudo= {fatherBird.pseudo}
-                                        avatar= {fatherBird.avatar}
-                                        content= {fatherBird.content}
-                                        date= {fatherBird.date}
-                                        heure= {fatherBird.heure}
-                                        isPublic= {fatherBird.isPublic}
-                                        isComment= {fatherBird.isComment}
-                                        isRebird= {fatherBird.isRebird}
-                                        likes= {fatherBird.likes}
-                                        rebirds= {fatherBird.rebirds}
-                                        userInfos= {userInfos}
-                                        isConnected= {isConnected}
-                                        reloadUserInfos= {reloadUserInfos}
-                                        setReloadUserInfos= {setReloadUserInfos}
-                                    />
+                                    <div>
+                                        <div className={styles.titreFather}>En réponse à</div>
+                                        <div className={styles.father}> 
+                                            <Bird className={styles.fatherBird}
+                                                idBird= {fatherBird._id}
+                                                pseudo= {fatherBird.pseudo}
+                                                avatar= {fatherBird.avatar}
+                                                content= {fatherBird.content}
+                                                date= {fatherBird.date}
+                                                heure= {fatherBird.heure}
+                                                isPublic= {fatherBird.isPublic}
+                                                isComment= {fatherBird.isComment}
+                                                isRebird= {fatherBird.isRebird}
+                                                likes= {fatherBird.likes}
+                                                rebirds= {fatherBird.rebirds}
+                                                userInfos= {userInfos}
+                                                isConnected= {isConnected}
+                                                reloadUserInfos= {reloadUserInfos}
+                                                setReloadUserInfos= {setReloadUserInfos}
+                                            />
+                                        </div>
+                                    </div>
                                     :
                                     (mainBird.isComment) ?
                                         <div className={styles.Bird}>Le tweet parent n'existe plus, il a été supprimé !</div>
                                         :
                                         null
                                 }
-                                <Bird
-                                    idBird= {mainBird._id}
-                                    pseudo= {mainBird.pseudo}
-                                    avatar= {mainBird.avatar}
-                                    content= {mainBird.content}
-                                    date= {mainBird.date}
-                                    heure= {mainBird.heure}
-                                    isPublic= {mainBird.isPublic}
-                                    isComment= {mainBird.isComment}
-                                    isRebird= {mainBird.isRebird}
-                                    likes= {mainBird.likes}
-                                    rebirds= {mainBird.rebirds}
-                                    userInfos= {userInfos}
-                                    isConnected= {isConnected}
-                                    reloadUserInfos= {reloadUserInfos}
-                                    setReloadUserInfos= {setReloadUserInfos}
-                                />
-                                <button onClick={supprimerBird}>Supprimer</button>
+                                <div className={styles.titreMain}>Vue détaillée du Bird</div>
+                                <div className={styles.main}> 
+                                    <Bird
+                                        idBird= {mainBird._id}
+                                        pseudo= {mainBird.pseudo}
+                                        avatar= {mainBird.avatar}
+                                        content= {mainBird.content}
+                                        date= {mainBird.date}
+                                        heure= {mainBird.heure}
+                                        isPublic= {mainBird.isPublic}
+                                        isComment= {mainBird.isComment}
+                                        isRebird= {mainBird.isRebird}
+                                        likes= {mainBird.likes}
+                                        rebirds= {mainBird.rebirds}
+                                        userInfos= {userInfos}
+                                        isConnected= {isConnected}
+                                        reloadUserInfos= {reloadUserInfos}
+                                        setReloadUserInfos= {setReloadUserInfos}
+                                    />
+                                </div>
+                                <button className={styles.button} onClick={supprimerBird}>Supprimer</button>
                                 <PostBird
                                     isConnected= {isConnected}
                                     userInfos= {userInfos}
                                     reloadListeBird= {reloadListeBird}
                                     setReloadListeBird= {setReloadListeBird}
 							    />
-                                {
-                                    (sideBirds && (sideBirds !== [])) ?
-                                        <div> 
-                                            <ListeBirds
-                                                isConnected= {isConnected}
-                                                userInfos= {userInfos}
-                                                reloadUserInfos= {reloadUserInfos}
-                                                setReloadUserInfos= {setReloadUserInfos}
-                                                birds= {sideBirds}
-                                            />
-                                        </div>  
+                                {   
+                                    (sideBirds && (sideBirds.length > 0)) ?
+                                        <div>
+                                            <div className={styles.titreCommentaires}>Commentaires</div>
+                                                <div className={styles.commentaires}>
+                                                <ListeBirds
+                                                    isConnected= {isConnected}
+                                                    userInfos= {userInfos}
+                                                    reloadUserInfos= {reloadUserInfos}
+                                                    setReloadUserInfos= {setReloadUserInfos}
+                                                    birds= {sideBirds}
+                                                />
+                                            </div>  
+                                        </div>
                                         :
                                         null
                                 }
@@ -143,11 +153,11 @@ export default function BirdDetailBirds({isConnected, userInfos, reloadListeBird
                 }
                 else {
                     //CONNECTE ET NON-PROPRIETAIRE DU BIRD
-                    return( <div>Chelou</div>)
                     return (
                         <div className={styles.birdDetail}>
                             <ul>
                                 {(fatherBird) ?
+                                    <div className={styles.father}> 
                                         <Bird
                                             idBird= {fatherBird._id}
                                             pseudo= {fatherBird.pseudo}
@@ -165,52 +175,51 @@ export default function BirdDetailBirds({isConnected, userInfos, reloadListeBird
                                             reloadUserInfos= {reloadUserInfos}
                                             setReloadUserInfos= {setReloadUserInfos}
                                         />
+                                    </div>
+                                    :
+                                    (mainBird.isComment) ?
+                                        <div className={styles.Bird}>Le tweet parent n'existe plus, il a été supprimé !</div>
                                         :
-                                        (mainBird.isComment) ?
-                                            <div>Le tweet n'existe plus, il a été supprimé !</div>
-                                            :
-                                            null
-                                    }
-                                <Bird
-                                    idBird= {mainBird._id}
-                                    pseudo= {mainBird.pseudo}
-                                    avatar= {mainBird.avatar}
-                                    content= {mainBird.content}
-                                    date= {mainBird.date}
-                                    heure= {mainBird.heure}
-                                    isPublic= {mainBird.isPublic}
-                                    isComment= {mainBird.isComment}
-                                    isRebird= {mainBird.isRebird}
-                                    likes= {mainBird.likes}
-                                    rebirds= {mainBird.rebirds}
-                                    userInfos= {userInfos}
+                                        null
+                                }
+                                <div className={styles.main}> 
+                                    <Bird
+                                        idBird= {mainBird._id}
+                                        pseudo= {mainBird.pseudo}
+                                        avatar= {mainBird.avatar}
+                                        content= {mainBird.content}
+                                        date= {mainBird.date}
+                                        heure= {mainBird.heure}
+                                        isPublic= {mainBird.isPublic}
+                                        isComment= {mainBird.isComment}
+                                        isRebird= {mainBird.isRebird}
+                                        likes= {mainBird.likes}
+                                        rebirds= {mainBird.rebirds}
+                                        userInfos= {userInfos}
+                                        isConnected= {isConnected}
+                                        reloadUserInfos= {reloadUserInfos}
+                                        setReloadUserInfos= {setReloadUserInfos}
+                                    />
+                                </div>
+                                <PostBird
                                     isConnected= {isConnected}
-                                    reloadUserInfos= {reloadUserInfos}
-                                    setReloadUserInfos= {setReloadUserInfos}
-                                />
+                                    userInfos= {userInfos}
+                                    reloadListeBird= {reloadListeBird}
+                                    setReloadListeBird= {setReloadListeBird}
+							    />
                                 {
-                                    sideBirds.filter(() => true)
-                                    .map((b)=>
-                                        <li key={b._id}>
-                                            <Bird
-                                                idBird= {b._id}
-                                                pseudo= {b.pseudo}
-                                                avatar= {b.avatar}
-                                                content= {b.content}
-                                                date= {b.date}
-                                                heure= {b.heure}
-                                                isPublic= {b.isPublic}
-                                                isComment= {b.isComment}
-                                                isRebird= {b.isRebird}
-                                                likes= {b.likes}
-                                                rebirds= {b.rebirds}
-                                                userInfos= {userInfos}
+                                    (sideBirds && (sideBirds !== [])) ?
+                                        <div className={styles.commentaires}> 
+                                            <ListeBirds
                                                 isConnected= {isConnected}
+                                                userInfos= {userInfos}
                                                 reloadUserInfos= {reloadUserInfos}
                                                 setReloadUserInfos= {setReloadUserInfos}
+                                                birds= {sideBirds}
                                             />
-                                        </li>
-                                    )
+                                        </div>  
+                                        :
+                                        null
                                 }
                             </ul>
                         </div>
@@ -219,74 +228,67 @@ export default function BirdDetailBirds({isConnected, userInfos, reloadListeBird
             }
         }
         //DECONNECTE
-        return( <div>Chelou 2</div>)
         return (
             <div className={styles.birdDetail}>
                 <ul>
                     {(fatherBird) ?
+                        <div className={styles.father}> 
+                            <Bird
+                                idBird= {fatherBird._id}
+                                pseudo= {fatherBird.pseudo}
+                                avatar= {fatherBird.avatar}
+                                content= {fatherBird.content}
+                                date= {fatherBird.date}
+                                heure= {fatherBird.heure}
+                                isPublic= {fatherBird.isPublic}
+                                isComment= {fatherBird.isComment}
+                                isRebird= {fatherBird.isRebird}
+                                likes= {fatherBird.likes}
+                                rebirds= {fatherBird.rebirds}
+                                userInfos= {userInfos}
+                                isConnected= {isConnected}
+                                reloadUserInfos= {reloadUserInfos}
+                                setReloadUserInfos= {setReloadUserInfos}
+                            />
+                        </div>
+                        :
+                        (mainBird.isComment) ?
+                            <div className={styles.Bird}>Le tweet parent n'existe plus, il a été supprimé !</div>
+                            :
+                            null
+                    }
+                    <div className={styles.main}> 
                         <Bird
-                            idBird= {fatherBird._id}
-                            pseudo= {fatherBird.pseudo}
-                            avatar= {fatherBird.avatar}
-                            content= {fatherBird.content}
-                            date= {fatherBird.date}
-                            heure= {fatherBird.heure}
-                            isPublic= {fatherBird.isPublic}
-                            isComment= {fatherBird.isComment}
-                            isRebird= {fatherBird.isRebird}
-                            likes= {fatherBird.likes}
-                            rebirds= {fatherBird.rebirds}
+                            idBird= {mainBird._id}
+                            pseudo= {mainBird.pseudo}
+                            avatar= {mainBird.avatar}
+                            content= {mainBird.content}
+                            date= {mainBird.date}
+                            heure= {mainBird.heure}
+                            isPublic= {mainBird.isPublic}
+                            isComment= {mainBird.isComment}
+                            isRebird= {mainBird.isRebird}
+                            likes= {mainBird.likes}
+                            rebirds= {mainBird.rebirds}
                             userInfos= {userInfos}
                             isConnected= {isConnected}
                             reloadUserInfos= {reloadUserInfos}
                             setReloadUserInfos= {setReloadUserInfos}
                         />
-                        :
-                        (mainBird.isComment) ?
-                            <div>Le tweet n'existe plus, il a été supprimé !</div>
-                            :
-                            null
-                    }
-                    <Bird
-                        idBird= {mainBird._id}
-                        pseudo= {mainBird.pseudo}
-                        avatar= {mainBird.avatar}
-                        content= {mainBird.content}
-                        date= {mainBird.date}
-                        heure= {mainBird.heure}
-                        isPublic= {mainBird.isPublic}
-                        isComment= {mainBird.isComment}
-                        isRebird= {mainBird.isRebird}
-                        likes= {mainBird.likes}
-                        rebirds= {mainBird.rebirds}
-                        userInfos= {userInfos}
-                        isConnected= {isConnected}
-                        reloadUserInfos= {reloadUserInfos}
-                        setReloadUserInfos= {setReloadUserInfos}
-                    />
+                    </div>
                     {
-                        sideBirds.filter(() => true)
-                        .map((b)=>
-                            <li key={b._id}>
-                                <Bird
-                                    idBird= {b._id}
-                                    pseudo= {b.pseudo}
-                                    avatar= {b.avatar}
-                                    content= {b.content}
-                                    date= {b.date}
-                                    heure= {b.heure}
-                                    isPublic= {b.isPublic}
-                                    isComment= {b.isComment}
-                                    isRebird= {b.isRebird}
-                                    likes= {b.likes}
-                                    rebirds= {b.rebirds}
-                                    userInfos= {userInfos}
+                        (sideBirds && (sideBirds !== [])) ?
+                            <div className={styles.commentaires}> 
+                                <ListeBirds
                                     isConnected= {isConnected}
+                                    userInfos= {userInfos}
                                     reloadUserInfos= {reloadUserInfos}
                                     setReloadUserInfos= {setReloadUserInfos}
+                                    birds= {sideBirds}
                                 />
-                            </li>
-                        )
+                            </div>  
+                            :
+                            null
                     }
                 </ul>
             </div>

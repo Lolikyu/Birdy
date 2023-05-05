@@ -14,3 +14,21 @@
     border-radius: 50%;
     object-fit: cover; /* Assurez-vous que l'image est entièrement visible */
 }
+
+.button {
+    display: flex;
+    text-align: center;
+    justify-content: space-around;
+    margin-top: 2%;
+}
+
+.button1, .button2, .button3 {
+    display: flex;
+    padding-left: 2%;
+    padding-right: 2%;
+    align-items: center;
+}
+
+.button1 {
+    margin-left: 10%;
+}

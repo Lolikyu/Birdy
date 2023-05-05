@@ -2,7 +2,6 @@
     background-color: var(--bgcolor);
     height: 100%;
     width: 20%;
-    display: flexbox;
     text-align: center;
     position: fixed;
     top: 0;
@@ -16,23 +15,29 @@
     border-bottom-right-radius: 0px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     
+    
 }
 
 .icon {
     align-self: center;
-    width: 64px;
+    vertical-align: -5px;
+    margin-right: 12px;
 }
 
 .elemMenu {
     display: block;
     width: 100%;
-    padding: 16px;
-    text-align: left;
+    padding: 10px;
+    margin-top: 15%;
+    text-align: center;
     border: none;
     background: none;
     font-size: 18px;
     color: var(--objcolor);
     cursor: pointer;
+    font-size: x-large;
+    border: 1px solid var(--objcolor);
+    border-radius: 9999px;
 }
       
 .elemMenu:hover {
@@ -49,4 +54,11 @@
 
 span {
     align-self: bottom;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: xx-large;
 }

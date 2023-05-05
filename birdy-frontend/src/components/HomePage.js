@@ -8,7 +8,7 @@ export default function HomePage({isConnected, userInfos, reloadListeBird, setRe
         if (userInfos) {
             return (
                 <div className={styles.homePage}>
-                    HomePage connecté
+                    <div className={styles.title}>Page d'accueil</div>
                     <PostBird
                         isConnected= {isConnected}
                         userInfos= {userInfos}
@@ -37,7 +37,7 @@ export default function HomePage({isConnected, userInfos, reloadListeBird, setRe
                     userInfos= {userInfos}
                     reloadListeBird= {reloadListeBird}
                     setReloadListeBird= {setReloadListeBird}
-                    condition= 'public'
+                    condition= 'private'
                     reloadUserInfos= {reloadUserInfos}
 					setReloadUserInfos= {setReloadUserInfos}
                 />

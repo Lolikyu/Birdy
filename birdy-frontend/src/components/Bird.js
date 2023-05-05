@@ -100,12 +100,10 @@ export default function Bird({idBird, pseudo, avatar, content, date, heure, isPu
                                 Posté le {date} à {heure}
                             </div>
                             <div>
-                                isPublic : {isPublic.toString()}<br></br>
-                                isComment : {(isComment)? isComment : "None"}<br></br>
-                                isRebird : {(isRebird)? isRebird : "None"}<br></br>
-                                <div onClick={likeBird}>Likes : {likes.length}<br></br></div>
-                                Rebirds : {rebirds.length}<br></br>
-                                <div onClick={favBird}>Favoris : {isInArray(idBird, userInfos.favorites)? "Oui" : "Non"}</div>
+                                <div className={styles.visibilite}>Bird {(isPublic) ? 'public' : 'privé'}<br></br></div>
+                                {(isComment) ? <div className={styles.reponse}>En réponse à un Bird<br></br></div> : null}
+                                <div className={styles.likes} onClick={likeBird}>Likes : {likes.length}<br></br></div>
+                                <div className={styles.favoris} onClick={favBird}>Favoris : {isInArray(idBird, userInfos.favorites)? "Oui" : "Non"}</div>
                             </div>
                         </div>
                     </div>

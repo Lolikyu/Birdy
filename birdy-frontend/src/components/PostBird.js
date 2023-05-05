@@ -40,19 +40,19 @@ export default function PostBird({isConnected, userInfos, reloadListeBird, setRe
       return (
         <div className={styles.postBird}>
             <form onSubmit={postBird}>
-                <div>Nouveau Bird: </div><br></br>
+                <div className={styles.title}>Nouveau Bird</div><br></br>
                 
                 <textarea className={styles.textarea}
                   placeholder= {"Contenu du Bird"}
                 /><br></br>
 
                 <div className={styles.checkbox}>
-                  <input className={styles.input} type="checkbox" id="isPublic" checked={isChecked} onChange={handleOnChange}/>
                   <label className={styles.label} htmlFor='isPublic'>Bird public</label>
+                  <input className={styles.input} type="checkbox" id="isPublic" checked={isChecked} onChange={handleOnChange}/>
                 </div>
                 
+                <div><button className={styles.button} type='submit'>Envoyer</button></div>
                 
-                <button type='submit'>Envoyer</button>
             </form>
         </div>
       )

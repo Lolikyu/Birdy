@@ -88,10 +88,11 @@ export default function Profile ({isConnected, userInfos, reloadListeBird, setRe
                         Followers : {userInfosCible.followers.length}<br></br>
                         Avatar : <br></br>
                         <img className={styles.avatar} src={userInfosCible.avatar} rel="pdp"></img><br></br>
-
-                        <button onClick={modeBirds}>Birds</button><br></br>
-                        <button onClick={modeLikes}>Likes</button><br></br>
-                        <button onClick={modeFavorites}>Favoris</button><br></br>
+                        <div className={styles.button}>
+                            <button className={styles.button1} onClick={modeBirds}>Birds</button><br></br>
+                            <button className={styles.button2} onClick={modeLikes}>Likes</button><br></br>
+                            <button className={styles.button3} onClick={modeFavorites}>Favoris</button><br></br>
+                        </div>
 
                         <ProfileBirds
                             mode= {mode}

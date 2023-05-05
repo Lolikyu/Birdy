@@ -7,7 +7,9 @@
     -moz-osx-font-smoothing: grayscale;
     --bgcolor: rgb(20, 20, 20);
     --objcolor: rgb(0, 140, 179);
-    --objcolor2: rgb(255, 195, 238);
+    --objcolor2: rgb(92, 255, 209);
+    --objcolor3: rgb(144, 15, 15);
+    --objcolor4: rgb(15, 114, 144);
 }
 
 body {
@@ -25,9 +27,8 @@ ul {
 
 button {
     display: inline-block;
-    padding: 5px 9px;
+    padding: 4px 8px;
     font-size: 16px;
-    font-weight: bold;
     text-align: center;
     border-radius: 9999px;
     color: white;
@@ -36,12 +37,12 @@ button {
 }
   /* Lorsque le bouton est survolé */
 button:hover {
-    background-color: var(--objcolor2);
     cursor: pointer;
+    background-color: var(--objcolor4);
 }
   
   /* Lorsque le bouton est pressé */
 button:active {
-    background-color: var(--objcolor2);
+    background-color: var(--objcolor4);
 }
 

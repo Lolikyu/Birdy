@@ -6,7 +6,7 @@ import ListeBirds from './ListeBirds';
 export default function ProfileBirds({mode, userInfosCible, isConnected, userInfos, reloadListeBird, setReloadListeBird, reloadUserInfos, setReloadUserInfos}){
     const [birds, setBirds] = useState([]);
     const [page, updatePage] = useState(0);
-    var ignore = false;
+    let ignore = false;
 
     function handleScroll () {
         if (window.innerHeight + document.documentElement.scrollTop + 1 >= document.documentElement.scrollHeight) {
@@ -64,28 +64,26 @@ export default function ProfileBirds({mode, userInfosCible, isConnected, userInf
 
     useEffect(() => {
         updatePage(0);
-        setBirds([])
+        setBirds([]);
     }, [mode]);
 
     useEffect(() => {
         birdFetching();
     }, [page, mode]);
 
-    if (birds && (birds !== [])) {
-        if (birds.length > 0) {
-            return (
-                <div> 
-                    <ListeBirds
-                        isConnected= {isConnected}
-                        userInfos= {userInfos}
-                        reloadListeBird= {reloadListeBird}
-                        setReloadListeBird= {setReloadListeBird}
-                        reloadUserInfos= {reloadUserInfos}
-                        setReloadUserInfos= {setReloadUserInfos}
-                        birds= {birds}
-                    />
-                </div>
-            )
-        }
+    if (birds && (birds.length > 0)) {
+        return (
+            <div> 
+                <ListeBirds
+                    isConnected= {isConnected}
+                    userInfos= {userInfos}
+                    reloadListeBird= {reloadListeBird}
+                    setReloadListeBird= {setReloadListeBird}
+                    reloadUserInfos= {reloadUserInfos}
+                    setReloadUserInfos= {setReloadUserInfos}
+                    birds= {birds}
+                />
+            </div>
+        ) 
     }
 }

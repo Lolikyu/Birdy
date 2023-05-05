@@ -8,14 +8,18 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
     transition: all 0.2s ease-in-out;
     border: 1px solid var(--objcolor);
-    border-radius: 5px;
+    border-radius: 50px;
 }
 
 /* Le nom d'utilisateur du tweet */
 .pseudo {
+    display: inline-block;
     font-size: 18px;
     font-weight: bold;
     color: var(--objcolor);;
+    padding: 5px;
+    margin-left: 10px;
+    vertical-align: 23px;
 }
 
 /* Le contenu du tweet */
@@ -24,6 +28,10 @@
     margin-top: 8px;
     font-size: 16px;
     line-height: 1.5;
+    padding-left: 15px;
+    white-space: pre-wrap;
+    word-break: break-word;
+    margin-bottom: 10px;
 }
 
 /* Le temps du tweet */
@@ -45,4 +53,39 @@
     height: 64px;
     border-radius: 50%;
     object-fit: cover; /* Assurez-vous que l'image est entièrement visible */
+}
+
+.visibilite {
+    font-size: 12px;
+    color: #666;
+}
+
+.reponse {
+    font-size: 12px;
+    color: #666;
+}
+
+.date, .visibilite, .reponse {
+    padding-left: 15px;
+}
+
+.likes {
+    color:rgb(255, 65, 96);
+    
+}
+
+.favoris {
+    color:rgb(255, 255, 129);
+}
+
+.likes, .favoris {
+    display: inline-block;
+    margin-top: 10px;
+    width: 25%;
+    margin-left: 20%;
+}
+
+.likes:hover, .favoris:hover {
+    text-decoration: underline;
+    cursor: pointer;
 }

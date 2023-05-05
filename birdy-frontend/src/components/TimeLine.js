@@ -55,19 +55,20 @@ export default function TimeLine({isConnected, userInfos, reloadListeBird, condi
         birdFetching();
     }, [page]);
     
-    if (birds && (birds !== [])) {
-        if (birds.length > 0) {
-            return (
-                <div> 
-                    <ListeBirds
-                        isConnected= {isConnected}
-                        userInfos= {userInfos}
-                        reloadUserInfos= {reloadUserInfos}
-                        setReloadUserInfos= {setReloadUserInfos}
-                        birds= {birds}
-                    />
-                </div>
-            )
-        }
+    if (ignore === true){
+        return (null)
+    }
+    if (birds && (birds.length > 0)) {
+        return (
+            <div> 
+                <ListeBirds
+                    isConnected= {isConnected}
+                    userInfos= {userInfos}
+                    reloadUserInfos= {reloadUserInfos}
+                    setReloadUserInfos= {setReloadUserInfos}
+                    birds= {birds}
+                />
+            </div>
+        )
     }
 }

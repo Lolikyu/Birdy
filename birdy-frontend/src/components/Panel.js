@@ -34,7 +34,7 @@ export default function Panel({isConnected, userInfos, updateUserInfos}){
         if (userInfos) {
             return (
                 <div className={styles.panel}>
-                    Panel connecté
+                    <div className={styles.title}>Birdy</div>
                     
                     <nav>
                         <div className={styles.elemMenu} onClick={goToHome}>

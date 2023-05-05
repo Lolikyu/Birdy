@@ -6,7 +6,7 @@
     border-radius: 8px;
     background-color: var(--bgcolor);
     border: 1px solid var(--objcolor);
-    border-radius: 5px;
+    border-radius: 20px;
 }
   
 .textarea {
@@ -37,3 +37,27 @@
     text-align: center;
     padding-top: 200px;
 }
+
+.checkbox {
+    width: 20%;
+    display: inline-flex;
+    align-items: center;
+}
+
+.label {
+
+    white-space: nowrap;
+    font-weight: 500;
+    margin: 10px;
+    margin-left: 1%;
+}
+
+.input {
+    padding-left: 10%;
+    width: 20px;
+    height: 20px;
+
+}
+
+
+  

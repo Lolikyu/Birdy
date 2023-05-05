@@ -62,20 +62,21 @@ export default function Authentification({updateUserInfos}){
 
     async function connexion(formulaire) {
         formulaire.preventDefault();
-        var retour = await axios.post('http://localhost:8000/api/user/connexion',
+        const response = await axios.post('http://localhost:8000/api/user/connexion',
             {
                 email: formulaire.target[0].value,
                 password: formulaire.target[1].value
             }
-        );
+        )
+        .catch((error) => alert('Email ou mot de passe incorrect'))
 
-        updateUserInfos(retour.data.userInfos);
-        if (retour.data.isConnected){
+        updateUserInfos(response.data.userInfos);
+        if (response.data.isConnected){
             signIn({
-                token: retour.data.userInfos.token,
+                token: response.data.userInfos.token,
                 expiresIn: 3600,
                 tokenType: "Bearer",
-                authState: {id: retour.data.userInfos.id, email: retour.data.userInfos.email}
+                authState: {id: response.data.userInfos.id, email: response.data.userInfos.email}
             });
             updateAfficheFormulaire(-1);
         }
