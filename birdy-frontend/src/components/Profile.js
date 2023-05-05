@@ -79,6 +79,7 @@ export default function Profile ({isConnected, userInfos, reloadListeBird, setRe
             if (userInfosCible.id === userInfos.id){
                 return (
                     <div className={styles.profile}>
+                        <div className={styles.title}>Profil utilisateur</div>
                         Pseudo : {userInfosCible.pseudo}<br></br>
                         Prénom : {userInfosCible.prenom}<br></br>
                         Nom : {userInfosCible.nom}<br></br>

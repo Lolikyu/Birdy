@@ -9,8 +9,8 @@
 
 .avatar {
     display: inline-block;
-    width: 64px;
-    height: 64px;
+    width: 112px;
+    height: 112px;
     border-radius: 50%;
     object-fit: cover; /* Assurez-vous que l'image est entièrement visible */
 }
@@ -31,4 +31,11 @@
 
 .button1 {
     margin-left: 10%;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: xx-large;
 }

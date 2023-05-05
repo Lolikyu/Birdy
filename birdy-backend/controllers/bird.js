@@ -157,7 +157,6 @@ exports.getBirdsByPageDisconnected = (req, res, next) => {
     .catch(error => res.status(400).json({ message : "Erreur de getBirdsByPageDisconnected" }))
 };
 
-
 exports.getBirdsByPageProfileBirds = (req, res, next) => {
     const nb = 6;
     var nbskip = nb * req.body.page;

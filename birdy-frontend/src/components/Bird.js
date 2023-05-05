@@ -115,12 +115,13 @@ export default function Bird({idBird, pseudo, avatar, content, date, heure, isPu
         return (
             <div className={styles.bird} onClick={details}>
                 <div>
-                    <div>
+                    <div onClick={checkProfile}>
                         <img className={styles.avatar} src={avatar}/>
-                        <div>
-                            <div className={styles.pseudo}>{pseudo}</div>
-                        </div>
+
+                        <div className={styles.pseudo}>{pseudo}</div>
+
                     </div>
+
                     <div className={styles.content}>
                         {content}
                     </div>
@@ -129,9 +130,8 @@ export default function Bird({idBird, pseudo, avatar, content, date, heure, isPu
                             Posté le {date} à {heure}
                         </div>
                         <div>
-                            isPublic : {isPublic.toString()}<br></br>
-                            Likes : {likes.length}<br></br>
-                            Rebirds : {rebirds.length}<br></br>
+                            <div className={styles.visibilite}>Bird {(isPublic) ? 'public' : 'privé'}<br></br></div>
+                            {(isComment) ? <div className={styles.reponse}>En réponse à un Bird<br></br></div> : null}
                         </div>
                     </div>
                 </div>

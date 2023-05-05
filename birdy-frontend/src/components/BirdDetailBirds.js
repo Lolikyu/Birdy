@@ -76,6 +76,7 @@ export default function BirdDetailBirds({isConnected, userInfos, reloadListeBird
                             <ul>
                                 {(fatherBird) ?
                                     <div>
+                                        <div className={styles.title}>Interface avancée de Bird</div>
                                         <div className={styles.titreFather}>En réponse à</div>
                                         <div className={styles.father}> 
                                             <Bird className={styles.fatherBird}
@@ -157,24 +158,28 @@ export default function BirdDetailBirds({isConnected, userInfos, reloadListeBird
                         <div className={styles.birdDetail}>
                             <ul>
                                 {(fatherBird) ?
-                                    <div className={styles.father}> 
-                                        <Bird
-                                            idBird= {fatherBird._id}
-                                            pseudo= {fatherBird.pseudo}
-                                            avatar= {fatherBird.avatar}
-                                            content= {fatherBird.content}
-                                            date= {fatherBird.date}
-                                            heure= {fatherBird.heure}
-                                            isPublic= {fatherBird.isPublic}
-                                            isComment= {fatherBird.isComment}
-                                            isRebird= {fatherBird.isRebird}
-                                            likes= {fatherBird.likes}
-                                            rebirds= {fatherBird.rebirds}
-                                            userInfos= {userInfos}
-                                            isConnected= {isConnected}
-                                            reloadUserInfos= {reloadUserInfos}
-                                            setReloadUserInfos= {setReloadUserInfos}
-                                        />
+                                    <div>
+                                        <div className={styles.title}>Interface avancée de Bird</div>
+                                        <div className={styles.titreFather}>En réponse à</div>
+                                        <div className={styles.father}> 
+                                            <Bird className={styles.fatherBird}
+                                                idBird= {fatherBird._id}
+                                                pseudo= {fatherBird.pseudo}
+                                                avatar= {fatherBird.avatar}
+                                                content= {fatherBird.content}
+                                                date= {fatherBird.date}
+                                                heure= {fatherBird.heure}
+                                                isPublic= {fatherBird.isPublic}
+                                                isComment= {fatherBird.isComment}
+                                                isRebird= {fatherBird.isRebird}
+                                                likes= {fatherBird.likes}
+                                                rebirds= {fatherBird.rebirds}
+                                                userInfos= {userInfos}
+                                                isConnected= {isConnected}
+                                                reloadUserInfos= {reloadUserInfos}
+                                                setReloadUserInfos= {setReloadUserInfos}
+                                            />
+                                        </div>
                                     </div>
                                     :
                                     (mainBird.isComment) ?
@@ -182,6 +187,7 @@ export default function BirdDetailBirds({isConnected, userInfos, reloadListeBird
                                         :
                                         null
                                 }
+                                <div className={styles.titreMain}>Vue détaillée du Bird</div>
                                 <div className={styles.main}> 
                                     <Bird
                                         idBird= {mainBird._id}
@@ -207,17 +213,20 @@ export default function BirdDetailBirds({isConnected, userInfos, reloadListeBird
                                     reloadListeBird= {reloadListeBird}
                                     setReloadListeBird= {setReloadListeBird}
 							    />
-                                {
-                                    (sideBirds && (sideBirds !== [])) ?
-                                        <div className={styles.commentaires}> 
-                                            <ListeBirds
-                                                isConnected= {isConnected}
-                                                userInfos= {userInfos}
-                                                reloadUserInfos= {reloadUserInfos}
-                                                setReloadUserInfos= {setReloadUserInfos}
-                                                birds= {sideBirds}
-                                            />
-                                        </div>  
+                                {   
+                                    (sideBirds && (sideBirds.length > 0)) ?
+                                        <div>
+                                            <div className={styles.titreCommentaires}>Commentaires</div>
+                                                <div className={styles.commentaires}>
+                                                <ListeBirds
+                                                    isConnected= {isConnected}
+                                                    userInfos= {userInfos}
+                                                    reloadUserInfos= {reloadUserInfos}
+                                                    setReloadUserInfos= {setReloadUserInfos}
+                                                    birds= {sideBirds}
+                                                />
+                                            </div>  
+                                        </div>
                                         :
                                         null
                                 }
@@ -232,24 +241,28 @@ export default function BirdDetailBirds({isConnected, userInfos, reloadListeBird
             <div className={styles.birdDetail}>
                 <ul>
                     {(fatherBird) ?
-                        <div className={styles.father}> 
-                            <Bird
-                                idBird= {fatherBird._id}
-                                pseudo= {fatherBird.pseudo}
-                                avatar= {fatherBird.avatar}
-                                content= {fatherBird.content}
-                                date= {fatherBird.date}
-                                heure= {fatherBird.heure}
-                                isPublic= {fatherBird.isPublic}
-                                isComment= {fatherBird.isComment}
-                                isRebird= {fatherBird.isRebird}
-                                likes= {fatherBird.likes}
-                                rebirds= {fatherBird.rebirds}
-                                userInfos= {userInfos}
-                                isConnected= {isConnected}
-                                reloadUserInfos= {reloadUserInfos}
-                                setReloadUserInfos= {setReloadUserInfos}
-                            />
+                        <div>
+                            <div className={styles.title}>Interface avancée de Bird</div>
+                            <div className={styles.titreFather}>En réponse à</div>
+                            <div className={styles.father}> 
+                                <Bird className={styles.fatherBird}
+                                    idBird= {fatherBird._id}
+                                    pseudo= {fatherBird.pseudo}
+                                    avatar= {fatherBird.avatar}
+                                    content= {fatherBird.content}
+                                    date= {fatherBird.date}
+                                    heure= {fatherBird.heure}
+                                    isPublic= {fatherBird.isPublic}
+                                    isComment= {fatherBird.isComment}
+                                    isRebird= {fatherBird.isRebird}
+                                    likes= {fatherBird.likes}
+                                    rebirds= {fatherBird.rebirds}
+                                    userInfos= {userInfos}
+                                    isConnected= {isConnected}
+                                    reloadUserInfos= {reloadUserInfos}
+                                    setReloadUserInfos= {setReloadUserInfos}
+                                />
+                            </div>
                         </div>
                         :
                         (mainBird.isComment) ?
@@ -257,6 +270,7 @@ export default function BirdDetailBirds({isConnected, userInfos, reloadListeBird
                             :
                             null
                     }
+                    <div className={styles.titreMain}>Vue détaillée du Bird</div>
                     <div className={styles.main}> 
                         <Bird
                             idBird= {mainBird._id}
@@ -276,22 +290,25 @@ export default function BirdDetailBirds({isConnected, userInfos, reloadListeBird
                             setReloadUserInfos= {setReloadUserInfos}
                         />
                     </div>
-                    {
-                        (sideBirds && (sideBirds !== [])) ?
-                            <div className={styles.commentaires}> 
-                                <ListeBirds
-                                    isConnected= {isConnected}
-                                    userInfos= {userInfos}
-                                    reloadUserInfos= {reloadUserInfos}
-                                    setReloadUserInfos= {setReloadUserInfos}
-                                    birds= {sideBirds}
-                                />
-                            </div>  
+                    {   
+                        (sideBirds && (sideBirds.length > 0)) ?
+                            <div>
+                                <div className={styles.titreCommentaires}>Commentaires</div>
+                                    <div className={styles.commentaires}>
+                                    <ListeBirds
+                                        isConnected= {isConnected}
+                                        userInfos= {userInfos}
+                                        reloadUserInfos= {reloadUserInfos}
+                                        setReloadUserInfos= {setReloadUserInfos}
+                                        birds= {sideBirds}
+                                    />
+                                </div>  
+                            </div>
                             :
                             null
                     }
                 </ul>
             </div>
         )
-    }
+    } 
 }

@@ -35,14 +35,13 @@ export default function Panel({isConnected, userInfos, updateUserInfos}){
             return (
                 <div className={styles.panel}>
                     <div className={styles.title}>Birdy</div>
-                    
                     <nav>
                         <div className={styles.elemMenu} onClick={goToHome}>
                             <i className={styles.icon}><span className="material-icons">home</span></i>
                             HomePage
                         </div><br></br>
                         <div className={styles.elemMenu} onClick={goToProfile}>
-                            Profil
+                            Profile
                         </div><br></br>
                         <div className={styles.elemMenu} onClick={goToFollows}>
                             Follows
