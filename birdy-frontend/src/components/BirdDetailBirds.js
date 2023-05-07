@@ -57,10 +57,8 @@ export default function BirdDetailBirds({mainBird}) {
     }
 
     useEffect(() => {
-        console.log("BirdDetail monté");
         window.addEventListener("scroll", handleScroll);
         return () => {
-            console.log("BirdDetail démonté");
             window.removeEventListener("scroll", handleScroll);
         }
     }, []);
