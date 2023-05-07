@@ -50,19 +50,19 @@ export default function Panel () {
                             Accueil
                         </div><br></br>
                         <div className={styles.elemMenu} onClick={goToProfile}>
-                            <i className={styles.icon}><i class="material-symbols-outlined">account_circle</i></i>
+                            <i className={styles.icon}><i className="material-symbols-outlined">account_circle</i></i>
                             Profil
                         </div><br></br>
                         <div className={styles.elemMenu} onClick={goToFollows}>
-                            <i className={styles.icon}><i class="material-symbols-outlined">group</i></i>
+                            <i className={styles.icon}><i className="material-symbols-outlined">group</i></i>
                             Abonnements
                         </div><br></br>
                         <div className={styles.elemMenu} onClick={goToFollowers}>
-                            <i className={styles.icon}><i class="material-symbols-outlined">groups</i></i>
+                            <i className={styles.icon}><i className="material-symbols-outlined">groups</i></i>
                             Abonnés
                         </div><br></br>   
                         <div className={styles.elemMenu} onClick={goToRecherche}>
-                            <i className={styles.icon}><i class="material-symbols-outlined">search</i></i>
+                            <i className={styles.icon}><i className="material-symbols-outlined">search</i></i>
                             Recherche
                         </div><br></br>      
                     </nav>

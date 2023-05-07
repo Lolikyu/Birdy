@@ -99,14 +99,8 @@ export default function App (){
 						path= '/recherche'
 						element= {
 							<RequireAuth loginPath='/'>
-								<div class={styles.container}>
-									<div class={styles.column}>
-										<Recherche mode="bird" />
-									</div>
-									<div class={styles.column}>
-										<Recherche mode="user" />
-									</div>
-								</div>
+								<Recherche mode="bird" />
+								<Recherche mode="user" />
 							</RequireAuth>
 						}
 					/>
