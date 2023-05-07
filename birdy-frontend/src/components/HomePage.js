@@ -23,7 +23,7 @@ export default function HomePage () {
     else {
         return (
             <div className={styles.homePage}>
-                HomePage déconnecté
+                <div className={styles.title}>Page d'accueil</div>
                 <TimeLine
                     condition= 'private'
                 />

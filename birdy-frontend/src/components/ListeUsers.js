@@ -36,7 +36,7 @@ export default function ListeUsers({mode}) {
         if (users) {
             return (
                 <div className={styles.listeUsers}> 
-                    {(mode === 'follows') ? <div className={styles.title}>Follows</div> : <div className={styles.title}>Followers</div>}
+                    {(mode === 'follows') ? <div className={styles.title}>Abonnements</div> : <div className={styles.title}>Abonnés</div>}
                     <ul>
                         {
                             users.map((u)=>

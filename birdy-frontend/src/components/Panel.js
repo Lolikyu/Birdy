@@ -47,19 +47,19 @@ export default function Panel () {
                     <nav>
                         <div className={styles.elemMenu} onClick={goToHome}>
                             <i className={styles.icon}><i className="material-icons">home</i></i>
-                            HomePage
+                            Accueil
                         </div><br></br>
                         <div className={styles.elemMenu} onClick={goToProfile}>
                             <i className={styles.icon}><i class="material-symbols-outlined">account_circle</i></i>
-                            Profile
+                            Profil
                         </div><br></br>
                         <div className={styles.elemMenu} onClick={goToFollows}>
                             <i className={styles.icon}><i class="material-symbols-outlined">group</i></i>
-                            Follows
+                            Abonnements
                         </div><br></br>
                         <div className={styles.elemMenu} onClick={goToFollowers}>
                             <i className={styles.icon}><i class="material-symbols-outlined">groups</i></i>
-                            Followers
+                            Abonnés
                         </div><br></br>   
                         <div className={styles.elemMenu} onClick={goToRecherche}>
                             <i className={styles.icon}><i class="material-symbols-outlined">search</i></i>
@@ -84,7 +84,7 @@ export default function Panel () {
                 <nav>
                     <div className={styles.elemMenu} onClick={goToHome}>
                         <i className={styles.icon}><i className="material-icons">home</i></i>
-                        HomePage
+                        Accueil
                     </div><br></br>
                 </nav>
                 <Authentification
