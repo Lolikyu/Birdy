@@ -2,11 +2,11 @@
     margin: 1%;
     padding: 24px;
     background-color: var(--bgcolor);
-    border: 2px solid #7aa5c2;
-    border-radius: 4px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border: 1px solid var(--objcolor);
     border-radius: 5px;
+    max-height: 70%;
+    overflow-y: auto; 
 }
   
 label {
@@ -18,13 +18,15 @@ label {
 .input {
     display: block;
     width: 100%;
-    padding: 8px;
-    border: 1px solid #3f5868;
+    padding: 2%;
+    border: 1px solid var(--objcolor4);
     border-radius: 4px;
     font-size: 16px;
 }
 
-  
+.texte {
+    margin-bottom: 5%;
+}
   
   
   

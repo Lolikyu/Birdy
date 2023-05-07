@@ -79,10 +79,11 @@ export default function Panel () {
     else {
         return (
             <div className={styles.panel}>
-                Panel déconnecté<br></br>
+                <img className={styles.logo} src={logo} alt="icôneBirdy"/>
+                <div className={styles.title}>Birdy</div>
                 <nav>
                     <div className={styles.elemMenu} onClick={goToHome}>
-                        <i className={styles.icon}></i>
+                        <i className={styles.icon}><i className="material-icons">home</i></i>
                         HomePage
                     </div><br></br>
                 </nav>

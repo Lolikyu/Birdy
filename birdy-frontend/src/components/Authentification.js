@@ -92,8 +92,10 @@ export default function Authentification(){
             return (
                 //Accueil
                 <div className={styles.auth}>
-                    Pas encore connecté ?<br></br>
-                    Connecte-toi ou rejoins la communauté !<br></br>
+                    <div className={styles.texte}>
+                        Pas encore connecté ?<br></br>
+                        Connecte-toi ou rejoins la communauté !<br></br>
+                    </div>
                     <button onClick={() => updateAfficheFormulaire(1)}>Je me connecte</button>
                     <button onClick={() => updateAfficheFormulaire(2)}>Je m'inscris</button>
                 </div>

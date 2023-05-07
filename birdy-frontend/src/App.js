@@ -74,34 +74,40 @@ export default function App (){
 					<Route
 						path= '/follows'
 						element= {
-							<div className={styles.details}>
-								<ListeUsers
-									mode= 'follows'
-								/>
-							</div>
+							<RequireAuth loginPath='/'>
+								<div className={styles.details}>
+									<ListeUsers
+										mode= 'follows'
+									/>
+								</div>
+							</RequireAuth>
 						}
 					/>
 					<Route
 						path= '/followers'
 						element= {
-							<div className={styles.details}>
-								<ListeUsers
-									mode= 'followers'
-								/>
-							</div>
+							<RequireAuth loginPath='/'>
+								<div className={styles.details}>
+									<ListeUsers
+										mode= 'followers'
+									/>
+								</div>
+							</RequireAuth>
 						}
 					/>
 					<Route
 						path= '/recherche'
 						element= {
-							<div class={styles.container}>
-								<div class={styles.column}>
-									<Recherche mode="bird" />
+							<RequireAuth loginPath='/'>
+								<div class={styles.container}>
+									<div class={styles.column}>
+										<Recherche mode="bird" />
+									</div>
+									<div class={styles.column}>
+										<Recherche mode="user" />
+									</div>
 								</div>
-								<div class={styles.column}>
-									<Recherche mode="user" />
-								</div>
-							</div>
+							</RequireAuth>
 						}
 					/>
 				</Routes>
