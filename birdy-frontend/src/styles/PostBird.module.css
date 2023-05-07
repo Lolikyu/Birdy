@@ -40,12 +40,13 @@
 
 .checkbox {
     width: 20%;
-    display: inline-flex;
+    display: flex;
     align-items: center;
+    margin-left: 2%;
 }
 
 .label {
-
+    display: flex;
     white-space: nowrap;
     font-weight: 500;
     margin: 10px;
@@ -56,8 +57,9 @@
     padding-left: 10%;
     width: 20px;
     height: 20px;
-
 }
 
-
-  
+.desc {
+    font-size: larger;
+    margin-left: 1%;
+}

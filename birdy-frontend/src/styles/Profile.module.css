@@ -5,15 +5,81 @@
     background-color: var(--bgcolor);
     border: 1px solid var(--objcolor);
     border-radius: 5px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-left: 0px;
 }
 
-.avatar {
-    display: inline-block;
-    width: 112px;
-    height: 112px;
-    border-radius: 50%;
-    object-fit: cover; /* Assurez-vous que l'image est entièrement visible */
+.title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+.infos {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;   
+    border: 1px solid var(--objcolor);
+    border-radius: 5px;
+    margin: 1%;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    margin-left: 14%;
+    margin-right: 16%;
+}
+
+.infosBis {
+    align-self: center;
+    width: 100%;
+}
+
+.flex {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    margin-left: 33%;
+}
+
+.infosTri {
+    justify-content: center;
+    align-items: center;
+}
+
+.username {
+    font-size: xx-large;
+    font-weight: bold;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    margin-top: 20px;
+    border-top: 1px solid var(--objcolor);
+    padding-top: 1%;
+    text-align: center;
+}
+
+.followNum {
+    font-size: 24px;
+    font-weight: bold;
+}
+  
+.followText, .infosText {
+    font-size: 16px;
+    font-weight: bold;
+    color: #999;
+}
+
+.infosText {
+    margin-right: 3%;
+    font-weight: bold;
+}
+  
 
 .button {
     display: flex;
@@ -21,7 +87,7 @@
     justify-content: space-around;
     margin-top: 2%;
 }
-
+  
 .button1, .button2, .button3 {
     display: flex;
     padding-left: 2%;
@@ -29,13 +95,51 @@
     align-items: center;
 }
 
+.avatarContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 55%;
+}
+
+.avatarContainerFollow {
+    display: flex;
+    text-align: center;
+    justify-content: space-between;
+    width: 100%;
+    padding-left: 11%;
+    padding-right: 11%;
+
+}
+
+.username, .buttonFollow {
+    display: flex;
+    padding-left: 2%;
+    padding-right: 2%;
+    align-items: center;
+}
+
+.avatar {
+    display: inline-block;
+    width: 112px;
+    height: 112px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-left: 21%;
+}
+
+.avatarFollow {
+    display: inline-block;
+    width: 112px;
+    height: 112px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+  
 .button1 {
     margin-left: 10%;
 }
 
-.title {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: xx-large;
-}
+
+  
+
+  

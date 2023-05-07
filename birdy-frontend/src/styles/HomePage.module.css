@@ -5,10 +5,15 @@
     background-color: var(--bgcolor);
     border: 1px solid var(--objcolor);
     border-radius: 5px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-left: 0px;
+    
 }
 
 .title {
     display: flex;
+    font-weight: bold;
     justify-content: center;
     align-items: center;
     font-size: xx-large;

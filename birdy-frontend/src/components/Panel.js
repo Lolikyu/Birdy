@@ -1,9 +1,10 @@
 import styles from '../styles/Panel.module.css'
+import logo from '../assets/Birdy.png'
 import { useNavigate } from 'react-router-dom';
 import { useSignOut } from 'react-auth-kit';
-import Authentification from './Authentification';
 import { AppContext } from '../App';
 import { useContext } from 'react';
+import Authentification from './Authentification';
 
 export default function Panel () {
     const { isConnected, userInfos, updateUserInfos } = useContext(AppContext);
@@ -33,25 +34,37 @@ export default function Panel () {
         navigate('/followers');
     }
 
+    function goToRecherche(){
+        navigate('/recherche');
+    }
+
     if (isConnected()){
         if (userInfos) {
             return (
                 <div className={styles.panel}>
+                    <img className={styles.logo} src={logo} alt="icôneBirdy"/>
                     <div className={styles.title}>Birdy</div>
                     <nav>
                         <div className={styles.elemMenu} onClick={goToHome}>
-                            <i className={styles.icon}><span className="material-icons">home</span></i>
+                            <i className={styles.icon}><i className="material-icons">home</i></i>
                             HomePage
                         </div><br></br>
                         <div className={styles.elemMenu} onClick={goToProfile}>
+                            <i className={styles.icon}><i class="material-symbols-outlined">account_circle</i></i>
                             Profile
                         </div><br></br>
                         <div className={styles.elemMenu} onClick={goToFollows}>
+                            <i className={styles.icon}><i class="material-symbols-outlined">group</i></i>
                             Follows
                         </div><br></br>
                         <div className={styles.elemMenu} onClick={goToFollowers}>
+                            <i className={styles.icon}><i class="material-symbols-outlined">groups</i></i>
                             Followers
-                        </div><br></br>        
+                        </div><br></br>   
+                        <div className={styles.elemMenu} onClick={goToRecherche}>
+                            <i className={styles.icon}><i class="material-symbols-outlined">search</i></i>
+                            Recherche
+                        </div><br></br>      
                     </nav>
                     <button className={styles.deconnexion} onClick={disconnect}>Déconnexion</button><br></br>
                 </div>

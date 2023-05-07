@@ -2,7 +2,7 @@ import styles from '../styles/BirdDetailBirds.module.css'
 import axios from 'axios'
 import { useState, useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
-import Bird from './Bird'
+import ListeBirds from './ListeBirds'
 import PostBird from './PostBird'
 import { AppContext } from '../App';
     
@@ -47,12 +47,12 @@ export default function BirdDetailBirds({mainBird}) {
 
     const birdFatherFechting = async function() {
         if (mainBird) {
-            var response3 = await axios.post("http://localhost:8000/api/bird/getBirdById",
+            await axios.post("http://localhost:8000/api/bird/getBirdById",
                 {
                     idBird: mainBird.isComment
                 }
             )
-            updateFatherBird(response3.data);
+            .then((response) => {updateFatherBird(response.data)}); 
         }
     }
 
@@ -74,7 +74,7 @@ export default function BirdDetailBirds({mainBird}) {
     useEffect(() => {
         birdCommentairesFetching();
         birdFatherFechting();
-    }, [page]);
+    }, [page, mainBird]);
     
     if (mainBird) {
         if (isConnected()) {
@@ -89,19 +89,9 @@ export default function BirdDetailBirds({mainBird}) {
                                         <div className={styles.title}>Interface avancée de Bird</div>
                                         <div className={styles.titreFather}>En réponse à</div>
                                         <div className={styles.father}> 
-                                            <Bird className={styles.fatherBird}
-                                                idBird= {fatherBird._id}
-                                                pseudo= {fatherBird.pseudo}
-                                                avatar= {fatherBird.avatar}
-                                                content= {fatherBird.content}
-                                                date= {fatherBird.date}
-                                                heure= {fatherBird.heure}
-                                                isPublic= {fatherBird.isPublic}
-                                                isComment= {fatherBird.isComment}
-                                                isRebird= {fatherBird.isRebird}
-                                                likes= {fatherBird.likes}
-                                                rebirds= {fatherBird.rebirds}
-                                            />
+                                        <ListeBirds
+                                            birds= {[fatherBird]}
+                                        />
                                         </div>
                                     </div>
                                     :
@@ -112,19 +102,9 @@ export default function BirdDetailBirds({mainBird}) {
                                 }
                                 <div className={styles.titreMain}>Vue détaillée du Bird</div>
                                 <div className={styles.main}> 
-                                    <Bird
-                                        idBird= {mainBird._id}
-                                        pseudo= {mainBird.pseudo}
-                                        avatar= {mainBird.avatar}
-                                        content= {mainBird.content}
-                                        date= {mainBird.date}
-                                        heure= {mainBird.heure}
-                                        isPublic= {mainBird.isPublic}
-                                        isComment= {mainBird.isComment}
-                                        isRebird= {mainBird.isRebird}
-                                        likes= {mainBird.likes}
-                                        rebirds= {mainBird.rebirds}
-                                    />
+                                        <ListeBirds
+                                            birds= {[mainBird]}
+                                        />
                                 </div>
                                 <button className={styles.button} onClick={supprimerBird}>Supprimer</button>
                                 <PostBird
@@ -138,25 +118,9 @@ export default function BirdDetailBirds({mainBird}) {
                                         <div>
                                             <div className={styles.titreCommentaires}>Commentaires</div>
                                                 <div className={styles.commentaires}>
-                                                {
-                                                    sideBirds.map((b) =>
-                                                        <li key={b._id}>
-                                                            <Bird
-                                                                idBird= {b._id}
-                                                                pseudo= {b.pseudo}
-                                                                avatar= {b.avatar}
-                                                                content= {b.content}
-                                                                date= {b.date}
-                                                                heure= {b.heure}
-                                                                isPublic= {b.isPublic}
-                                                                isComment= {b.isComment}
-                                                                isRebird= {b.isRebird}
-                                                                likes= {b.likes}
-                                                                rebirds= {b.rebirds}
-                                                            />
-                                                        </li>
-                                                    )
-                                                }
+                                                <ListeBirds
+                                                    birds= {sideBirds}
+                                                />
                                             </div>  
                                         </div>
                                         :
@@ -176,18 +140,8 @@ export default function BirdDetailBirds({mainBird}) {
                                         <div className={styles.title}>Interface avancée de Bird</div>
                                         <div className={styles.titreFather}>En réponse à</div>
                                         <div className={styles.father}> 
-                                            <Bird className={styles.fatherBird}
-                                                idBird= {fatherBird._id}
-                                                pseudo= {fatherBird.pseudo}
-                                                avatar= {fatherBird.avatar}
-                                                content= {fatherBird.content}
-                                                date= {fatherBird.date}
-                                                heure= {fatherBird.heure}
-                                                isPublic= {fatherBird.isPublic}
-                                                isComment= {fatherBird.isComment}
-                                                isRebird= {fatherBird.isRebird}
-                                                likes= {fatherBird.likes}
-                                                rebirds= {fatherBird.rebirds}
+                                            <ListeBirds
+                                                birds= {[fatherBird]}
                                             />
                                         </div>
                                     </div>
@@ -199,19 +153,9 @@ export default function BirdDetailBirds({mainBird}) {
                                 }
                                 <div className={styles.titreMain}>Vue détaillée du Bird</div>
                                 <div className={styles.main}> 
-                                    <Bird
-                                        idBird= {mainBird._id}
-                                        pseudo= {mainBird.pseudo}
-                                        avatar= {mainBird.avatar}
-                                        content= {mainBird.content}
-                                        date= {mainBird.date}
-                                        heure= {mainBird.heure}
-                                        isPublic= {mainBird.isPublic}
-                                        isComment= {mainBird.isComment}
-                                        isRebird= {mainBird.isRebird}
-                                        likes= {mainBird.likes}
-                                        rebirds= {mainBird.rebirds}
-                                    />
+                                        <ListeBirds
+                                            birds= {[mainBird]}
+                                        />
                                 </div>
                                 <PostBird
                                     isConnected= {isConnected}
@@ -224,25 +168,9 @@ export default function BirdDetailBirds({mainBird}) {
                                         <div>
                                             <div className={styles.titreCommentaires}>Commentaires</div>
                                                 <div className={styles.commentaires}>
-                                                {
-                                                    sideBirds.map((b) =>
-                                                        <li key={b._id}>
-                                                            <Bird
-                                                                idBird= {b._id}
-                                                                pseudo= {b.pseudo}
-                                                                avatar= {b.avatar}
-                                                                content= {b.content}
-                                                                date= {b.date}
-                                                                heure= {b.heure}
-                                                                isPublic= {b.isPublic}
-                                                                isComment= {b.isComment}
-                                                                isRebird= {b.isRebird}
-                                                                likes= {b.likes}
-                                                                rebirds= {b.rebirds}
-                                                            />
-                                                        </li>
-                                                    )
-                                                }
+                                                <ListeBirds
+                                                    birds= {sideBirds}
+                                                />
                                             </div>  
                                         </div>
                                         :
@@ -263,18 +191,8 @@ export default function BirdDetailBirds({mainBird}) {
                             <div className={styles.title}>Interface avancée de Bird</div>
                             <div className={styles.titreFather}>En réponse à</div>
                             <div className={styles.father}> 
-                                <Bird className={styles.fatherBird}
-                                    idBird= {fatherBird._id}
-                                    pseudo= {fatherBird.pseudo}
-                                    avatar= {fatherBird.avatar}
-                                    content= {fatherBird.content}
-                                    date= {fatherBird.date}
-                                    heure= {fatherBird.heure}
-                                    isPublic= {fatherBird.isPublic}
-                                    isComment= {fatherBird.isComment}
-                                    isRebird= {fatherBird.isRebird}
-                                    likes= {fatherBird.likes}
-                                    rebirds= {fatherBird.rebirds}
+                                <ListeBirds
+                                    birds= {[fatherBird]}
                                 />
                             </div>
                         </div>
@@ -286,18 +204,8 @@ export default function BirdDetailBirds({mainBird}) {
                     }
                     <div className={styles.titreMain}>Vue détaillée du Bird</div>
                     <div className={styles.main}> 
-                        <Bird
-                            idBird= {mainBird._id}
-                            pseudo= {mainBird.pseudo}
-                            avatar= {mainBird.avatar}
-                            content= {mainBird.content}
-                            date= {mainBird.date}
-                            heure= {mainBird.heure}
-                            isPublic= {mainBird.isPublic}
-                            isComment= {mainBird.isComment}
-                            isRebird= {mainBird.isRebird}
-                            likes= {mainBird.likes}
-                            rebirds= {mainBird.rebirds}
+                        <ListeBirds
+                            birds= {[mainBird]}
                         />
                     </div>
                     {   
@@ -306,25 +214,9 @@ export default function BirdDetailBirds({mainBird}) {
                                 <div className={styles.titreCommentaires}>Commentaires</div>
                                     <div className={styles.commentaires}>
                                     <ul>
-                                        {
-                                            sideBirds.map((b) =>
-                                                <li key={b._id}>
-                                                    <Bird
-                                                        idBird= {b._id}
-                                                        pseudo= {b.pseudo}
-                                                        avatar= {b.avatar}
-                                                        content= {b.content}
-                                                        date= {b.date}
-                                                        heure= {b.heure}
-                                                        isPublic= {b.isPublic}
-                                                        isComment= {b.isComment}
-                                                        isRebird= {b.isRebird}
-                                                        likes= {b.likes}
-                                                        rebirds= {b.rebirds}
-                                                    />
-                                                </li>
-                                            )
-                                        }
+                                        <ListeBirds
+                                           birds= {sideBirds}
+                                        />
                                     </ul>
                                 </div>  
                             </div>

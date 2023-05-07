@@ -83,15 +83,29 @@ export default function Profile () {
                 return (
                     <div className={styles.profile}>
                         <div className={styles.title}>Profil utilisateur</div>
-                        Pseudo : {userInfosCible.pseudo}<br></br>
-                        Prénom : {userInfosCible.prenom}<br></br>
-                        Nom : {userInfosCible.nom}<br></br>
-                        Adresse mail : {userInfosCible.email}<br></br>
-                        Date de naissance : {userInfosCible.dateNaissance}<br></br>
-                        Follows : {userInfosCible.follows.length}<br></br>
-                        Followers : {userInfosCible.followers.length}<br></br>
-                        Avatar : <br></br>
-                        <img className={styles.avatar} src={userInfosCible.avatar} rel="pdp"></img><br></br>
+                        <div className={styles.infos}>
+                            <div className={styles.infosBis}>
+                                <div className={styles.avatarContainer}>
+                                    <img className={styles.avatar} src={userInfosCible.avatar} alt="Avatar de l'utilisateur" />
+                                    <div className={styles.username}>{userInfosCible.pseudo}</div>
+                                </div>
+                                <div className={styles.infosTri}>
+                                    <div className={styles.flex}><div className={styles.infosText}>Nom & Prénom : </div>{userInfosCible.prenom} {userInfosCible.nom}</div>
+                                    <div className={styles.flex}><div className={styles.infosText}>Adresse mail : </div>{userInfosCible.email}</div>
+                                    <div className={styles.flex}><div className={styles.infosText}>Date de naissance : </div>{userInfosCible.dateNaissance}</div>     
+                                </div>
+                            </div>
+                            <div className={styles.stats}>
+                                <div>
+                                <div className={styles.followNum}>{userInfosCible.follows.length}</div>
+                                <div className={styles.followText}>FOLLOWS</div>
+                                </div>
+                                <div>
+                                <div className={styles.followNum}>{userInfosCible.followers.length}</div>
+                                <div className={styles.followText}>FOLLOWERS</div>
+                                </div>
+                            </div>
+                        </div>
                         <div className={styles.button}>
                             <button className={styles.button1} onClick={modeBirds}>Birds</button><br></br>
                             <button className={styles.button2} onClick={modeLikes}>Likes</button><br></br>
@@ -109,18 +123,37 @@ export default function Profile () {
             else {
                 //SI ON FOLLOW DEJA L'UTILISATEUR
                 if (isInArray(userInfosCible.id, userInfos.follows)){
-                    
                     return (
                         <div className={styles.profile}>
-                            Pseudo : {userInfosCible.pseudo}<br></br>
-                            Date de naissance : {userInfosCible.dateNaissance}<br></br>
-                            Follows : {userInfosCible.follows.length}<br></br>
-                            Followers : {userInfosCible.followers.length}<br></br>
-                            Avatar : <br></br>
-                            <img className={styles.avatar} src={userInfosCible.avatar} rel="pdp"></img><br></br>
-                            <button onClick={unfollowUser}>Unfollow</button><br></br><br></br>
-                            <button onClick={modeBirds}>Birds</button><br></br>
-                            <button onClick={modeLikes}>Likes</button><br></br>
+                            <div className={styles.title}>Profil utilisateur</div>
+                            <div className={styles.infos}>
+                                <div className={styles.infosBis}>
+                                    <div className={styles.avatarContainerFollow}>
+                                        <img className={styles.avatarFollow} src={userInfosCible.avatar} alt="Avatar de l'utilisateur" />
+                                        <div className={styles.username}>{userInfosCible.pseudo}</div>
+                                        <div className={styles.buttonFollow}><button onClick={unfollowUser}>Unfollow</button></div>
+                                    </div>
+                                    <div className={styles.infosTri}>
+                                        <div className={styles.flex}><div className={styles.infosText}>Nom & Prénom : </div>{userInfosCible.prenom} {userInfosCible.nom}</div>
+                                        <div className={styles.flex}><div className={styles.infosText}>Adresse mail : </div>{userInfosCible.email}</div>
+                                        <div className={styles.flex}><div className={styles.infosText}>Date de naissance : </div>{userInfosCible.dateNaissance}</div>     
+                                    </div>
+                                </div>
+                                <div className={styles.stats}>
+                                    <div>
+                                    <div className={styles.followNum}>{userInfosCible.follows.length}</div>
+                                    <div className={styles.followText}>FOLLOWS</div>
+                                    </div>
+                                    <div>
+                                    <div className={styles.followNum}>{userInfosCible.followers.length}</div>
+                                    <div className={styles.followText}>FOLLOWERS</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className={styles.button}>
+                                <button className={styles.button1} onClick={modeBirds}>Birds</button><br></br>
+                                <button className={styles.button2} onClick={modeLikes}>Likes</button><br></br>
+                            </div>
     
                             <ProfileBirds
                                 mode= {mode}
@@ -133,14 +166,35 @@ export default function Profile () {
                 else {
                     return (
                         <div className={styles.profile}>
-                            Pseudo : {userInfosCible.pseudo}<br></br>
-                            Follows : {userInfosCible.follows.length}<br></br>
-                            Followers : {userInfosCible.followers.length}<br></br>
-                            Avatar : <br></br>
-                            <img className={styles.avatar} src={userInfosCible.avatar} rel="pdp"></img><br></br>
-                            <button onClick={followUser}>Follow</button><br></br><br></br>
-                            <button onClick={modeBirds}>Birds</button><br></br>
-                            <button onClick={modeLikes}>Likes</button><br></br>
+                            <div className={styles.title}>Profil utilisateur</div>
+                            <div className={styles.infos}>
+                                <div className={styles.infosBis}>
+                                    <div className={styles.avatarContainerFollow}>
+                                        <img className={styles.avatarFollow} src={userInfosCible.avatar} alt="Avatar de l'utilisateur" />
+                                        <div className={styles.username}>{userInfosCible.pseudo}</div>
+                                        <div className={styles.buttonFollow}><button onClick={followUser}>Follow</button></div>
+                                    </div>
+                                    <div className={styles.infosTri}>
+                                        <div className={styles.flex}><div className={styles.infosText}>Nom & Prénom : </div>{userInfosCible.prenom} {userInfosCible.nom}</div>
+                                        <div className={styles.flex}><div className={styles.infosText}>Adresse mail : </div>{userInfosCible.email}</div>
+                                        <div className={styles.flex}><div className={styles.infosText}>Date de naissance : </div>{userInfosCible.dateNaissance}</div>     
+                                    </div>
+                                </div>
+                                <div className={styles.stats}>
+                                    <div>
+                                    <div className={styles.followNum}>{userInfosCible.follows.length}</div>
+                                    <div className={styles.followText}>FOLLOWS</div>
+                                    </div>
+                                    <div>
+                                    <div className={styles.followNum}>{userInfosCible.followers.length}</div>
+                                    <div className={styles.followText}>FOLLOWERS</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className={styles.button}>
+                                <button className={styles.button1} onClick={modeBirds}>Birds</button><br></br>
+                                <button className={styles.button2} onClick={modeLikes}>Likes</button><br></br>
+                            </div>
     
                             <ProfileBirds
                                 mode= {mode}

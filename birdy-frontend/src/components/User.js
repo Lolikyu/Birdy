@@ -12,11 +12,12 @@ export default function User({pseudo, avatar, follows, followers}) {
 
     return (
         <div className={styles.user} onClick={checkProfile}>
-            Pseudo: {pseudo}<br></br>
-            Avatar: <br></br>
-            <img className={styles.avatar} src={avatar} rel="pdp"></img><br></br>
-            Follows: {follows.length}<br></br>
-            Followers: {followers.length}<br></br>
+            <div>
+                <div><img className={styles.avatar} src={avatar} rel="pdp"></img><br></br></div>
+                <div>{pseudo}<br></br></div>
+            </div>
+            <div>Follows: {follows.length}<br></br></div>
+            <div>Followers: {followers.length}<br></br></div>
         </div>
     );
 }

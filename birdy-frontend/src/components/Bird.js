@@ -4,14 +4,14 @@ import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../App';
 import { useContext } from 'react';
 
-export default function Bird({idBird, pseudo, avatar, content, date, heure, isPublic, isComment, isRebird, likes, rebirds}) {
+export default function Bird({idBird, pseudo, avatar, content, date, heure, isPublic, isComment, isRebird, likes, rebirds, favorites}) {
     const navigate = useNavigate();
 
     const { isConnected, userInfos, reloadUserInfos, setReloadUserInfos } = useContext(AppContext);
 
     function checkProfile(e) {
         e.stopPropagation();
-
+        navigate(0);
         navigate('/profile/' + String(pseudo));
     }
     
@@ -66,6 +66,7 @@ export default function Bird({idBird, pseudo, avatar, content, date, heure, isPu
                     idUser: userInfos.id
                 }
             )
+            deleteFromArray(favorites, userInfos.id);
             setReloadUserInfos(reloadUserInfos +1);
         }
         else {
@@ -75,11 +76,13 @@ export default function Bird({idBird, pseudo, avatar, content, date, heure, isPu
                     idUser: userInfos.id
                 }
             )
+            favorites.push(userInfos.id);
             setReloadUserInfos(reloadUserInfos +1);
         }
     }
 
     function details() {
+        navigate('/');
         navigate('/bird/' + String(idBird));
     }
 
@@ -105,8 +108,8 @@ export default function Bird({idBird, pseudo, avatar, content, date, heure, isPu
                             <div>
                                 <div className={styles.visibilite}>Bird {(isPublic) ? 'public' : 'privé'}<br></br></div>
                                 {(isComment) ? <div className={styles.reponse}>En réponse à un Bird<br></br></div> : null}
-                                <div className={styles.likes} onClick={likeBird}>Likes : {likes.length}<br></br></div>
-                                <div className={styles.favoris} onClick={favBird}>Favoris : {isInArray(idBird, userInfos.favorites)? "Oui" : "Non"}</div>
+                                {(isInArray(idBird, userInfos.likes))? <div className={styles.likesTrue} onClick={likeBird}><i className={styles.icon}><i class="material-symbols-outlined">favorite</i></i> {likes.length}<br></br></div> : <div className={styles.likesFalse} onClick={likeBird}><i className={styles.icon}><i class="material-symbols-outlined">favorite</i></i> {likes.length}<br></br></div>} 
+                                {(isInArray(idBird, userInfos.favorites))? <div className={styles.favorisTrue} onClick={favBird}><i className={styles.icon}><i class="material-symbols-outlined">star</i></i></div> : <div className={styles.favorisFalse} onClick={favBird}><i className={styles.icon}><i class="material-symbols-outlined">star</i></i></div>}
                             </div>
                         </div>
                     </div>

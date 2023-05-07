@@ -2,7 +2,9 @@
     display: flex;
     flex-direction: column;
     margin: 1%;
-    padding: 16px;
+    padding: 1%;
+    padding-left: 3%;
+    padding-top: 2%;
     border-radius: 8px;
     background-color: var(--bgcolor);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
@@ -11,7 +13,6 @@
     border-radius: 50px;
 }
 
-/* Le nom d'utilisateur du tweet */
 .pseudo {
     display: inline-block;
     font-size: 18px;
@@ -22,7 +23,6 @@
     vertical-align: 23px;
 }
 
-/* Le contenu du tweet */
 .content {
     white-space: pre;
     margin-top: 8px;
@@ -34,17 +34,17 @@
     margin-bottom: 10px;
 }
 
-/* Le temps du tweet */
 .date {
     margin-top: 8px;
     font-size: 12px;
     color: #666;
 }
 
-/* Lorsque le tweet est survolé */
 .bird:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
     transform: translateY(-2px);
+    border-color: var(--objcolor4);
+    cursor: pointer;
 }
 
 .avatar {
@@ -52,7 +52,7 @@
     width: 64px;
     height: 64px;
     border-radius: 50%;
-    object-fit: cover; /* Assurez-vous que l'image est entièrement visible */
+    object-fit: cover;
 }
 
 .visibilite {
@@ -69,23 +69,28 @@
     padding-left: 15px;
 }
 
-.likes {
+.likesTrue {
     color:rgb(255, 65, 96);
     
 }
 
-.favoris {
+.favorisTrue {
     color:rgb(255, 255, 129);
 }
 
-.likes, .favoris {
+.likesTrue, .likesFalse, .favorisTrue, .favorisFalse{
     display: inline-block;
     margin-top: 10px;
     width: 25%;
     margin-left: 20%;
 }
 
-.likes:hover, .favoris:hover {
-    text-decoration: underline;
+.likesTrue:hover, .likesFalse:hover, .favorisTrue:hover, .favorisFalse:hover{
     cursor: pointer;
+}
+
+.icon {
+    align-self: center;
+    vertical-align: -5px;
+    margin-right: 12px;
 }

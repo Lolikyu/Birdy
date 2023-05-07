@@ -44,7 +44,7 @@ export default function PostBird () {
       return (
         <div className={styles.postBird}>
             <form onSubmit={postBird}>
-                <div className={styles.title}>Nouveau Bird</div><br></br>
+                <div className={styles.desc}>Nouveau Bird</div><br></br>
                 
                 <textarea className={styles.textarea}
                   placeholder= {"Contenu du Bird"}

@@ -105,10 +105,10 @@ export default function Authentification(){
                 <div className={styles.auth}>
                     <form onSubmit={connexion}>
                         <label htmlFor='Email'>Adresse mail </label>
-                        <input name='Email' type='email' required/><br></br>
+                        <input className={styles.input} name='Email' type='email' required/><br></br>
 
                         <label htmlFor='Mdp'>Mot de passe </label>
-                        <input name='Mdp' type='password' required/><br></br>
+                        <input className={styles.input} name='Mdp' type='password' required/><br></br>
 
                         <button type='submit'>Connexion</button>
                         <button onClick={() => updateAfficheFormulaire(0)}>Annuler</button>
@@ -122,28 +122,28 @@ export default function Authentification(){
                 <div className={styles.auth}>
                     <form onSubmit={inscription}>
                         <label htmlFor='Pseudo'>Pseudo: </label>
-                        <input name='Pseudo' type='text' required/><br></br>
+                        <input className={styles.input} name='Pseudo' type='text' required/><br></br>
                         
                         <label htmlFor='Nom'>Nom: </label>
-                        <input name='Nom' type='text' required/><br></br>
+                        <input className={styles.input} name='Nom' type='text' required/><br></br>
                         
                         <label htmlFor='Prénom'>Prénom: </label>
-                        <input name='Prénom' type='text' required/><br></br>
+                        <input className={styles.input} name='Prénom' type='text' required/><br></br>
 
                         <label htmlFor='Email'>Email: </label>
-                        <input name='Email' type='email' required/><br></br>
+                        <input className={styles.input} name='Email' type='email' required/><br></br>
                         
                         <label htmlFor='Mdp1'>Mot de passe: </label>
-                        <input name='Mdp1' type='password' required/><br></br>
+                        <input className={styles.input} name='Mdp1' type='password' required/><br></br>
                         
                         <label htmlFor='Mdp2'>Confirmer le mot de passe: </label>
-                        <input name='Mdp2' type='password' required/><br></br>
+                        <input className={styles.input} name='Mdp2' type='password' required/><br></br>
                         
                         <label htmlFor='dateNaissance'>Date de naissance: </label>
-                        <input name='dateNaissance' type='date' required/><br></br>
+                        <input className={styles.input} name='dateNaissance' type='date' required/><br></br>
                         
                         <label htmlFor='Avatar'>Le lien de ta photo de profil: </label>
-                        <input name='Avatar' type='url' /><br></br>
+                        <input className={styles.input} name='Avatar' type='url' /><br></br>
                         
                         <button type='submit'>Rejoindre Birdy</button>
                         <button onClick={() => updateAfficheFormulaire(0)}>Annuler</button>

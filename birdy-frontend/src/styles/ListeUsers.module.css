@@ -1,8 +1,21 @@
 .listeUsers {
-    margin-left: 20%;
+    margin-left: 0%;
     padding: 1%;
     align-content: center;
     background-color: var(--bgcolor);
     border: 1px solid var(--objcolor);
     border-radius: 5px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-left: 0px;
 }
+
+.title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+

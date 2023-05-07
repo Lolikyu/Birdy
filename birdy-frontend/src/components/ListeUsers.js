@@ -1,7 +1,7 @@
 import styles from '../styles/ListeUsers.module.css';
 import axios from 'axios';
 import { useEffect, useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import User from './User';
 import { AppContext } from '../App';
 
@@ -9,6 +9,7 @@ export default function ListeUsers({mode}) {
     const [users, setUsers] = useState(null);
 
     const { isConnected, userInfos } = useContext(AppContext);
+    const params = useParams();
 
     async function usersFetching(mode) {
         if (userInfos) {
@@ -35,6 +36,7 @@ export default function ListeUsers({mode}) {
         if (users) {
             return (
                 <div className={styles.listeUsers}> 
+                    {(mode === 'follows') ? <div className={styles.title}>Follows</div> : <div className={styles.title}>Followers</div>}
                     <ul>
                         {
                             users.map((u)=>

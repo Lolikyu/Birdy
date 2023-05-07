@@ -18,6 +18,7 @@ export default function ListeBirds({ birds }) {
                             isRebird= {b.isRebird}
                             likes= {b.likes}
                             rebirds= {b.rebirds}
+                            favorites= {b.favorites}
                         />
                     </li>
                 )

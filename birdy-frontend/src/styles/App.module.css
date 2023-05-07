@@ -17,7 +17,7 @@ body {
     background-color: var(--bgcolor);
 }
 
-ul {
+ul, li {
     list-style: none;
 }
 
@@ -45,4 +45,3 @@ button:hover {
 button:active {
     background-color: var(--objcolor4);
 }
-

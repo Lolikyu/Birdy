@@ -1,15 +1,11 @@
 const Bird = require('../models/bird');
 const User = require('../models/user');
 
-//get : on filtre les birds > date du jour - 1 pour ne pas renvoyer une liste trop longue
-exports.getBirdsFiltre = (req, res, next) => { 
-    Bird.find(
-        {
-            dateDepuis70: {$gte: req.body.dateDebut, $lte: req.body.dateFin},
-        }
-    )
-    .then(bird => res.status(201).json(bird))
-    .catch(error => res.status(400).json({ message : "Erreur de lecture de Bird filtré" }))
+exports.getBirdsFiltre = (req, res, next) => {
+    Bird.find({ content: { $regex: req.body.keyword, $options: "i" } })
+      .then((birds) => {res.status(200).json(birds)})
+      .catch((error) => {res.status(500).json({ message: "Erreur de lecture de Bird filtré" });
+      });
 };
 
 exports.getBirdById = (req, res, next) => {

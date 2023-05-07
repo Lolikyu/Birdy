@@ -257,3 +257,11 @@ exports.getUsersListeId = (req, res, next) => {
     .then(users => res.status(201).json(users))
     .catch(error => res.status(400).json({ message : "Erreur de getUser" }))
 }
+
+exports.getUsersFiltre = (req, res, next) => {
+    console.log(req.body.keyword)
+    User.find({ pseudo: {$eq: req.body.keyword} })
+      .then((users) => {res.status(200).json(users)})
+      .catch((error) => {res.status(500).json({ message: "Erreur de lecture de User filtré" });
+    });
+};

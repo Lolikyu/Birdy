@@ -8,6 +8,7 @@ import Profile from './components/Profile';
 import BirdDetail from './components/BirdDetail';
 import ListeUsers from './components/ListeUsers';
 import axios from 'axios';
+import Recherche from './components/Recherche';
 
 export const AppContext = createContext();
 
@@ -87,6 +88,19 @@ export default function App (){
 								<ListeUsers
 									mode= 'followers'
 								/>
+							</div>
+						}
+					/>
+					<Route
+						path= '/recherche'
+						element= {
+							<div class={styles.container}>
+								<div class={styles.column}>
+									<Recherche mode="bird" />
+								</div>
+								<div class={styles.column}>
+									<Recherche mode="user" />
+								</div>
 							</div>
 						}
 					/>
